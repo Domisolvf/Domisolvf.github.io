@@ -1,0 +1,767 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Корни и приставки</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="ЕГЭ 9·10">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#f3f6fb" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#10141c" media="(prefers-color-scheme: dark)">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" type="image/png" href="icon-512.png">
+<link rel="manifest" href="manifest.webmanifest">
+<style>
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; }
+[hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Golos+Text:wght@400;500;600&family=PT+Serif:wght@400;700&display=swap">
+<style>
+/* Layout: one notebook sheet on graph paper; teacher's marks live in the red right margin */
+:root {
+  --paper: #f3f6fb;
+  --grid: #dde6f2;
+  --sheet: #ffffff;
+  --text: #1c2333;
+  --muted: #5f6a82;
+  --line: #d3dbe8;
+  --ink: #2443b0;
+  --ink-soft: #e7ecfb;
+  --red: #cf3329;
+  --red-soft: #fbe9e7;
+  --ok: #24784a;
+  --ok-soft: #e4f3ea;
+  --f-hand: "Caveat", "Segoe Print", "Comic Sans MS", cursive;
+  --f-ui: "Golos Text", "Segoe UI", system-ui, sans-serif;
+  --f-word: "PT Serif", "Times New Roman", Georgia, serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #10141c; --grid: #19202c; --sheet: #171c26; --text: #e5e9f1; --muted: #9aa4b9;
+    --line: #2b3444; --ink: #92a9ff; --ink-soft: #222c47; --red: #ff6f62; --red-soft: #3a1f1d;
+    --ok: #63d394; --ok-soft: #173126; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #10141c; --grid: #19202c; --sheet: #171c26; --text: #e5e9f1; --muted: #9aa4b9;
+  --line: #2b3444; --ink: #92a9ff; --ink-soft: #222c47; --red: #ff6f62; --red-soft: #3a1f1d;
+  --ok: #63d394; --ok-soft: #173126; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 22px 22px;
+  color: var(--text);
+  font-family: var(--f-ui);
+  font-size: 16px;
+  line-height: 1.5;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 24px 48px;
+}
+.wrap { max-width: 820px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+header { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 8px 16px; }
+h1 { font-family: var(--f-word); font-size: 30px; line-height: 1.1; margin: 0; text-wrap: balance; }
+.sub { font-family: var(--f-hand); font-size: 22px; color: var(--ink); line-height: 1; }
+.stats { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; display: flex; gap: 14px; flex-wrap: wrap; }
+.stats b { color: var(--text); font-weight: 600; }
+
+.tabs { display: flex; gap: 4px; flex-wrap: wrap; }
+.tab {
+  font: 500 15px var(--f-ui); color: var(--muted); background: transparent; border: 1px solid transparent;
+  padding: 7px 14px; border-radius: 8px; cursor: pointer;
+}
+.tab:hover { color: var(--text); }
+.tab[aria-selected="true"] { background: var(--sheet); color: var(--ink); border-color: var(--line); }
+
+.sheet {
+  position: relative; background: var(--sheet); border: 1px solid var(--line); border-radius: 4px;
+  padding: 22px 76px 26px 24px; min-width: 0;
+  box-shadow: 0 1px 0 var(--line), 0 10px 30px -18px rgba(20, 30, 60, .35);
+}
+.sheet::after { content: ""; position: absolute; top: 0; bottom: 0; right: 56px; width: 1.5px; background: var(--red); opacity: .55; }
+.mark {
+  position: absolute; right: 8px; width: 40px; text-align: center; font-family: var(--f-hand); font-weight: 700;
+  font-size: 40px; line-height: 1; color: var(--red); pointer-events: none;
+}
+@media (max-width: 560px) {
+  .sheet { padding: 18px 50px 22px 16px; }
+  .sheet::after { right: 38px; }
+  .mark { right: 2px; width: 34px; font-size: 34px; }
+}
+
+.controls { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; margin-bottom: 18px; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.seg button { font: 500 14px var(--f-ui); background: transparent; color: var(--muted); border: 0; padding: 6px 12px; cursor: pointer; }
+.seg button + button { border-left: 1px solid var(--line); }
+.seg button[aria-pressed="true"] { background: var(--ink-soft); color: var(--ink); }
+select { font: 14px var(--f-ui); color: var(--text); background: var(--sheet); border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px; max-width: 100%; }
+label.lbl { font-size: 13px; color: var(--muted); display: inline-flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+
+.progress { height: 4px; background: var(--line); border-radius: 2px; overflow: hidden; margin-bottom: 6px; }
+.progress i { display: block; height: 100%; background: var(--ink); width: 0; transition: width .3s; }
+.ptext { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+.word { font-family: var(--f-word); font-size: clamp(30px, 7vw, 46px); line-height: 1.25; text-align: center; padding: 34px 0 10px; overflow-wrap: anywhere; }
+.note { color: var(--muted); font-size: .55em; }
+.gap {
+  display: inline-block; min-width: .75em; text-align: center; color: var(--ink);
+  border-bottom: 2px dashed var(--ink); line-height: 1; padding: 0 .05em; font-family: var(--f-hand); font-weight: 700;
+}
+.gap.filled { border-bottom-style: solid; font-size: 1.15em; }
+.gap.filled.bad { color: var(--red); border-color: var(--red); }
+.opts { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; padding: 18px 0 8px; }
+.opt {
+  min-width: 68px; height: 64px; font: 700 34px var(--f-hand); color: var(--ink); background: var(--sheet);
+  border: 1.5px solid var(--line); border-radius: 10px; cursor: pointer; padding: 0 14px;
+}
+.opt:hover:not(:disabled) { border-color: var(--ink); background: var(--ink-soft); }
+.opt:disabled { cursor: default; opacity: .45; }
+.opt .k { display: block; font: 11px var(--f-ui); color: var(--muted); margin-top: -6px; }
+.hint { text-align: center; font-size: 13px; color: var(--muted); }
+
+.fb { margin-top: 14px; display: flex; flex-direction: column; gap: 12px; }
+.fb .head { font-family: var(--f-hand); font-size: 28px; line-height: 1; }
+.fb.ok .head { color: var(--ok); }
+.fb.bad .head { color: var(--red); }
+.rule { border: 1.5px dashed var(--line); border-radius: 10px; padding: 14px 16px; background: var(--sheet); }
+.rule h3 { margin: 0 0 6px; font-size: 16px; font-weight: 600; }
+.rule p { margin: 0; color: var(--text); max-width: 65ch; }
+.rule p + p { margin-top: 6px; }
+.fb.bad .rule { border-color: var(--red); background: var(--red-soft); }
+.row-actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.btn {
+  font: 600 15px var(--f-ui); background: var(--ink); color: var(--sheet); border: 0; border-radius: 8px;
+  padding: 10px 18px; cursor: pointer;
+}
+.btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+.btn:hover { filter: brightness(1.08); }
+.small { font-size: 13px; color: var(--muted); }
+.pill { display: inline-block; font-size: 12px; padding: 2px 9px; border-radius: 99px; background: var(--ink-soft); color: var(--ink); white-space: nowrap; }
+
+.weak { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.weak .t { font-size: 13px; color: var(--muted); margin-right: 4px; }
+.chipbtn { font: 500 13px var(--f-ui); background: var(--red-soft); color: var(--red); border: 0; border-radius: 99px; padding: 4px 11px; cursor: pointer; }
+
+.summary { text-align: center; padding: 26px 0 8px; display: flex; flex-direction: column; gap: 14px; align-items: center; }
+.big { font-family: var(--f-hand); font-size: 56px; line-height: 1; color: var(--ink); font-variant-numeric: tabular-nums; }
+
+/* Rows (EGE format) */
+.task { font-family: var(--f-word); font-size: 16px; margin: 0 0 14px; max-width: 65ch; }
+.rows { display: flex; flex-direction: column; gap: 4px; }
+.r {
+  display: grid; grid-template-columns: 34px 1fr; gap: 10px; align-items: start; text-align: left;
+  background: transparent; border: 1.5px solid transparent; border-radius: 8px; padding: 8px 10px; cursor: pointer;
+  font: 18px var(--f-word); color: var(--text); width: 100%;
+}
+.r:hover { background: var(--ink-soft); }
+.r .n {
+  width: 28px; height: 28px; border-radius: 50%; border: 1.5px solid var(--line); display: grid; place-items: center;
+  font: 600 14px var(--f-ui); color: var(--muted);
+}
+.r[aria-pressed="true"] .n { background: var(--ink); border-color: var(--ink); color: var(--sheet); }
+.r[aria-pressed="true"] { border-color: var(--ink-soft); }
+.r .ws { display: flex; flex-wrap: wrap; gap: 4px 0; min-width: 0; }
+.w { display: inline-flex; flex-direction: column; align-items: flex-start; margin-right: .45em; }
+.chip {
+  font: 500 11.5px var(--f-ui); color: var(--red); background: var(--red-soft); border-radius: 99px; padding: 1px 8px;
+  margin-top: 3px; border: 0; cursor: pointer; white-space: nowrap;
+}
+.answer-line { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 16px; margin-top: 14px; }
+.answer-line .hand { font: 700 30px var(--f-hand); color: var(--ink); min-width: 80px; border-bottom: 1.5px solid var(--text); padding: 0 6px; letter-spacing: .12em; }
+.msg { margin-top: 12px; }
+.msg.bad { color: var(--red); }
+.msg.ok { color: var(--ok); }
+
+.blocks { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+.bk { font: 600 13px var(--f-ui); border: 1px solid var(--line); background: var(--sheet); color: var(--muted); border-radius: 7px; padding: 5px 9px; cursor: pointer; font-variant-numeric: tabular-nums; }
+.bk.done { background: var(--ok-soft); color: var(--ok); border-color: transparent; }
+.bk[aria-current="true"] { outline: 2px solid var(--ink); outline-offset: 1px; }
+.orig { font-size: 14px; color: var(--muted); margin-bottom: 10px; }
+.orig .hand { font: 700 24px var(--f-hand); color: var(--ink); }
+.orig .redm { font: 700 24px var(--f-hand); color: var(--red); }
+
+.rules-list { display: grid; gap: 12px; }
+.rules-list h2 { font: 700 20px var(--f-word); margin: 12px 0 0; }
+.rcard { border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; }
+.rcard h3 { margin: 0; font-size: 16px; font-weight: 600; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.rcard p { margin: 0; max-width: 65ch; }
+.rcard .row-actions { margin-top: 2px; }
+.errc { font-size: 12px; color: var(--red); font-weight: 500; }
+
+button:focus-visible, select:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+
+/* iPhone */
+body { padding-top: calc(24px + env(safe-area-inset-top, 0px)); padding-bottom: calc(48px + env(safe-area-inset-bottom, 0px)); min-height: 100vh; }
+button, select { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+@media (hover: none) { .hint, .opt .k { display: none; } .opt { min-width: 76px; height: 70px; } .r:hover { background: transparent; } .r[aria-pressed="true"] { background: var(--ink-soft); } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Корни и приставки</h1>
+      <div class="sub">задания 9 и 10 ЕГЭ · работа над ошибками</div>
+    </div>
+    <div class="stats" id="stats"></div>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <button class="tab" role="tab" data-tab="words" aria-selected="true">Слова</button>
+    <button class="tab" role="tab" data-tab="rows" aria-selected="false">Ряды как на ЕГЭ</button>
+    <button class="tab" role="tab" data-tab="test" aria-selected="false">Моя ср</button>
+    <button class="tab" role="tab" data-tab="rules" aria-selected="false">Правила</button>
+  </nav>
+
+  <section class="sheet" id="p-words"></section>
+  <section class="sheet" id="p-rows" hidden></section>
+  <section class="sheet" id="p-test" hidden></section>
+  <section class="sheet" id="p-rules" hidden></section>
+</div>
+
+<script>
+/* ---------- Правила ---------- */
+const RULES = {
+  prov:   { t: 9,  short: "проверяемая", title: "Проверяемая безударная гласная",
+            text: ["Поставь гласную под ударение: измени форму слова или подбери однокоренное слово с тем же значением.",
+                   "Следи за смыслом: поласкать (кота) проверяется словом «ласка», а полоскать (бельё) — словом «полощет»; посидеть (у окна) — «сидя», поседеть (о волосах) — «седой»."] },
+  neprov: { t: 9,  short: "словарное", title: "Непроверяемая (словарная) гласная",
+            text: ["Ударением эту гласную не проверить — написание нужно запомнить. Часто это заимствованные слова.",
+                   "Не пытайся подобрать «проверочное» слово по звучанию — так делают типичную ошибку. Вспомни, как слово выглядит в словаре, и выпиши его в свой список."] },
+  lag:    { t: 9,  short: "-лаг-/-лож-", title: "Корни -лаг- / -лож-",
+            text: ["Перед г пишется а, перед ж — о. Ударение здесь ничего не решает.", "Исключение: полог."] },
+  kas:    { t: 9,  short: "-кас-/-кос-", title: "Корни -кас- / -кос-",
+            text: ["Если сразу после корня стоит суффикс -а-, пишется а. Если суффикса -а- нет — о."] },
+  rast:   { t: 9,  short: "-раст-/-рос-", title: "Корни -раст- / -ращ- / -рос-",
+            text: ["Перед ст и щ пишется а, перед с (без т) — о.",
+                   "Исключения: росток, ростовщик, отрасль, Ростов, Ростислав, подросток — и однокоренные к ним."] },
+  skak:   { t: 9,  short: "-скак-/-скоч-", title: "Корни -скак- / -скоч-",
+            text: ["Перед к пишется а, перед ч — о.", "Исключения: скачок, скачу."] },
+  gar:    { t: 9,  short: "-гар-/-гор-", title: "Корни -гар- / -гор-",
+            text: ["Без ударения пишется о. Под ударением — как слышится.", "Исключения: выгарки, изгарь, пригарь."] },
+  zar:    { t: 9,  short: "-зар-/-зор-", title: "Корни -зар- / -зор-",
+            text: ["Без ударения пишется а. Под ударением — как слышится.", "Исключение: зоревать."] },
+  tvar:   { t: 9,  short: "-твар-/-твор-", title: "Корни -твар- / -твор-",
+            text: ["Без ударения пишется о.", "Исключение: утварь."] },
+  plav:   { t: 9,  short: "-плав-/-плов-", title: "Корни -плав- / -плов-",
+            text: ["Пишется а.", "Исключения: пловец, пловчиха, плывун."] },
+  ravn:   { t: 9,  short: "-равн-/-ровн-", title: "Корни -равн- / -ровн-",
+            text: ["-равн- — значение «равный, одинаковый, наравне»; -ровн- — «ровный, гладкий, прямой».",
+                   "Исключения: ровесник, ровня, уровень, равнина."] },
+  mak:    { t: 9,  short: "-мак-/-мок-", title: "Корни -мак- / -мок-",
+            text: ["-мак- — значение «окунать в жидкость»; -мок- — «пропускать жидкость, становиться мокрым»."] },
+  klan:   { t: 9,  short: "-клан-/-клон-", title: "Корни -клан- / -клон-",
+            text: ["Без ударения пишется о. Под ударением — как слышится."] },
+  ei:     { t: 9,  short: "е/и + суффикс -а-", title: "Корни с чередованием е / и",
+            text: ["-бер-/-бир-, -дер-/-дир-, -мер-/-мир-, -пер-/-пир-, -тер-/-тир-, -блест-/-блист-, -жег-/-жиг-, -стел-/-стил-, -чет-/-чит-.",
+                   "Если сразу после корня стоит суффикс -а-, пишется и. Если суффикса -а- нет — е. Исключения: сочетать, сочетание, чета.",
+                   "Не путай с проверяемыми корнями: «мир» (покой) и «мер» (мера) проверяются ударением."] },
+  im:     { t: 9,  short: "-им-/-а-", title: "Корни с чередованием -им- / -а- (-ин- / -я-)",
+            text: ["Если после корня есть суффикс -а-, пишется -им- / -ин-: сжать — сжимать, начать — начинать."] },
+  c:      { t: 9,  short: "и/ы после ц", title: "И / Ы после Ц", opts: ["и", "ы"],
+            text: ["В корне после ц пишется и. Исключения: цыган, цыплёнок, на цыпочках, цыц — и однокоренные.",
+                   "В окончаниях и суффиксах -ын пишется ы (огурцы, сестрицын)."] },
+  sh:     { t: 9,  short: "ё/о после шипящих", title: "Ё / О после шипящих в корне", opts: ["ё", "о"],
+            text: ["Под ударением пишется ё, если можно подобрать однокоренное слово с е (жёлтый — желтеть).",
+                   "Если такого слова нет — пишется о (шорох, обжора). В заимствованных словах тоже о (шок, шорты, жокей)."] },
+
+  pre:    { t: 10, short: "пре-/при-", title: "Приставки ПРЕ- и ПРИ-",
+            text: ["ПРЕ- = «очень» (премилый) или близко к ПЕРЕ- (преградить = перегородить, преступить = переступить).",
+                   "ПРИ- = приближение (прибежать), присоединение (пришить), близость (приморский), неполнота действия (приоткрыть), доведение до результата (пристыдить).",
+                   "Определи значение приставки в этом слове — подставь «очень» или «пере-»."] },
+  pre_d:  { t: 10, short: "пре-/при-: запомнить", title: "ПРЕ- / ПРИ- в словах, где значение не определить",
+            text: ["Значение приставки здесь не выделяется (или слово заимствованное), так что правило «очень / пере- / приближение» не работает.",
+                   "Такие слова запоминают по словарю. Выпиши их в отдельный список и повторяй."] },
+  pred:   { t: 10, short: "пред-", title: "Приставка ПРЕД-",
+            text: ["ПРЕД- — отдельная неизменяемая приставка со значением «перед, раньше»: предвидеть, предсказать, предпоследний. Её не путают с пре-/при-."] },
+  niz:    { t: 10, short: "низ-/нис-", title: "Приставки НИЗ- / НИС-",
+            text: ["Пишутся через и: низвергнуть, ниспадать. Последняя буква — по правилу з/с."] },
+  zs:     { t: 10, short: "з/с на конце", title: "Приставки на З / С",
+            text: ["без-/бес-, воз-/вос-, вз-/вс-, из-/ис-, низ-/нис-, раз-/рас-, роз-/рос-, через-/черес-.",
+                   "Перед звонкой и сонорной согласной (б, в, г, д, ж, з, л, м, н, р) пишется з, перед глухой (к, п, с, т, ф, х, ц, ч, ш, щ) — с. Смотри на букву сразу после приставки."] },
+  s_pref: { t: 10, short: "приставка с-", title: "Приставка С-",
+            text: ["Приставка с- никогда не меняется, даже перед звонкой согласной: сделать, сбить, сгиб. Приставки «з-» в русском языке нет."] },
+  dt:     { t: 10, short: "под-, от-, над-…", title: "Неизменяемые приставки на согласный",
+            text: ["Приставки под-, над-, от-, об-, пред-, в- пишутся всегда одинаково. Перед глухой они не превращаются в «пот-», «нат-», а перед звонкой — в «од-»."] },
+  pv:     { t: 10, short: "по-, за-, на-…", title: "Неизменяемые приставки на гласный",
+            text: ["по-, про-, до-, за-, на-, о-, подо-, надо-, пра-, поза-, наи- пишутся всегда одинаково.",
+                   "Без ударения вспомни эту приставку в других словах. Внимание: раз-/рас- сюда не относятся — у них свое правило."] },
+  rr:     { t: 10, short: "раз-/роз-", title: "Приставки РАЗ- / РАС- и РОЗ- / РОС-",
+            text: ["Под ударением пишется ро-: ро́зыск, ро́спись. Без ударения — ра-: разыскать, расписание."] },
+  yi:     { t: 10, short: "ы/и после приставки", title: "Ы / И после приставок", opts: ["и", "ы"],
+            text: ["После русских приставок на согласный корень на и пишется через ы: играть — сыграть, искать — отыскать.",
+                   "И остаётся: после меж- и сверх-; после иноязычных приставок (пост-, супер-, контр-, суб-, транс-, пан-, дез-); в сложносокращённых словах; в слове взимать; после приставок на гласный (заиграть).",
+                   "В начале слова без приставки ы не пишется."] },
+  tz:     { t: 10, short: "ъ / ь", title: "Разделительные Ъ и Ь", opts: ["ъ", "ь"],
+            text: ["Ъ пишется перед е, ё, ю, я: после приставок на согласный (подъезд), в иноязычных приставках и корнях (адъютант, субъект, объект), в сложных словах с двух-, трёх-, четырёх-.",
+                   "Ь пишется внутри корня, перед суффиксами и окончаниями — не после приставки (вьюга, соловьи), а также в иноязычных словах (бульон, батальон)."] }
+};
+
+const DEFAULT_OPTS = { "а": ["а","о"], "о": ["а","о"], "е": ["е","и"], "и": ["е","и"], "я": ["е","и","я"],
+  "ё": ["ё","о"], "ю": ["у","ю"], "ы": ["и","ы"], "з": ["з","с"], "с": ["з","с"], "д": ["д","т"], "т": ["д","т"],
+  "ъ": ["ъ","ь"], "ь": ["ъ","ь"] };
+
+/* ---------- Блоки из самостоятельной (порядок рядов как на листе) ---------- */
+const TEST = [
+  { id: "9-1", task: 9, orig: "237", mark: "−", rows: [
+    ["изл_жить (суть)|о|lag","сотв_рение (мира)|о|tvar","п_лисадник|а|neprov"],
+    ["вым_ршие (животные)|е|ei","водоизм_рительный|е|prov","соед_нение|и|prov"],
+    ["пар_докс|а|neprov","отв_рить (окно)|о|prov","оз_рённый|а|zar"],
+    ["пот_рать (руки)|и|ei","отп_рательство|и|ei","усм_рённый|и|prov"],
+    ["прис_гать|я|prov","одр_хлевший|я|prov","_довитый (гриб)|я|prov"]]},
+  { id: "9-2", task: 9, orig: "125", mark: "+", rows: [
+    ["словосоч_тание|е|ei","вр_дитель|е|prov","бл_стеть|е|ei"],
+    ["п_риодический|е|neprov","з_мляной|е|prov","губ_рнатор|е|neprov"],
+    ["пров_нциальный|и|neprov","объед_нение|и|prov","прив_дение (доказательства)|е|prov"],
+    ["к_саться|а|kas","ст_рожил (дом)|о|prov","к_нсьерж|о|neprov"],
+    ["препод_ватель|а|prov","ак_демический|а|neprov","ур_внять (в правах)|а|ravn"]]},
+  { id: "9-3", task: 9, orig: "15", mark: "−", rows: [
+    ["кровообр_щение|а|prov","утр_мбованный|а|neprov","пол_скать (кота)|а|prov"],
+    ["ум_лять (о помощи)|о|prov","нераст_ропный|о|neprov","др_матический|а|prov"],
+    ["разв_вающийся (флаг)|е|prov","отбл_ставший|и|ei","пол_мический|е|neprov"],
+    ["благосл_влённый|о|prov","распол_жение|о|lag","скл_няться|о|klan"],
+    ["вдохн_влённый|о|neprov","непром_каемый|о|mak","погл_щённость|о|prov"]]},
+  { id: "9-4", task: 9, orig: "235", mark: "−", rows: [
+    ["заж_мать|и|im","оп_раться|и|ei","прим_рение (сторон)|и|prov"],
+    ["к_сательная|а|kas","оз_рение|а|zar","отв_рить (овощи)|а|prov"],
+    ["г_ревать|о|prov","зар_сли|о|rast","прик_снуться|о|kas"],
+    ["изл_жить|о|lag","несг_раемый|о|gar","к_сички|о|prov"],
+    ["п_рила|е|neprov","зам_реть|е|ei","ст_листический|и|prov"]]},
+  { id: "9-5", task: 9, orig: "25", mark: "+", rows: [
+    ["заг_равший|о|gar","р_сточек|о|rast","рест_врация|а|neprov"],
+    ["инт_ллектуальный|е|neprov","предс_датель|е|neprov","сб_режения|е|prov"],
+    ["обр_млять (гравюру)|а|prov","х_лмистый|о|prov","п_лемический|о|neprov"],
+    ["см_гчение (нравов)|я|prov","разъ_снение|я|prov","см_калистый (ученик)|е|neprov|е,и,я"],
+    ["д_лина|о|prov","м_хнатый|о|prov","подор_жание|о|prov"]]},
+  { id: "9-6", task: 9, orig: "345", mark: "−", rows: [
+    ["разб_гатеть|о|neprov","(молодая) пор_сль (кустов)|о|rast","провозгл_шать|а|prov"],
+    ["поч_тать (старших)|и|neprov","зал_вать (водой)|и|prov","усм_рённый|и|prov"],
+    ["рац_ональный|и|c","ц_ганский|ы|c","ц_трусовые (плоды)|и|c"],
+    ["выт_реть (стол)|е|ei","выв_ска (на двери)|е|prov","ош_ломлённый|е|neprov"],
+    ["б_ллетень|ю|neprov","параш_т|ю|neprov","(члены) ж_ри|ю|neprov"]]},
+  { id: "9-7", task: 9, orig: "45", mark: "−", rows: [
+    ["пол_мизировать|е|neprov","(не дать) ум_реть (от голода)|е|ei","р_жиссёрский|е|neprov"],
+    ["х_рактеристика|а|neprov","р_весники|о|ravn","прор_стают (семена)|а|rast"],
+    ["защ_лка (замка)|ё|sh","ч_рный (цвет)|ё|sh","ш_ковое (состояние)|о|sh"],
+    ["ориг_нальный|и|neprov","уд_вительный|и|prov","ч_стоплотный|и|prov"],
+    ["сум_рки|е|neprov","ст_листический (приём)|и|prov","архит_ктурный|е|neprov"]]},
+  { id: "9-8", task: 9, orig: "35", mark: "−", rows: [
+    ["пл_чо|е|prov","шп_онаж|и|neprov","в_стибюль|е|neprov"],
+    ["распроп_гандировать|а|neprov","апл_дировать|о|neprov","зап_стись (провизией)|а|prov"],
+    ["сл_жение (чисел)|о|lag","арист_крат|о|neprov","к_ндуктор|о|neprov"],
+    ["непозв_лительно|о|prov","выск_чка|о|skak","пл_вчиха|о|plav"],
+    ["пол_гать|а|lag","выр_щенный|а|rast","л_донь|а|neprov"]]},
+
+  { id: "10-1", task: 10, orig: "124", mark: "+", rows: [
+    ["пр_образовать|е|pre","пр_неприятный|е|pre","пр_следовать|е|pre_d"],
+    ["сверх_естественный|ъ|tz","с_ёмка|ъ|tz","двух_ярусный|ъ|tz"],
+    ["п_никнуть|о|pv","пр_дедушка|а|pv","поз_вчера|а|pv"],
+    ["чере_чур|с|zs","и_синя-чёрный|с|zs","бе_крайний|с|zs"],
+    ["вз_скать|ы|yi","без_нициативный|ы|yi","сверх_зысканный|и|yi"]]},
+  { id: "10-2", task: 10, orig: "234", mark: "+", rows: [
+    ["пр_добрый|е|pre","гостепр_имный|и|pre","правопр_емник|е|pre_d"],
+    ["н_дломить|а|pv","поз_бросил|а|pv","з_ночевать|а|pv"],
+    ["бе_срочный|с|zs","и_черченный|с|zs","ра_пущенный|с|zs"],
+    ["зав_южило|ь|tz","фамил_ярный|ь|tz","гнездов_е|ь|tz"],
+    ["вз_скание|ы|yi","без_нтересный|ы|yi","меж_нститутский|и|yi"]]},
+  { id: "10-3", task: 10, orig: "125", mark: "+", rows: [
+    ["ра_буженный|з|zs","бе_граничный|з|zs","и_вестить|з|zs"],
+    ["н_испособнейший|а|pv","поз_вчера|а|pv","н_дстройка|а|pv"],
+    ["сверх_зысканно|и|yi","меж_здательский|и|yi","пред_дущий|ы|yi"],
+    ["пр_следовать (врага)|е|pre_d","пр_купить|и|pre","пр_шить (пуговицу)|и|pre"],
+    ["по_черкнуть|д|dt","на_пись|д|dt","пре_писание|д|dt"]]},
+  { id: "10-4", task: 10, orig: "135", mark: "−", rows: [
+    ["пр_стыдить|и|pre","непр_ступная (крепость)|и|pre","беспр_мерный|и|pre_d"],
+    ["от_скать|ы|yi","пост_ндустриальный|и|yi","за_нтересовать|и|yi"],
+    ["сни_хождение|с|zs","и_колесить|с|zs","ра_ценки|с|zs"],
+    ["непре_сказуемый|д|dt","о_блеск|т|dt","по_точить|д|dt"],
+    ["нер_ссказанный|а|rr","под_спел|о|pv","н_илучший|а|pv"]]},
+  { id: "10-5", task: 10, orig: "135", mark: "−", rows: [
+    ["пр_землиться|и|pre","пр_обретение|и|pre_d","пр_открывшийся|и|pre"],
+    ["р_зобщённо|а|rr","п_переменно|о|pv","пр_верка|о|pv"],
+    ["_митировать|и|yi","без_сходный|ы|yi","под_грать|ы|yi"],
+    ["ра_мешать|з|zs","бе_граничный|з|zs","бе_численный|с|zs"],
+    ["роз_грыш|ы|yi","без_скусный|ы|yi","за_граться|и|yi"]]},
+  { id: "10-6", task: 10, orig: "25", mark: "−?", rows: [
+    ["не_хваченный (переписью)|о|pv","р_зместить|а|rr","п_дметать|о|pv"],
+    ["раз_ёмный|ъ|tz","под_ём|ъ|tz","об_ект|ъ|tz"],
+    ["не_жатый|с|s_pref","бе_дорожье|з|zs","бе_заботно|з|zs"],
+    ["под_скать|ы|yi","сверх_нтересный|и|yi","вз_мать|и|yi"],
+    ["пр_обретатель|и|pre_d","пр_чудливый|и|pre_d","пр_ходящий (домой)|и|pre"]]},
+  { id: "10-7", task: 10, orig: "234", mark: "+", rows: [
+    ["п_переменно|о|pv","пр_студа|о|pv","р_зровнять|а|rr"],
+    ["спорт_нвентарь|и|yi","сверх_зысканно|и|yi","меж_нститутский|и|yi"],
+    ["ра_мешать|з|zs","бе_граничный|з|zs","и_рисованный|з|zs"],
+    ["пр_землиться|и|pre","пр_обретение|и|pre_d","пр_открывшийся|и|pre"],
+    ["пр_двзятый|е|pred","н_зводить|и|niz","н_сходящий|и|niz"]]}
+];
+
+/* ---------- Дополнительные слова на те же правила ---------- */
+const EXTRA = {
+  9: ["предпол_гать|а|lag","прил_жение|о|lag","изл_жение|о|lag","выр_сли|о|rast","выр_щивать|а|rast","р_стение|а|rast",
+      "отр_сль|а|rast","р_стовщик|о|rast","к_снуться|о|kas","прик_саться|а|kas","заг_реть|о|gar","з_ря|а|zar",
+      "з_ревать|о|zar","скл_нение|о|klan","выб_рающий|и|ei","зап_реть (дверь)|е|ei","зап_рать (дверь)|и|ei",
+      "расст_лать|и|ei","заж_гать|и|ei","выч_тать|и|ei","соч_тать|е|ei","бл_стящий|е|ei","пл_вучий|а|plav",
+      "пл_вец|о|plav","ур_вень|о|ravn","р_внина|а|ravn","ср_внивать|а|ravn","подр_внять (кусты)|о|ravn",
+      "обм_кнуть (хлеб в соус)|а|mak","пром_кательная (бумага)|о|mak","тв_рец|о|tvar","ск_кать|а|skak",
+      "ск_чок|а|skak","нач_нать|и|im","сн_мать|и|im","ум_лять (свои достоинства)|а|prov","пос_деть (у окна)|и|prov",
+      "пос_деть (о волосах)|е|prov","обв_нять|и|prov","разв_вается (ребёнок)|и|prov","пол_скать (бельё)|о|prov",
+      "вет_ринар|е|neprov","интелл_генция|и|neprov","ап_ллировать|е|neprov","д_фицит|е|neprov","ж_лудь|ё|sh",
+      "ш_рох|о|sh","ч_рствый|ё|sh","ш_пот|ё|sh","ц_рк|и|c","ц_плёнок|ы|c","на ц_почках|ы|c"],
+  10: ["пр_бывать (в столицу)|и|pre","пр_бывать (в неведении)|е|pre","пр_зирать (предателей)|е|pre_d",
+       "пр_дел (участка)|е|pre_d","пр_вратный|е|pre_d","пр_зидент|е|pre_d","пр_тензия|е|pre_d","пр_оритет|и|pre_d",
+       "пр_митивный|и|pre_d","пр_вилегия|и|pre_d","пр_сесть|и|pre","пр_мудрый|е|pre","пр_брежный|и|pre",
+       "пр_градить (путь)|е|pre","бе_вкусный|с|zs","ра_бег|з|zs","во_ход|с|zs","и_пуганный|с|zs","во_гордиться|з|zs",
+       "бе_шумный|с|zs","без_мянный|ы|yi","пред_стория|ы|yi","контр_гра|и|yi","супер_гра|и|yi","с_грать|ы|yi",
+       "раз_скать|ы|yi","пред_нфарктный|ы|yi","пред_юбилейный|ъ|tz","суб_ект|ъ|tz","ад_ютант|ъ|tz","в_юга|ь|tz",
+       "сер_ёзный|ь|tz","трёх_язычный|ъ|tz","из_ян|ъ|tz","солов_иный|ь|tz","д_бежать|о|pv","з_гадка|а|pv",
+       "пр_бег|о|pv","р_спись (по дереву)|о|rr","р_зыск|о|rr","р_списание|а|rr","р_ссказ|а|rr","по_писать|д|dt",
+       "о_дать|т|dt","по_жечь|д|dt","о_бросить|т|dt","_бить (с толку)|с|s_pref","_гиб|с|s_pref",
+       "н_спадающий|и|niz","н_звергнуть|и|niz","пр_дпоследний|е|pred"]
+};
+
+/* ---------- Банк слов ---------- */
+const BANK = {};
+function addWord(s, task, fromTest) {
+  const [text, ans, rule, o] = s.split("|");
+  if (!RULES[rule]) console.warn("no rule", s);
+  if (!BANK[text]) BANK[text] = { id: text, text, ans, rule, task, fromTest, opts: o ? o.split(",") : null };
+  else if (fromTest) BANK[text].fromTest = true;
+  return BANK[text];
+}
+TEST.forEach(b => { b.rows = b.rows.map(r => r.map(s => addWord(s, b.task, true).id)); });
+EXTRA[9].forEach(s => addWord(s, 9, false));
+EXTRA[10].forEach(s => addWord(s, 10, false));
+const ALL = Object.values(BANK);
+function optsOf(w) { return w.opts || RULES[w.rule].opts || DEFAULT_OPTS[w.ans]; }
+
+/* ---------- Хранилище ---------- */
+const KEY = "ege-9-10-trainer-v1";
+let S = { words: {}, blocks: {}, total: { n: 0, ok: 0 } };
+try { const raw = localStorage.getItem(KEY); if (raw) S = Object.assign(S, JSON.parse(raw)); } catch (e) {}
+function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+function ws(id) { return S.words[id] || (S.words[id] = { ok: 0, bad: 0, streak: 0 }); }
+function ruleErrors() {
+  const m = {};
+  for (const [id, st] of Object.entries(S.words)) { const w = BANK[id]; if (w && st.bad) m[w.rule] = (m[w.rule] || 0) + st.bad; }
+  return m;
+}
+
+/* ---------- Утилиты ---------- */
+const $ = (sel, root = document) => root.querySelector(sel);
+const esc = s => s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const pick = a => a[Math.floor(Math.random() * a.length)];
+function wordHTML(w, fill, bad) {
+  const parts = esc(w.text).replace(/\([^)]*\)/g, m => `<span class="note">${m}</span>`).split("_");
+  const g = fill ? `<span class="gap filled${bad ? " bad" : ""}">${esc(fill)}</span>` : `<span class="gap">&nbsp;</span>`;
+  return parts[0] + g + (parts[1] || "");
+}
+function ruleHTML(id) {
+  const r = RULES[id];
+  return `<div class="rule"><h3>${esc(r.title)}</h3>${r.text.map(p => `<p>${esc(p)}</p>`).join("")}</div>`;
+}
+function renderStats() {
+  const solved = TEST.filter(b => S.blocks[b.id]).length;
+  const pct = S.total.n ? Math.round(S.total.ok / S.total.n * 100) : 0;
+  $("#stats").innerHTML = `<span>ответов: <b>${S.total.n}</b></span><span>верно: <b>${pct}%</b></span><span>блоков ср решено: <b>${solved}/${TEST.length}</b></span>`;
+}
+
+/* ---------- Вкладки ---------- */
+const tabs = document.querySelectorAll(".tab");
+function showTab(name) {
+  tabs.forEach(t => t.setAttribute("aria-selected", t.dataset.tab === name ? "true" : "false"));
+  ["words", "rows", "test", "rules"].forEach(n => { $("#p-" + n).hidden = n !== name; });
+  if (name === "rules") renderRules();
+  if (name === "words" && !W.queue.length && !W.current) renderWords();
+  try { localStorage.setItem(KEY + "-tab", name); } catch (e) {}
+}
+tabs.forEach(t => t.addEventListener("click", () => showTab(t.dataset.tab)));
+
+/* ---------- Режим «Слова» ---------- */
+const ROUND = 20;
+const W = { task: "all", source: "all", rule: "", queue: [], current: null, answered: false, seen: new Set(),
+            first: { n: 0, ok: 0 }, missedRules: {}, total: 0, timer: null, customIds: null, customLabel: "" };
+
+function poolWords() {
+  if (W.customIds) return W.customIds.map(id => BANK[id]);
+  return ALL.filter(w => {
+    if (W.task !== "all" && String(w.task) !== W.task) return false;
+    if (W.rule && w.rule !== W.rule) return false;
+    if (W.source === "test" && !w.fromTest) return false;
+    if (W.source === "mistakes") { const st = S.words[w.id]; if (!st || !st.bad || st.streak >= 2) return false; }
+    return true;
+  });
+}
+function startRound() {
+  clearTimeout(W.timer);
+  const pool = shuffle(poolWords());
+  W.queue = pool.slice(0, W.customIds ? pool.length : ROUND).map(w => w.id);
+  W.total = W.queue.length; W.seen = new Set(); W.first = { n: 0, ok: 0 }; W.missedRules = {};
+  W.current = null; nextWord();
+}
+function nextWord() {
+  clearTimeout(W.timer);
+  W.current = W.queue.shift() || null; W.answered = false;
+  renderWords();
+}
+function answer(letter) {
+  if (!W.current || W.answered) return;
+  const w = BANK[W.current]; const ok = letter === w.ans; const st = ws(w.id);
+  W.answered = { letter, ok };
+  const firstTime = !W.seen.has(w.id); W.seen.add(w.id);
+  if (firstTime) { W.first.n++; if (ok) W.first.ok++; }
+  S.total.n++;
+  if (ok) { S.total.ok++; st.ok++; st.streak++; }
+  else {
+    st.bad++; st.streak = 0; W.missedRules[w.rule] = (W.missedRules[w.rule] || 0) + 1;
+    const pos = Math.min(W.queue.length, 3 + Math.floor(Math.random() * 3));
+    W.queue.splice(pos, 0, w.id);
+  }
+  save(); renderStats(); renderWords();
+  if (ok) W.timer = setTimeout(nextWord, 1300);
+}
+
+function wordControls() {
+  const ruleOpts = Object.entries(RULES)
+    .filter(([, r]) => W.task === "all" || String(r.t) === W.task)
+    .map(([id, r]) => `<option value="${id}"${W.rule === id ? " selected" : ""}>${esc(r.title)}</option>`).join("");
+  if (W.customIds) {
+    return `<div class="controls"><span class="pill">${esc(W.customLabel)}</span>
+      <button class="btn ghost" id="w-reset">Вернуться ко всем словам</button></div>`;
+  }
+  return `<div class="controls">
+    <div class="seg" role="group" aria-label="Задание">
+      ${[["all","9 и 10"],["9","Задание 9"],["10","Задание 10"]].map(([v,l]) => `<button data-task="${v}" aria-pressed="${W.task===v}">${l}</button>`).join("")}
+    </div>
+    <label class="lbl">Слова
+      <select id="w-source">
+        <option value="all"${W.source==="all"?" selected":""}>все (${ALL.length})</option>
+        <option value="test"${W.source==="test"?" selected":""}>только из ср</option>
+        <option value="mistakes"${W.source==="mistakes"?" selected":""}>мои ошибки</option>
+      </select></label>
+    <label class="lbl">Правило
+      <select id="w-rule"><option value="">любое</option>${ruleOpts}</select></label>
+  </div>`;
+}
+function weakHTML() {
+  const errs = Object.entries(ruleErrors()).sort((a, b) => b[1] - a[1]).slice(0, 5);
+  if (!errs.length) return "";
+  return `<div class="weak"><span class="t">Чаще всего ошибаешься:</span>${errs.map(([id, n]) =>
+    `<button class="chipbtn" data-drill="${id}">${esc(RULES[id].short)} · ${n}</button>`).join("")}</div>`;
+}
+function renderWords() {
+  const root = $("#p-words");
+  let body = "";
+  if (!W.current && !W.queue.length && W.total) {
+    const pct = W.first.n ? Math.round(W.first.ok / W.first.n * 100) : 0;
+    const missed = Object.entries(W.missedRules).sort((a, b) => b[1] - a[1]);
+    body = `<div class="summary">
+      <div class="big">${W.first.ok} / ${W.first.n}</div>
+      <div>верно с первого раза (${pct}%)</div>
+      ${missed.length ? `<div class="small">Повтори правила:</div><div class="row-actions" style="justify-content:center">${missed.map(([id]) =>
+        `<button class="chipbtn" data-drill="${id}">${esc(RULES[id].short)}</button>`).join("")}</div>` : `<div class="small">Ни одной ошибки в этом круге.</div>`}
+      <button class="btn" id="w-again">Ещё круг</button></div>`;
+  } else if (!W.current) {
+    const n = poolWords().length;
+    body = n ? `<div class="summary"><div>В подборке ${n} слов${n > ROUND && !W.customIds ? `, в круге будет ${ROUND}` : ""}.</div><button class="btn" id="w-again">Начать</button></div>`
+             : `<div class="summary"><div>Под эти фильтры слов нет${W.source === "mistakes" ? " — ошибок пока нет или ты их уже исправил" : ""}.</div></div>`;
+  } else {
+    const w = BANK[W.current]; const a = W.answered; const opts = optsOf(w);
+    const repeat = W.seen.has(w.id) && !a ? `<span class="pill">повтор</span>` : "";
+    body = `
+      <div class="progress"><i style="width:${W.first.n / Math.max(1, W.total) * 100}%"></i></div>
+      <div class="ptext">осталось ${W.queue.length + 1} · задание ${w.task} ${repeat}</div>
+      <div class="word">${a && a.ok ? wordHTML(w, w.ans) : wordHTML(w)}</div>
+      <div class="opts">${opts.map((o, i) => `<button class="opt" data-l="${o}"${a ? " disabled" : ""}>${o}<span class="k">${i + 1}</span></button>`).join("")}</div>
+      ${!a ? `<div class="hint">Нажми букву или цифру на клавиатуре</div>` : ""}
+      ${a ? (a.ok
+        ? `<div class="fb ok"><div class="head">Верно</div><div class="row-actions"><span class="pill">${esc(RULES[w.rule].short)}</span><button class="btn ghost" id="w-next">Дальше</button></div></div>`
+        : `<div class="fb bad"><div class="head">Не так. Вспомни правило</div>${ruleHTML(w.rule)}
+            <div class="row-actions"><button class="btn" id="w-next">Дальше</button><span class="small">Это слово вернётся через несколько заданий.</span></div></div>`) : ""}
+    `;
+  }
+  const mark = W.current && W.answered ? `<div class="mark" style="top:96px">${W.answered.ok ? "+" : "−"}</div>` : "";
+  root.innerHTML = wordControls() + body + mark + weakHTML();
+
+  root.querySelectorAll("[data-task]").forEach(b => b.onclick = () => { W.task = b.dataset.task; if (W.rule && String(RULES[W.rule].t) !== W.task && W.task !== "all") W.rule = ""; resetIdle(); });
+  const src = $("#w-source", root); if (src) src.onchange = () => { W.source = src.value; resetIdle(); };
+  const rl = $("#w-rule", root); if (rl) rl.onchange = () => { W.rule = rl.value; resetIdle(); };
+  root.querySelectorAll(".opt").forEach(b => b.onclick = () => answer(b.dataset.l));
+  const nx = $("#w-next", root); if (nx) { nx.onclick = nextWord; nx.focus({ preventScroll: true }); }
+  const ag = $("#w-again", root); if (ag) ag.onclick = startRound;
+  const rs = $("#w-reset", root); if (rs) rs.onclick = () => { W.customIds = null; resetIdle(); };
+  root.querySelectorAll("[data-drill]").forEach(b => b.onclick = () => drillRule(b.dataset.drill));
+}
+function resetIdle() { clearTimeout(W.timer); W.queue = []; W.current = null; W.total = 0; renderWords(); }
+function drillRule(id) {
+  W.customIds = null; W.rule = id; W.source = "all"; W.task = "all";
+  showTab("words"); startRound();
+}
+function drillIds(ids, label) {
+  W.customIds = ids; W.customLabel = label; showTab("words"); startRound();
+}
+document.addEventListener("keydown", e => {
+  if ($("#p-words").hidden || e.ctrlKey || e.metaKey || e.altKey) return;
+  if (e.target.tagName === "SELECT") return;
+  if (!W.current) return;
+  if (W.answered) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); nextWord(); } return; }
+  const opts = optsOf(BANK[W.current]); const k = e.key.toLowerCase();
+  if (/^[1-9]$/.test(k) && opts[+k - 1]) { answer(opts[+k - 1]); return; }
+  if (opts.includes(k)) answer(k);
+});
+
+/* ---------- Ряды (общий виджет) ---------- */
+function correctRows(block) { return block.rows.map((r, i) => r.every(id => BANK[id].ans === BANK[r[0]].ans) ? i + 1 : 0).filter(Boolean); }
+function rowsWidget(root, block, opts) {
+  const st = { sel: new Set(), tries: 0, solved: false, msg: "", showRules: false, openRule: null };
+  function draw() {
+    const answerStr = [...st.sel].sort().join("") || "—";
+    root.innerHTML = `
+      ${opts.header || ""}
+      <p class="task">Укажите варианты ответов, в которых во всех словах одного ряда пропущена одна и та же буква.</p>
+      <div class="rows">${block.rows.map((r, i) => `
+        <button class="r" data-i="${i + 1}" aria-pressed="${st.sel.has(i + 1)}"${st.solved ? " disabled" : ""}>
+          <span class="n">${i + 1}</span>
+          <span class="ws">${r.map((id, j) => { const w = BANK[id]; return `<span class="w"><span>${wordHTML(w, st.solved ? w.ans : null)}${j < 2 ? "," : ""}</span>${st.showRules ? `<span class="chip" data-rule="${w.rule}">${esc(RULES[w.rule].short)}</span>` : ""}</span>`; }).join("")}</span>
+        </button>`).join("")}</div>
+      <div class="answer-line"><span class="small">Ответ:</span><span class="hand">${answerStr}</span>
+        ${st.solved ? "" : `<button class="btn" id="r-check">Проверить</button>`}
+        ${opts.footer ? opts.footer(st) : ""}</div>
+      ${st.msg ? `<div class="msg ${st.solved ? "ok" : "bad"}">${st.msg}</div>` : ""}
+      ${st.openRule ? `<div style="margin-top:12px">${ruleHTML(st.openRule)}</div>` : ""}
+      ${st.tries && !st.solved ? `<div class="row-actions" style="margin-top:12px"><button class="btn ghost" id="r-drill">Потренировать слова этого блока</button></div>` : ""}
+      ${st.tries ? `<div class="mark" style="top:${opts.markTop || 20}px">${st.solved ? "+" : "−"}</div>` : ""}
+    `;
+    root.querySelectorAll(".r").forEach(b => b.onclick = e => {
+      const chip = e.target.closest("[data-rule]");
+      if (chip) { st.openRule = st.openRule === chip.dataset.rule ? null : chip.dataset.rule; draw(); return; }
+      const i = +b.dataset.i; st.sel.has(i) ? st.sel.delete(i) : st.sel.add(i); draw();
+    });
+    const ck = $("#r-check", root); if (ck) ck.onclick = check;
+    const dr = $("#r-drill", root); if (dr) dr.onclick = () => drillIds(block.rows.flat(), opts.drillLabel || "Слова из блока");
+    if (opts.bind) opts.bind(root, st);
+  }
+  function check() {
+    const right = correctRows(block); const mine = [...st.sel];
+    const wrongCount = [1, 2, 3, 4, 5].filter(i => right.includes(i) !== st.sel.has(i)).length;
+    st.tries++;
+    if (!wrongCount) {
+      st.solved = true; st.msg = st.tries === 1 ? "Верно с первой попытки." : `Верно. Попыток: ${st.tries}.`;
+      st.openRule = null; if (opts.onSolve) opts.onSolve(st);
+    } else {
+      st.showRules = true;
+      st.msg = st.tries === 1
+        ? "Есть ошибка. Под каждым словом подписано правило — нажми на него, чтобы прочитать, и проверь ряды заново."
+        : `Всё ещё неверно: ошибка в оценке ${wrongCount} ${wrongCount === 1 ? "ряда" : "рядов"}. Пройди по каждому слову с правилом.`;
+    }
+    draw();
+  }
+  draw();
+  return st;
+}
+
+/* ---------- Режим «Ряды как на ЕГЭ» ---------- */
+function genBlock(task) {
+  const pool = ALL.filter(w => w.task === task);
+  for (let tries = 0; tries < 300; tries++) {
+    const used = new Set(); const rows = []; let ok = true;
+    const k = 2 + Math.floor(Math.random() * 3);
+    const pattern = shuffle([0, 1, 2, 3, 4].map(i => i < k));
+    for (const yes of pattern) {
+      const avail = pool.filter(w => !used.has(w.id));
+      const groups = {};
+      avail.forEach(w => { const key = optsOf(w).join() + "|" + w.ans; (groups[key] = groups[key] || []).push(w); });
+      const need = yes ? 3 : 2;
+      const cand = Object.values(groups).filter(g => g.length >= need);
+      if (!cand.length) { ok = false; break; }
+      const g = pick(cand); const chosen = shuffle(g).slice(0, need);
+      if (!yes) {
+        const fam = optsOf(chosen[0]).join();
+        const odd = avail.filter(w => optsOf(w).join() === fam && w.ans !== chosen[0].ans);
+        if (!odd.length) { ok = false; break; }
+        chosen.push(pick(odd));
+      }
+      chosen.forEach(w => used.add(w.id));
+      rows.push(shuffle(chosen).map(w => w.id));
+    }
+    if (ok) return { task, rows };
+  }
+  return null;
+}
+const R = { task: 9 };
+function renderRowsTab() {
+  const root = $("#p-rows");
+  root.innerHTML = `<div class="controls"><div class="seg" role="group" aria-label="Задание">
+      ${[9, 10].map(t => `<button data-rt="${t}" aria-pressed="${R.task === t}">Задание ${t}</button>`).join("")}</div>
+      <button class="btn ghost" id="r-new">Новый вариант</button>
+      <span class="small">Ряды собираются случайно из ${ALL.filter(w => w.task === R.task).length} слов.</span></div>
+    <div id="r-body"></div>`;
+  root.querySelectorAll("[data-rt]").forEach(b => b.onclick = () => { R.task = +b.dataset.rt; renderRowsTab(); });
+  $("#r-new", root).onclick = renderRowsTab;
+  const block = genBlock(R.task);
+  rowsWidget($("#r-body", root), block, { markTop: 90, drillLabel: "Слова из этого варианта" });
+}
+
+/* ---------- Режим «Моя ср» ---------- */
+let currentBlock = TEST[0].id;
+function renderTest() {
+  const root = $("#p-test");
+  const b = TEST.find(x => x.id === currentBlock);
+  const idx = TEST.indexOf(b);
+  const label = x => { const [t, n] = x.id.split("-"); return `${t}·${n}`; };
+  root.innerHTML = `<div class="blocks" role="group" aria-label="Блоки">${TEST.map(x =>
+      `<button class="bk${S.blocks[x.id] ? " done" : ""}" data-b="${x.id}" aria-current="${x.id === b.id}">${label(x)}</button>`).join("")}</div>
+    <div id="t-body"></div>`;
+  root.querySelectorAll("[data-b]").forEach(x => x.onclick = () => { currentBlock = x.dataset.b; renderTest(); });
+  const dispute = b.mark === "−?"
+    ? ` <span class="small">(по правилам твой ответ здесь выглядит верным — уточни у учителя)</span>` : "";
+  const header = `<div class="orig">Задание ${b.task}, блок ${b.id.split("-")[1]} · на ср ты ответил <span class="hand">${b.orig}</span> <span class="redm">${b.mark.replace("?", "")}</span>${dispute}</div>`;
+  rowsWidget($("#t-body", root), b, {
+    header, markTop: 74, drillLabel: `Слова из блока ${label(b)}`,
+    onSolve: () => { S.blocks[b.id] = true; save(); renderStats(); root.querySelector(`[data-b="${b.id}"]`).classList.add("done"); },
+    footer: st => st.solved && idx < TEST.length - 1 ? `<button class="btn ghost" id="t-next">Следующий блок</button>` : "",
+    bind: (r) => { const n = $("#t-next", r); if (n) n.onclick = () => { currentBlock = TEST[idx + 1].id; renderTest(); }; }
+  });
+}
+
+/* ---------- Правила ---------- */
+function renderRules() {
+  const errs = ruleErrors();
+  const count = id => ALL.filter(w => w.rule === id).length;
+  const card = id => { const r = RULES[id]; return `<div class="rcard"><h3>${esc(r.title)}${errs[id] ? `<span class="errc">ошибок: ${errs[id]}</span>` : ""}</h3>
+      ${r.text.map(p => `<p>${esc(p)}</p>`).join("")}
+      <div class="row-actions"><button class="btn ghost" data-drill="${id}">Тренировать (${count(id)} слов)</button></div></div>`; };
+  const ids = t => Object.keys(RULES).filter(id => RULES[id].t === t);
+  $("#p-rules").innerHTML = `<div class="rules-list">
+    <h2>Задание 9 · корни</h2>${ids(9).map(card).join("")}
+    <h2>Задание 10 · приставки</h2>${ids(10).map(card).join("")}</div>`;
+  $("#p-rules").querySelectorAll("[data-drill]").forEach(b => b.onclick = () => drillRule(b.dataset.drill));
+}
+
+/* ---------- Старт ---------- */
+renderStats();
+startRound();
+renderRowsTab();
+renderTest();
+let startTab = "words";
+try { startTab = localStorage.getItem(KEY + "-tab") || "words"; } catch (e) {}
+showTab(["words", "rows", "test", "rules"].includes(startTab) ? startTab : "words");
+</script>
+
+<script>
+if ('serviceWorker' in navigator) { window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {})); }
+</script>
+</body>
+</html>
