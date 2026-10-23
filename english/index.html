@@ -1,0 +1,1097 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Английский</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="English">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#f3f5f9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#10131a" media="(prefers-color-scheme: dark)">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" type="image/png" href="icon-512.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Golos+Text:wght@400;500;600&family=PT+Serif:wght@400;700&display=swap">
+<style>
+html { -webkit-text-size-adjust: 100%; }
+[hidden] { display: none !important; }
+:root {
+  --paper: #f3f5f9; --grid: #e1e6ef; --sheet: #ffffff; --text: #1a1f2b; --muted: #5f6878; --line: #d6dce7;
+  --ink: #1f4e9c; --ink-soft: #e5edfa; --gold: #b7860b; --gold-soft: #fbf1d6;
+  --bad: #c9372c; --bad-soft: #fbe8e6; --ok: #23784a; --ok-soft: #e3f3e9;
+  --g-m: #2c5bc9; --g-f: #c9372c; --g-n: #23824a;
+  --f-hand: "Caveat", "Segoe Print", cursive;
+  --f-ui: "Golos Text", "Segoe UI", system-ui, sans-serif;
+  --f-word: "PT Serif", Georgia, serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #10131a; --grid: #181d27; --sheet: #161b24; --text: #e6eaf2; --muted: #98a2b5; --line: #2c3443;
+    --ink: #8fb4ff; --ink-soft: #1f2b44; --gold: #e8bd4a; --gold-soft: #33290f;
+    --bad: #ff7b6e; --bad-soft: #3b1f1c; --ok: #64d396; --ok-soft: #163024;
+    --g-m: #8fb0ff; --g-f: #ff8a7e; --g-n: #6fd69c; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #10131a; --grid: #181d27; --sheet: #161b24; --text: #e6eaf2; --muted: #98a2b5; --line: #2c3443;
+  --ink: #8fb4ff; --ink-soft: #1f2b44; --gold: #e8bd4a; --gold-soft: #33290f;
+  --bad: #ff7b6e; --bad-soft: #3b1f1c; --ok: #64d396; --ok-soft: #163024;
+  --g-m: #8fb0ff; --g-f: #ff8a7e; --g-n: #6fd69c; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background-color: var(--paper);
+  background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 22px 22px; color: var(--text); font: 16px/1.5 var(--f-ui);
+  padding: calc(20px + env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) calc(48px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+}
+.wrap { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
+header { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 6px 16px; }
+h1 { font: 700 30px/1.1 var(--f-word); margin: 0; }
+.sub { font: 500 22px/1 var(--f-hand); color: var(--ink); }
+.stats { font-size: 13px; color: var(--muted); display: flex; gap: 14px; flex-wrap: wrap; font-variant-numeric: tabular-nums; }
+.stats b { color: var(--text); font-weight: 600; }
+.tabs { display: flex; gap: 4px; flex-wrap: wrap; }
+.tab { font: 500 15px var(--f-ui); color: var(--muted); background: transparent; border: 1px solid transparent; padding: 7px 13px; border-radius: 8px; cursor: pointer; }
+@media (max-width: 420px) { .tab { font-size: 13.5px; padding: 6px 6px; white-space: nowrap; } .tabs { gap: 0; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; } .tabs::-webkit-scrollbar { display: none; } }
+.tab[aria-selected="true"] { background: var(--sheet); color: var(--ink); border-color: var(--line); }
+.sheet { background: var(--sheet); border: 1px solid var(--line); border-radius: 6px; padding: 22px 22px 26px; min-width: 0; box-shadow: 0 10px 30px -20px rgba(40, 20, 10, .4); }
+@media (max-width: 560px) { .sheet { padding: 18px 16px 22px; } }
+h2 { font: 700 22px/1.25 var(--f-word); margin: 0 0 10px; }
+h3 { font: 600 17px/1.3 var(--f-ui); margin: 22px 0 8px; }
+p { margin: 0 0 10px; }
+.muted { color: var(--muted); }
+.small { font-size: 13.5px; }
+.hand { font: 700 22px/1.1 var(--f-hand); color: var(--ink); }
+
+.btn { font: 600 15px var(--f-ui); background: var(--ink); color: var(--sheet); border: 0; border-radius: 9px; padding: 11px 18px; cursor: pointer; }
+.btn.ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--line); }
+.btn.small { padding: 7px 12px; font-size: 14px; }
+.btn:disabled { opacity: .45; cursor: default; }
+.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.row.center { justify-content: center; }
+.grades { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 18px; }
+.grades button { font: 600 15px var(--f-ui); border-radius: 9px; padding: 12px 6px; cursor: pointer; border: 1.5px solid var(--line); background: var(--sheet); color: var(--text); }
+.grades .g0 { color: var(--bad); border-color: var(--bad); background: var(--bad-soft); }
+.grades .g1 { color: var(--gold); border-color: var(--gold); background: var(--gold-soft); }
+.grades .g2 { color: var(--ok); border-color: var(--ok); background: var(--ok-soft); }
+
+.progress { height: 4px; background: var(--line); border-radius: 2px; overflow: hidden; margin-bottom: 4px; }
+.progress i { display: block; height: 100%; background: var(--ink); width: 0; transition: width .3s; }
+.ptext { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; display: flex; justify-content: space-between; gap: 8px; }
+.kind { font: 700 20px var(--f-hand); color: var(--gold); text-align: center; margin-top: 14px; }
+.big { font: 400 clamp(26px, 6.5vw, 38px)/1.25 var(--f-word); text-align: center; padding: 14px 0 6px; overflow-wrap: anywhere; }
+.big.de { cursor: pointer; }
+.ru { font-size: 19px; text-align: center; }
+.note { background: var(--gold-soft); border-radius: 8px; padding: 8px 12px; font-size: 14.5px; margin: 12px 0 0; }
+.speak { display: flex; gap: 8px; justify-content: center; margin: 6px 0 4px; flex-wrap: wrap; }
+.speak button, .play { font: 500 14px var(--f-ui); color: var(--ink); background: var(--ink-soft); border: 0; border-radius: 99px; padding: 7px 14px; cursor: pointer; }
+.heard { text-align: center; font-size: 14.5px; min-height: 0; margin-top: 6px; }
+.heard.ok { color: var(--ok); } .heard.bad { color: var(--bad); }
+.reveal { margin-top: 18px; border-top: 1px dashed var(--line); padding-top: 14px; }
+
+.de { color: var(--ink); cursor: pointer; font-family: var(--f-word); }
+span.de, b.de { text-decoration: underline dotted; text-underline-offset: 3px; }
+.g-m { color: var(--g-m); font-weight: 700; } .g-f { color: var(--g-f); font-weight: 700; } .g-n { color: var(--g-n); font-weight: 700; }
+
+.readbox { margin-top: 12px; padding: 12px; border: 1px solid var(--line); border-radius: 10px; }
+.readbox .w { font: 22px var(--f-word); text-align: center; margin-bottom: 10px; line-height: 1.6; }
+.readbox mark { background: var(--gold-soft); color: inherit; border-radius: 3px; padding: 0 1px; border-bottom: 2px solid var(--gold); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font: 500 13.5px var(--f-ui); border: 1px solid var(--line); background: var(--sheet); color: var(--text); border-radius: 99px; padding: 4px 10px; cursor: pointer; }
+.chip b { font-family: var(--f-word); color: var(--ink); }
+
+.opts { display: grid; gap: 8px; margin-top: 16px; }
+.opts button { font: 16px var(--f-ui); text-align: left; padding: 12px 14px; border-radius: 10px; border: 1.5px solid var(--line); background: var(--sheet); color: var(--text); cursor: pointer; }
+.opts button.right { border-color: var(--ok); background: var(--ok-soft); }
+.opts button.wrong { border-color: var(--bad); background: var(--bad-soft); }
+
+.answer { min-height: 54px; border-bottom: 2px solid var(--line); display: flex; flex-wrap: wrap; gap: 6px; padding: 8px 0; justify-content: center; margin-top: 14px; }
+.tiles { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 16px; }
+.tile { font: 19px var(--f-word); padding: 7px 13px; border-radius: 9px; border: 1.5px solid var(--line); background: var(--sheet); color: var(--text); cursor: pointer; box-shadow: 0 2px 0 var(--line); }
+.tile.used { visibility: hidden; }
+.verdict { text-align: center; margin-top: 14px; font-weight: 600; }
+.verdict.ok { color: var(--ok); } .verdict.bad { color: var(--bad); }
+
+.lessons { display: grid; gap: 8px; }
+.lesson { display: grid; grid-template-columns: 34px 1fr auto; gap: 12px; align-items: center; text-align: left; width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--sheet); color: var(--text); cursor: pointer; font: inherit; }
+.lesson .n { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font: 700 15px var(--f-ui); background: var(--ink-soft); color: var(--ink); }
+.lesson.done .n { background: var(--ok-soft); color: var(--ok); }
+.lesson b { display: block; font-size: 16px; }
+.lesson span { color: var(--muted); font-size: 13.5px; }
+.lesson .cnt { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.theory { font-size: 15.5px; }
+.theory table, .tbl { border-collapse: collapse; margin: 8px 0 14px; font-size: 15px; }
+.theory td, .theory th, .tbl td, .tbl th { border: 1px solid var(--line); padding: 5px 10px; text-align: left; vertical-align: top; }
+.theory th, .tbl th { background: var(--ink-soft); font-weight: 600; }
+.tscroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.phrases { display: grid; gap: 0; margin-top: 6px; }
+.ph { display: grid; grid-template-columns: 36px 1fr 10px; gap: 10px; align-items: start; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.ph .play { padding: 0; width: 34px; height: 34px; }
+.ph .dd { font: 18px var(--f-word); cursor: pointer; }
+.ph .rr { font-size: 14.5px; color: var(--muted); }
+.ph .nn { font-size: 13.5px; color: var(--gold); margin-top: 2px; }
+.dot { width: 10px; height: 10px; border-radius: 50%; background: var(--line); margin-top: 8px; }
+.dot.s1 { background: var(--gold); } .dot.s2 { background: var(--ok); }
+
+.rule { border: 1px solid var(--line); border-radius: 10px; padding: 14px; margin-bottom: 10px; scroll-margin-top: 16px; transition: box-shadow .4s; }
+.rule.flash { box-shadow: 0 0 0 3px var(--gold); }
+.rule h3 { margin: 0 0 6px; display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+.rule h3 code { font: 700 18px var(--f-word); color: var(--ink); background: var(--ink-soft); padding: 0 7px; border-radius: 6px; }
+.rule .bad { background: var(--bad-soft); border-radius: 8px; padding: 7px 10px; font-size: 14.5px; margin: 8px 0; }
+.ex { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.ex button { font: 15px var(--f-ui); border: 1px solid var(--line); background: var(--sheet); color: var(--text); border-radius: 8px; padding: 5px 10px; cursor: pointer; }
+.ex button b { font: 700 17px var(--f-word); color: var(--ink); font-weight: 400; }
+.ex button span { color: var(--muted); font-size: 13px; }
+.drill { border: 1.5px solid var(--gold); background: var(--gold-soft); border-radius: 12px; padding: 14px; margin-bottom: 16px; }
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+.pair button { font: 22px var(--f-word); padding: 12px 6px; border-radius: 10px; border: 1.5px solid var(--line); background: var(--sheet); color: var(--text); cursor: pointer; }
+.pair button.right { border-color: var(--ok); background: var(--ok-soft); }
+.pair button.wrong { border-color: var(--bad); background: var(--bad-soft); }
+.warn { background: var(--bad-soft); border-radius: 10px; padding: 10px 12px; font-size: 14.5px; }
+.settings { display: grid; gap: 10px; margin-top: 8px; font-size: 15px; }
+.settings label { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+select { font: 15px var(--f-ui); color: var(--text); background: var(--sheet); border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px; }
+.today-num { font: 700 46px/1 var(--f-word); color: var(--ink); }
+.plan { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; text-align: center; margin: 12px 0 16px; }
+.plan div { border: 1px solid var(--line); border-radius: 10px; padding: 10px 4px; }
+.plan span { display: block; font-size: 13px; color: var(--muted); }
+.lnav { display: flex; justify-content: space-between; gap: 6px; }
+.lnav .btn { padding: 7px 10px; }
+.focus { display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: var(--muted); margin-top: 16px; }
+.focus select { width: 100%; }
+.cur { display: block; font-size: 11.5px; color: var(--gold); font-weight: 600; }
+details { border-top: 1px solid var(--line); padding-top: 10px; margin-top: 18px; }
+summary { cursor: pointer; font-weight: 600; color: var(--muted); }
+</style>
+<style>
+.appnav { display: flex; gap: 6px; align-items: center; overflow-x: auto; scrollbar-width: none; margin: 0 0 4px; }
+.appnav::-webkit-scrollbar { display: none; }
+.appnav a { font: 500 13.5px system-ui, -apple-system, "Segoe UI", sans-serif; color: inherit; text-decoration: none; white-space: nowrap; padding: 5px 11px; border-radius: 99px; border: 1px solid rgba(127,127,127,.35); opacity: .75; }
+.appnav a[aria-current="page"] { opacity: 1; font-weight: 600; background: rgba(127,127,127,.16); border-color: transparent; }
+.appnav a.home { padding: 5px 9px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="appnav" aria-label="Тренажёры"><a class="home" href="../">← Домой</a></nav>
+  <header>
+    <div>
+      <h1>Английский</h1>
+      <div class="sub">говорить и понимать на слух</div>
+    </div>
+    <div class="stats" id="stats"></div>
+  </header>
+  <nav class="tabs" role="tablist">
+    <button class="tab" role="tab" data-tab="today" aria-selected="true">Сегодня</button>
+    <button class="tab" role="tab" data-tab="lessons" aria-selected="false">Уроки</button>
+    <button class="tab" role="tab" data-tab="pron" aria-selected="false">Произношение</button>
+    <button class="tab" role="tab" data-tab="sheet" aria-selected="false">Шпаргалка</button>
+  </nav>
+  <section class="sheet" id="p-today"></section>
+  <section class="sheet" id="p-lessons" hidden></section>
+  <section class="sheet" id="p-pron" hidden></section>
+  <section class="sheet" id="p-sheet" hidden></section>
+</div>
+
+<script>
+const D = s => `<span class="de">${s}</span>`;
+
+const LESSONS = [
+{ id: "hello", title: "Первые фразы", sub: "привет, как дела, не понимаю",
+theory: `<p>Главное про английский: он <b>не читается так, как пишется</b>. Одни и те же буквы звучат по-разному: ${D("cut")} и ${D("put")}, ${D("read")} (читаю) и ${D("read")} (читал). Поэтому <b>каждое слово сначала слушай</b>, а не читай по буквам — для этого здесь у каждой фразы есть озвучка.</p>
+<p>В живой речи все говорят <b>сокращениями</b>: ${D("I'm")}, ${D("it's")}, ${D("don't")}, ${D("can't")}. «I am fine» звучит как робот. Учи сразу сокращённые формы.</p>
+<p>${D("How are you?")} — это не вопрос о делах, а приветствие. Отвечают коротко: ${D("Good, thanks. And you?")} — даже если день так себе.</p>
+<p>${D("Excuse me")} — чтобы обратиться к человеку или пройти. ${D("Sorry")} — чтобы извиниться или переспросить: ${D("Sorry?")}</p>
+<p>Две фразы-спасателя выучи первыми: ${D("I don't understand")} и ${D("Can you speak more slowly, please?")}</p>
+<p>Параллельно пройди вкладку «Произношение» — там главные ошибки русских, которые слышно сразу.</p>`,
+items: [
+["Hi! How are you?", "Привет! Как дела?"], ["I'm good, thanks. And you?", "Хорошо, спасибо. А ты?", "На How are you? не жалуются — это просто приветствие."],
+["Nice to meet you.", "Приятно познакомиться."], ["What's your name?", "Как тебя зовут?"], ["My name is Max.", "Меня зовут Макс."],
+["Where are you from?", "Откуда ты?"], ["I'm from Russia.", "Я из России."], ["Thank you so much!", "Большое спасибо!"],
+["You're welcome.", "Пожалуйста. (в ответ на «спасибо»)"], ["Excuse me, can you help me?", "Извините, можете помочь?", "Excuse me — обратиться или пройти. Sorry — извиниться."],
+["Sorry, I'm late.", "Извини, я опоздал."], ["Sorry? Could you repeat that?", "Простите? Можете повторить?"], ["I don't understand.", "Я не понимаю."],
+["Can you speak more slowly, please?", "Можете говорить помедленнее?"], ["See you later!", "Увидимся!"], ["Have a nice day!", "Хорошего дня!"]
+]},
+{ id: "be", title: "Глагол to be", sub: "am, is, are — «быть»",
+theory: `<p>По-русски «я ученик» — без глагола. В английском <b>глагол обязателен всегда</b>: ${D("I am a student")} — «я есть ученик».</p>
+<div class="tscroll"><table><tr><th>кто</th><th>полная</th><th>как говорят</th><th>не</th></tr>
+<tr><td>I</td><td>${D("I am")}</td><td>${D("I'm")}</td><td>${D("I'm not")}</td></tr>
+<tr><td>you / we / they</td><td>${D("you are")}</td><td>${D("you're")}</td><td>${D("you aren't")}</td></tr>
+<tr><td>he / she / it</td><td>${D("he is")}</td><td>${D("he's")}</td><td>${D("he isn't")}</td></tr></table></div>
+<p><b>Вопрос</b> — глагол вперёд: ${D("You are OK")} → ${D("Are you OK?")}</p>
+<p><b>Возраст — через be, а не have:</b> ${D("I'm sixteen")}. Ошибка русских — <s>I have sixteen years</s>.</p>
+<p><b>Состояния — тоже через be:</b> ${D("I'm hungry")} (голоден), ${D("I'm cold")} (мне холодно), ${D("I'm scared")} (мне страшно), ${D("I'm late")} (опаздываю). Русское «мне холодно» по-английски — «я холодный» в смысле состояния.</p>
+<p><b>«Холодно», «поздно»</b> — нужно подлежащее ${D("it")}: ${D("It's cold")}, ${D("It's late")}.</p>
+<p>Профессия и роль — с артиклем ${D("a")}: ${D("I'm a student")}, ${D("She's a doctor")}.</p>`,
+items: [
+["I'm sixteen years old.", "Мне шестнадцать лет.", "Возраст — через be, не have."], ["I'm a student.", "Я ученик.", "Профессия — с артиклем a."],
+["She's my sister.", "Она моя сестра."], ["We're friends.", "Мы друзья."], ["They're at home.", "Они дома."],
+["It's cold today.", "Сегодня холодно.", "Нужно подлежащее it."], ["I'm hungry.", "Я голоден.", "Состояния — через be."],
+["I'm not ready yet.", "Я ещё не готов."], ["He isn't here.", "Его здесь нет."], ["Are you OK?", "Ты в порядке?"],
+["Is it far from here?", "Это далеко отсюда?"], ["Where's the bathroom?", "Где туалет?"], ["What's wrong?", "Что не так? / Что случилось?"],
+["I'm scared.", "Мне страшно.", "Дословно «я напуган»."], ["How old are you?", "Сколько тебе лет?"]
+]},
+{ id: "simple", title: "Present Simple", sub: "I work — he works",
+theory: `<p>Обычное настоящее время — для того, что бывает <b>регулярно, всегда, вообще</b>: привычки, факты, расписание.</p>
+<div class="tscroll"><table><tr><th></th><th>утверждение</th><th>отрицание</th><th>вопрос</th></tr>
+<tr><td>I / you / we / they</td><td>${D("I work")}</td><td>${D("I don't work")}</td><td>${D("Do you work?")}</td></tr>
+<tr><td>he / she / it</td><td>${D("she works")}</td><td>${D("she doesn't work")}</td><td>${D("Does she work?")}</td></tr></table></div>
+<p><b>Главная ошибка русских — забыть -s</b> у he/she/it: <s>He like</s> → ${D("He likes")}. Это слышно сразу.</p>
+<p><b>Вопрос и отрицание — только через do/does.</b> По-русски «Ты любишь пиццу?» — просто интонацией. По-английски нужен помощник: ${D("Do you like pizza?")} После does/doesn't глагол <b>теряет -s</b>: ${D("Does she work?")}, ${D("She doesn't work")}.</p>
+<p>${D("have")} → ${D("has")}, ${D("go")} → ${D("goes")}, ${D("watch")} → ${D("watches")}, ${D("study")} → ${D("studies")}.</p>
+<p><b>Как часто:</b> ${D("always")}, ${D("usually")}, ${D("often")}, ${D("sometimes")}, ${D("never")} — ставятся <b>перед</b> глаголом: ${D("I usually get up at seven")}. Но после be: ${D("I'm always late")}.</p>
+<p>${D("What do you do?")} — это «кем работаешь / чем занимаешься», а не «что делаешь сейчас».</p>`,
+items: [
+["I live in Moscow.", "Я живу в Москве."], ["She works in a hospital.", "Она работает в больнице.", "he/she/it → глагол с -s."],
+["He plays football every day.", "Он играет в футбол каждый день."], ["I don't like coffee.", "Я не люблю кофе."],
+["She doesn't eat meat.", "Она не ест мясо.", "После doesn't — без -s."], ["Do you speak English?", "Ты говоришь по-английски?"],
+["Does he have a car?", "У него есть машина?", "has → в вопросе Does he have."], ["What do you do?", "Чем ты занимаешься?", "Про профессию, а не про «сейчас»."],
+["Where do you live?", "Где ты живёшь?"], ["I usually get up at seven.", "Обычно я встаю в семь."],
+["We never watch TV.", "Мы никогда не смотрим телевизор.", "never уже отрицание — don't не нужен."], ["It takes twenty minutes.", "Это занимает двадцать минут."],
+["How often do you go to the gym?", "Как часто ты ходишь в зал?"], ["What does this word mean?", "Что значит это слово?"]
+]},
+{ id: "cont", title: "Present Continuous", sub: "I'm doing — прямо сейчас",
+theory: `<p><b>am / is / are + глагол-ing</b> — действие идёт <b>прямо сейчас</b> или временно, в эти дни.</p>
+<div class="tscroll"><table><tr><th>Simple — вообще</th><th>Continuous — сейчас</th></tr>
+<tr><td>${D("I work in a shop.")}<br><small>работаю там вообще</small></td><td>${D("I'm working now.")}<br><small>сейчас занят работой</small></td></tr>
+<tr><td>${D("It often rains here.")}</td><td>${D("It's raining.")}</td></tr></table></div>
+<p>В русском одно время на оба смысла, поэтому русские путают. Спроси себя: <b>«прямо сейчас / в эти дни?»</b> — Continuous. <b>«вообще / обычно?»</b> — Simple.</p>
+<p><b>Глаголы состояния не бывают в -ing:</b> ${D("know")}, ${D("like")}, ${D("love")}, ${D("want")}, ${D("need")}, ${D("understand")}, ${D("mean")}, ${D("believe")}. Говорят ${D("I know")}, а не <s>I'm knowing</s>, даже если «сейчас». (Рекламное «I'm lovin' it» — нарочное нарушение.)</p>
+<p>В английском <b>одно отрицание</b>: ${D("I'm not doing anything")} — «я ничего не делаю». Не <s>I'm not doing nothing</s>.</p>
+<p>Предлоги при глаголах: ${D("wait for")} — ждать кого-то, ${D("listen to")} — слушать кого-то, ${D("look at")} — смотреть на.</p>`,
+items: [
+["What are you doing?", "Что ты делаешь (сейчас)?"], ["I'm watching a film.", "Я смотрю фильм."], ["She's talking on the phone.", "Она разговаривает по телефону."],
+["It's raining.", "Идёт дождь."], ["We're waiting for you.", "Мы тебя ждём.", "wait for — ждать кого-то."], ["Are you listening to me?", "Ты меня слушаешь?", "listen to — слушать кого-то."],
+["I'm not doing anything.", "Я ничего не делаю.", "Одно отрицание: not … anything."], ["He's working from home this week.", "На этой неделе он работает из дома.", "Временно → Continuous."],
+["I know.", "Я знаю.", "know не бывает в -ing."], ["I don't understand what you mean.", "Я не понимаю, что ты имеешь в виду."],
+["I need help.", "Мне нужна помощь.", "«Мне нужно» → I need."], ["I want to go home.", "Я хочу домой."], ["Why are you laughing?", "Почему ты смеёшься?"]
+]},
+{ id: "art", title: "Артикли a, an, the", sub: "чего нет в русском",
+theory: `<p>В русском артиклей нет, поэтому это самая частая ошибка. Логика простая:</p>
+<p><b>a / an</b> — «какой-то, один из», когда упоминаешь впервые. Только с исчисляемыми в единственном числе: ${D("I have a dog")}. <b>an</b> — перед гласным <b>звуком</b>: ${D("an apple")}, ${D("an hour")} (h не читается), но ${D("a university")} (звук «ю»).</p>
+<p><b>the</b> — «тот самый», понятно какой: уже упоминали, единственный в мире или ясно из ситуации: ${D("The dog is friendly")}, ${D("the sun")}, ${D("Close the window")}.</p>
+<p><b>Без артикля</b> — когда говоришь вообще о множественном или неисчисляемом: ${D("I like cats")}, ${D("Life is short")}, ${D("Water is important")}.</p>
+<p><b>Устойчивые случаи</b> (просто запомнить): ${D("at home")}, ${D("at school")}, ${D("go to bed")}, ${D("by bus")} — без артикля. Спорт без артикля (${D("play football")}), инструменты с the (${D("play the guitar")}).</p>
+<p>Совет: сомневаешься — для конкретной вещи ставь <b>the</b>, для «какой-то одной» — <b>a</b>. Ошибка с артиклем почти никогда не мешает понять тебя, так что не бойся говорить.</p>`,
+items: [
+["I have a dog.", "У меня есть собака."], ["The dog is very friendly.", "Эта собака очень дружелюбная.", "Второе упоминание → the."],
+["It's an hour from here.", "Это в часе отсюда.", "an: в hour не читается h."], ["She's a university student.", "Она студентка.", "a: university начинается со звука «ю»."],
+["Can you close the window?", "Можешь закрыть окно?", "Понятно, какое окно → the."], ["The sun is shining.", "Светит солнце.", "Единственное в мире → the."],
+["I like cats.", "Я люблю кошек.", "Вообще → без артикля."], ["Life is short.", "Жизнь коротка."], ["I play the guitar.", "Я играю на гитаре.", "Инструменты — с the."],
+["We play football on Sundays.", "По воскресеньям мы играем в футбол.", "Спорт — без артикля."], ["I go to school by bus.", "Я езжу в школу на автобусе."],
+["What a nice day!", "Какой хороший день!"], ["Is there a shop near here?", "Здесь рядом есть магазин?"]
+]},
+{ id: "there", title: "There is, some, much / many", sub: "«есть», «немного», «сколько»",
+theory: `<p>Русское «в комнате есть кровать» по-английски строится <b>задом наперёд</b>: сначала «there is», потом что, потом где: ${D("There's a bed in the room")}. Ошибка русских — <s>In my room is a bed</s>.</p>
+<p>${D("There is")} — один предмет, ${D("There are")} — несколько. Вопрос: ${D("Is there…?")}, ${D("Are there…?")} Отрицание: ${D("There isn't…")}, ${D("There aren't…")}</p>
+<p><b>some / any</b> — «немного, сколько-то». ${D("some")} — в утверждениях, ${D("any")} — в вопросах и отрицаниях: ${D("I need some water")}, ${D("I don't have any money")}. В просьбах и предложениях — снова some: ${D("Can I have some tea?")}</p>
+<p><b>много:</b> ${D("many")} — с исчисляемыми (people, friends), ${D("much")} — с неисчисляемыми (time, money, water), в основном в вопросах и отрицаниях. ${D("a lot of")} — со всеми и везде: ${D("a lot of tourists")}.</p>
+<p>${D("How much?")} — сколько (денег, времени), ${D("How many?")} — сколько штук.</p>`,
+items: [
+["There's a park near my house.", "Рядом с моим домом есть парк."], ["There are two beds in the room.", "В комнате две кровати."],
+["There isn't any milk.", "Молока нет."], ["Are there any questions?", "Есть вопросы?"], ["Is there a bus to the airport?", "Есть автобус до аэропорта?"],
+["I need some water.", "Мне нужно немного воды."], ["Can I have some tea, please?", "Можно мне чаю?", "В просьбах — some."],
+["I don't have any money.", "У меня нет денег."], ["How much is it?", "Сколько это стоит?"], ["How many people are there?", "Сколько там людей?"],
+["I don't have much time.", "У меня мало времени."], ["There are a lot of tourists here.", "Здесь много туристов."], ["There's nothing to do.", "Нечего делать."]
+]},
+{ id: "past", title: "Past Simple", sub: "I worked, I went, did you…?",
+theory: `<p>Простое прошедшее — законченное действие в прошлом, обычно с указанием когда: ${D("yesterday")}, ${D("last week")}, ${D("two days ago")}.</p>
+<p><b>Правильные глаголы:</b> + <b>-ed</b>: ${D("watch → watched")}, ${D("play → played")}. Окончание читается тремя способами — смотри «Произношение».</p>
+<p><b>Неправильные</b> — учить (список в «Шпаргалке»): ${D("go → went")}, ${D("buy → bought")}, ${D("see → saw")}, ${D("forget → forgot")}.</p>
+<p>Форма <b>одна для всех лиц</b> — никаких -s.</p>
+<p><b>Вопрос и отрицание — через did</b>, а глагол возвращается в начальную форму: ${D("I didn't go")}, ${D("Did you see?")} Ошибка: <s>Did you saw?</s> — прошедшее уже в did, второй раз не нужно.</p>
+<p><b>be</b> в прошлом: ${D("I / he / she / it was")}, ${D("you / we / they were")}. Вопрос: ${D("Where were you?")}</p>`,
+items: [
+["I watched a great film yesterday.", "Вчера я посмотрел отличный фильм."], ["We played video games all night.", "Мы всю ночь играли в видеоигры."],
+["She wanted to come.", "Она хотела прийти.", "-ed после t/d читается [ɪd]."], ["I went to the cinema last week.", "На прошлой неделе я ходил в кино.", "go → went."],
+["He bought a new phone.", "Он купил новый телефон.", "buy → bought."], ["I saw her two days ago.", "Я видел её два дня назад.", "ago — «назад», ставится после."],
+["I didn't sleep well.", "Я плохо спал.", "didn't + начальная форма."], ["Did you see that?", "Ты это видел?", "Не Did you saw."],
+["What did you say?", "Что ты сказал?"], ["Where were you?", "Где ты был?"], ["I was at home.", "Я был дома."],
+["It was really fun.", "Было очень весело."], ["When did you get home?", "Когда ты пришёл домой?"], ["I forgot my keys.", "Я забыл ключи."]
+]},
+{ id: "perfect", title: "Present Perfect", sub: "I've done — результат сейчас",
+theory: `<p><b>have / has + третья форма глагола</b>: ${D("I've lost")}, ${D("She has finished")}.</p>
+<p>Это время для прошлого, которое <b>важно сейчас</b>, когда <b>не говоришь, когда именно</b>:</p>
+<p>• <b>Результат:</b> ${D("I've lost my keys")} — я потерял ключи (и сейчас их нет).<br>
+• <b>Опыт за жизнь:</b> ${D("Have you ever been to London?")}, ${D("I've never seen it")}.<br>
+• <b>Только что / уже / ещё нет:</b> ${D("just")}, ${D("already")}, ${D("yet")}.</p>
+<p><b>Главное правило:</b> если есть точное время в прошлом (${D("yesterday")}, ${D("in 2020")}, ${D("ago")}, ${D("last summer")}) — <b>только Past Simple</b>. <s>I have seen him yesterday</s> → ${D("I saw him yesterday")}.</p>
+<p><b>Ловушка для русских:</b> «Я знаю его пять лет» — по-русски настоящее время, а по-английски Perfect, потому что «с тех пор и до сих пор»: ${D("I've known him for five years")}. ${D("for")} — сколько времени, ${D("since")} — с какого момента.</p>
+<p>${D("been to")} — «бывал где-то»: ${D("I've been to Italy")}.</p>`,
+items: [
+["I've lost my keys.", "Я потерял ключи.", "Результат сейчас: ключей нет."], ["Have you ever been to London?", "Ты когда-нибудь был в Лондоне?"],
+["I've never seen this film.", "Я никогда не видел этот фильм."], ["She has just left.", "Она только что ушла."], ["I've already eaten.", "Я уже поел."],
+["Have you finished yet?", "Ты уже закончил?", "yet — в вопросах и отрицаниях, в конце."], ["I haven't decided yet.", "Я ещё не решил."],
+["I've known him for five years.", "Я знаю его пять лет.", "«С тех пор и до сих пор» → Perfect."], ["We've lived here since 2020.", "Мы живём здесь с 2020 года."],
+["How long have you been here?", "Сколько ты уже здесь?"], ["I've been to Italy twice.", "Я был в Италии дважды."],
+["I went to Italy last summer.", "Прошлым летом я ездил в Италию.", "Есть точное время → Past Simple."], ["What have you done?", "Что ты наделал?"]
+]},
+{ id: "future", title: "Будущее время", sub: "will, going to, I'm meeting",
+theory: `<p>В английском три способа сказать о будущем, и они не одинаковы:</p>
+<p><b>will</b> — решение <b>прямо сейчас</b>, обещание, просто мнение: ${D("I'll call you")}, ${D("I'll have a coffee")}, ${D("I think it'll be fine")}.</p>
+<p><b>be going to</b> — намерение, решённое <b>заранее</b>, или то, что уже видно: ${D("I'm going to learn English")}, ${D("Look at the clouds — it's going to rain")}.</p>
+<p><b>Present Continuous</b> — договорённость, план с временем: ${D("I'm meeting my friends tonight")}.</p>
+<p><b>Ловушка:</b> после ${D("when")}, ${D("if")}, ${D("before")}, ${D("after")}, ${D("as soon as")} будущее говорят <b>настоящим</b>: ${D("When I get home, I'll text you")}. Не <s>When I will get home</s>. По-русски «когда приду» — будущее, по-английски — нет.</p>
+<p>${D("won't")} = will not.</p>`,
+items: [
+["I'll call you later.", "Я позвоню тебе позже."], ["I'll have a coffee, please.", "Мне кофе, пожалуйста.", "Решение прямо сейчас → will."],
+["Don't worry, I'll help you.", "Не волнуйся, я помогу."], ["I think it'll be fine.", "Думаю, всё будет нормально."],
+["I'm going to learn English this year.", "В этом году я собираюсь выучить английский.", "Решено заранее → going to."],
+["It's going to rain.", "Сейчас пойдёт дождь.", "Видно по тучам → going to."], ["What are you going to do?", "Что ты собираешься делать?"],
+["I'm meeting my friends tonight.", "Сегодня вечером я встречаюсь с друзьями.", "Договорённость → Continuous."],
+["When I get home, I'll text you.", "Когда приду домой, напишу тебе.", "После when — настоящее время."], ["If it rains, we'll stay at home.", "Если будет дождь, останемся дома."],
+["I won't tell anyone.", "Я никому не скажу.", "won't = will not."], ["Will you be there?", "Ты там будешь?"], ["See you tomorrow!", "До завтра!"]
+]},
+{ id: "modal", title: "Модальные глаголы", sub: "can, should, have to, mustn't",
+theory: `<div class="tscroll"><table><tr><th>глагол</th><th>значение</th><th>пример</th></tr>
+<tr><td>${D("can / can't")}</td><td>могу, умею</td><td>${D("I can swim.")}</td></tr>
+<tr><td>${D("could")}</td><td>мог; вежливая просьба</td><td>${D("Could you help me?")}</td></tr>
+<tr><td>${D("should")}</td><td>стоит, следует (совет)</td><td>${D("You should rest.")}</td></tr>
+<tr><td>${D("have to")}</td><td>надо, вынужден</td><td>${D("I have to go.")}</td></tr>
+<tr><td>${D("must")}</td><td>должен (строго)</td><td>${D("You must stop.")}</td></tr>
+<tr><td>${D("may / might")}</td><td>можно; может быть</td><td>${D("I might be late.")}</td></tr></table></div>
+<p>После модальных глаголов — <b>голый глагол</b>: без to и без -s. <s>He cans</s>, <s>I can to swim</s> → ${D("He can swim")}.</p>
+<p><b>Ловушка:</b><br>
+• ${D("mustn't")} — <b>нельзя</b>: ${D("You mustn't touch it")}.<br>
+• ${D("don't have to")} — <b>не обязательно</b>: ${D("You don't have to come")}.<br>
+Это противоположные вещи, а по-русски похоже звучат.</p>
+<p>${D("Could you…?")} вежливее, чем ${D("Can you…?")}. С незнакомыми лучше could.</p>
+<p>${D("need to")} — «нужно»: ${D("We need to talk")}.</p>`,
+items: [
+["I can swim.", "Я умею плавать."], ["Can you help me?", "Можешь мне помочь?"], ["Could you open the door, please?", "Не могли бы вы открыть дверь?", "Could — вежливее."],
+["I can't hear you.", "Я тебя не слышу."], ["You should see a doctor.", "Тебе стоит сходить к врачу.", "should — совет."], ["You shouldn't worry.", "Не стоит волноваться."],
+["I have to go now.", "Мне пора идти."], ["You don't have to come.", "Тебе не обязательно приходить.", "don't have to = не обязательно."],
+["You mustn't touch it.", "Это трогать нельзя.", "mustn't = нельзя!"], ["May I come in?", "Можно войти?"], ["I might be late.", "Я, возможно, опоздаю.", "might — «может быть»."],
+["Can I ask you something?", "Можно тебя кое о чём спросить?"], ["We need to talk.", "Нам надо поговорить."]
+]},
+{ id: "ask", title: "Порядок слов и вопросы", sub: "кто? что? и где вокзал",
+theory: `<p>В русском слова можно переставлять. В английском порядок <b>жёсткий</b>: <b>кто — делает — что</b>. Иначе меняется смысл: ${D("The dog bit the man")} ≠ ${D("The man bit the dog")}.</p>
+<p><b>Схема вопроса:</b> вопросительное слово + помощник (${D("do / does / did / am / is / are / have / will / can")}) + подлежащее + глагол: ${D("Where do you live?")}, ${D("What are you doing?")}</p>
+<p><b>Вопрос к подлежащему — без do:</b> ${D("Who called you?")}, ${D("What happened?")} Здесь who/what сами подлежащее.</p>
+<p><b>Предлог — в конец вопроса:</b> ${D("Where are you from?")}, ${D("What are you talking about?")}, ${D("Who are you waiting for?")}</p>
+<p><b>«Как ты думаешь?»</b> — ${D("What do you think?")}, а не <s>How do you think</s>. <b>«Как он выглядит?»</b> — ${D("What does he look like?")}</p>
+<p><b>Косвенный вопрос — прямой порядок слов:</b> ${D("Where is the station?")} → ${D("Do you know where the station is?")} Ошибка — <s>Do you know where is the station?</s> Вежливо спрашивать у незнакомых лучше именно так.</p>`,
+items: [
+["Who called you?", "Кто тебе звонил?", "Вопрос к подлежащему — без did."], ["What happened?", "Что случилось?"], ["Who wants pizza?", "Кто хочет пиццу?"],
+["Where are you from?", "Откуда ты?", "Предлог — в конце."], ["What are you talking about?", "О чём ты говоришь?"], ["Who are you waiting for?", "Кого ты ждёшь?"],
+["What do you think?", "Как ты думаешь?", "Не How do you think."], ["What does she look like?", "Как она выглядит?"],
+["Do you know where the station is?", "Не знаешь, где вокзал?", "Косвенный вопрос — прямой порядок."], ["Can you tell me what time it is?", "Не подскажете, который час?"],
+["I don't know what to say.", "Я не знаю, что сказать."], ["How long does it take?", "Сколько это занимает времени?"], ["Why didn't you tell me?", "Почему ты мне не сказал?"]
+]},
+{ id: "comp", title: "Сравнение", sub: "bigger, the best, too, enough",
+theory: `<p><b>Короткие прилагательные</b> (1 слог и 2 слога на -y): + <b>-er</b> / <b>the -est</b>: ${D("tall → taller → the tallest")}, ${D("big → bigger")} (согласная удваивается), ${D("easy → easier")} (y → i).</p>
+<p><b>Длинные:</b> ${D("more")} / ${D("the most")}: ${D("more expensive")}, ${D("the most beautiful")}.</p>
+<p><b>Неправильные:</b> ${D("good → better → the best")}, ${D("bad → worse → the worst")}, ${D("far → further")}.</p>
+<p>«Чем» — ${D("than")}: ${D("taller than me")}. «Такой же, как» — ${D("as … as")}: ${D("as tall as me")}.</p>
+<p>${D("much")} перед сравнением = «намного»: ${D("much better")}. Не <s>very better</s>.</p>
+<p>${D("too")} — «слишком», ставится перед: ${D("too late")}. ${D("enough")} — «достаточно», ставится <b>после</b> прилагательного: ${D("old enough")}.</p>
+<p>«Такой» — ${D("so")} + прилагательное (${D("so cold")}), ${D("such a")} + прилагательное + существительное (${D("such a nice guy")}).</p>`,
+items: [
+["My brother is taller than me.", "Мой брат выше меня."], ["This is the best pizza in town.", "Это лучшая пицца в городе."],
+["English is easier than German.", "Английский проще немецкого.", "easy → easier."], ["It's more expensive than I thought.", "Это дороже, чем я думал."],
+["This is the most beautiful place I've ever seen.", "Это самое красивое место, что я видел."], ["It's getting worse.", "Становится хуже.", "bad → worse → the worst."],
+["She's as tall as me.", "Она такого же роста, как я."], ["It's too late.", "Слишком поздно."], ["I'm not old enough.", "Я недостаточно взрослый.", "enough — после прилагательного."],
+["The sooner, the better.", "Чем раньше, тем лучше."], ["It's much better now.", "Сейчас намного лучше.", "much + сравнение = намного."],
+["It's so cold!", "Так холодно!"], ["He's such a nice guy.", "Он такой хороший парень.", "such a + прилагательное + существительное."]
+]},
+{ id: "prep", title: "Предлоги in, on, at", sub: "время и место",
+theory: `<p>Три маленьких предлога, которые путают все. Правило — от точки к большому:</p>
+<div class="tscroll"><table><tr><th></th><th>at — точка</th><th>on — поверхность, день</th><th>in — внутри, период</th></tr>
+<tr><td>время</td><td>${D("at five")}, ${D("at night")}, ${D("at the weekend")}</td><td>${D("on Monday")}, ${D("on May 5th")}, ${D("on my birthday")}</td><td>${D("in July")}, ${D("in 2009")}, ${D("in the morning")}</td></tr>
+<tr><td>место</td><td>${D("at home")}, ${D("at school")}, ${D("at the station")}</td><td>${D("on the table")}, ${D("on the wall")}, ${D("on the bus")}</td><td>${D("in the room")}, ${D("in London")}, ${D("in a car")}</td></tr></table></div>
+<p><b>Особые случаи:</b> ${D("in the morning")}, но ${D("at night")}. ${D("in a car")} (маленькая, сидишь внутри), но ${D("on the bus / train / plane")}.</p>
+<p><b>in + время = «через»:</b> ${D("in ten minutes")} — через десять минут. Не <s>after ten minutes</s>.</p>
+<p><b>Без предлога:</b> ${D("next week")}, ${D("last year")}, ${D("this morning")}, ${D("tomorrow")}, ${D("yesterday")}.</p>`,
+items: [
+["See you at five.", "Увидимся в пять."], ["I was born in 2009.", "Я родился в 2009 году."], ["The party is on Saturday.", "Вечеринка в субботу."],
+["I'll be back in ten minutes.", "Вернусь через десять минут.", "in + время = через."], ["I work in the morning.", "Я работаю по утрам."],
+["I can't sleep at night.", "Я не могу спать по ночам.", "at night, но in the morning."], ["I'm at home.", "Я дома."], ["She's at school.", "Она в школе."],
+["The keys are on the table.", "Ключи на столе."], ["He lives in London.", "Он живёт в Лондоне."], ["I'm on the bus.", "Я в автобусе.", "on the bus, но in a car."],
+["We'll meet next week.", "Встретимся на следующей неделе.", "next / last / this — без предлога."], ["What's on the wall?", "Что на стене?"]
+]},
+{ id: "if", title: "Условные предложения", sub: "if I were you…",
+theory: `<p><b>Реальное условие</b> (может случиться): ${D("If")} + <b>настоящее</b>, ${D("will")} + глагол.<br>${D("If I have time, I'll come")} — «если будет время, приду». После if — настоящее, хотя по-русски будущее!</p>
+<p><b>Нереальное, воображаемое</b> (сейчас не так): ${D("If")} + <b>прошедшее</b>, ${D("would")} + глагол.<br>${D("If I had more money, I'd travel")} — «если бы у меня было больше денег…» (но их нет).</p>
+<p>${D("If I were you")} — «на твоём месте»: тут ${D("were")} для всех лиц, это устойчивое.</p>
+<p><b>Про прошлое</b>, которое уже не изменить: ${D("If I had known, I would have helped")} — «если бы я знал, я бы помог».</p>
+<p>${D("I wish")} + прошедшее — «жаль, что не…»: ${D("I wish I knew")} — «хотел бы я знать».</p>
+<p>${D("unless")} = if not: ${D("Unless you hurry, you'll be late")}.</p>
+<p>${D("would")} ещё и просто вежливое «бы»: ${D("I would love to")}, ${D("It would be great")}.</p>`,
+items: [
+["If you heat ice, it melts.", "Если нагреть лёд, он тает.", "Всегда так → настоящее в обеих частях."], ["If you need help, call me.", "Если нужна помощь — звони."],
+["If I have time, I'll come.", "Если будет время, я приду."], ["If I had more money, I'd travel.", "Если бы у меня было больше денег, я бы путешествовал.", "Нереальное → прошедшее + would."],
+["If I were you, I'd say yes.", "На твоём месте я бы согласился."], ["What would you do?", "Что бы ты сделал?"], ["I would love to come.", "Я бы с радостью пришёл."],
+["I wish I knew.", "Хотел бы я знать."], ["I wish you were here.", "Жаль, что тебя здесь нет."],
+["If I had known, I would have helped.", "Если бы я знал, я бы помог.", "Прошлое: had + V3, would have + V3."], ["Unless you hurry, you'll be late.", "Если не поторопишься, опоздаешь."],
+["It would be great.", "Было бы здорово."]
+]},
+{ id: "phrasal", title: "Фразовые глаголы", sub: "give up, look for, find out",
+theory: `<p>Глагол + маленькое слово (${D("up")}, ${D("out")}, ${D("on")}, ${D("off")}, ${D("for")}…) = <b>новое значение</b>, часто совсем другое: ${D("give")} — давать, ${D("give up")} — сдаваться.</p>
+<p>Носители говорят ими постоянно — без них живая речь непонятна. Учи как отдельные слова.</p>
+<p>Ударение — на частицу: ${D("give UP")}, ${D("come ON")}.</p>
+<p><b>С местоимением</b> оно встаёт в середину: ${D("Turn it off")}, ${D("Pick me up")}. Не <s>Turn off it</s>. С обычным словом можно и так, и так: ${D("Turn off the light")} = ${D("Turn the light off")}.</p>
+<p>${D("look forward to")} — ждать с нетерпением; после него -ing: ${D("I'm looking forward to seeing you")}.</p>`,
+items: [
+["I get up at seven.", "Я встаю в семь."], ["Don't give up!", "Не сдавайся!"], ["I'm looking for my phone.", "Я ищу свой телефон.", "look for — искать."],
+["Can you pick me up at six?", "Можешь забрать меня в шесть?"], ["Turn it off, please.", "Выключи это, пожалуйста.", "Местоимение — в середину."],
+["I found out the truth.", "Я узнал правду.", "find out — выяснить."], ["We ran out of milk.", "У нас закончилось молоко."], ["Hold on a second.", "Подожди секунду."],
+["Come on!", "Давай! / Да ладно!"], ["I'll figure it out.", "Я разберусь."], ["Look out!", "Осторожно!"],
+["She's looking forward to the trip.", "Она с нетерпением ждёт поездку."], ["Let's hang out this weekend.", "Давай потусуемся на выходных."], ["Calm down.", "Успокойся."]
+]},
+{ id: "life", title: "Кафе, магазин, дорога", sub: "фразы для поездки",
+theory: `<p><b>Вежливость</b> в английском важнее, чем в русском. ${D("Give me a coffee")} звучит грубо, даже с please. Говорят: ${D("Could I have…?")}, ${D("Can I get…?")} (в Америке), ${D("I'd like…")}. И почти каждая фраза с ${D("please")} и ${D("thank you")}.</p>
+<p><b>Американский и британский</b> различаются в словах: счёт — ${D("check")} / ${D("bill")}, туалет — ${D("restroom")} / ${D("toilet")}, метро — ${D("subway")} / ${D("underground")}. Поймут оба варианта.</p>
+<p>В магазине продавец спросит ${D("Can I help you?")} — если просто смотришь, отвечай ${D("Just looking, thanks")}.</p>
+<p>На ${D("Do you mind if…?")} («не против, если…») разрешение — это ${D("No, not at all")}. «Yes» значит «да, против».</p>
+<p>В США чаевые в кафе — 15–20 %, это почти обязательно.</p>`,
+items: [
+["Could I have the menu, please?", "Можно меню, пожалуйста?"], ["Can I get a large coffee?", "Можно большой кофе?", "Типичный заказ в Америке."], ["I'd like to order, please.", "Я бы хотел заказать."],
+["Can we have the check, please?", "Можно счёт?", "check (Ам.) = bill (Брит.)."], ["Just looking, thanks.", "Я просто смотрю, спасибо.", "Ответ продавцу на Can I help you?"],
+["Do you take cards?", "Вы принимаете карты?"], ["Where's the restroom?", "Где туалет?", "restroom (Ам.), toilet (Брит.)."], ["How do I get to the station?", "Как пройти к вокзалу?"],
+["Go straight and turn left.", "Идите прямо и поверните налево."], ["A one-way ticket to London, please.", "Билет в один конец до Лондона, пожалуйста."],
+["Is this seat taken?", "Это место занято?"], ["Do you mind if I sit here?", "Не против, если я сяду здесь?", "Разрешить — No, not at all."],
+["Sorry, I didn't catch that.", "Извините, я не расслышал."], ["That sounds great!", "Звучит отлично!"]
+]}
+];
+
+const PRON = [
+{ group: "Главное", items: [
+{ id: "voiced", t: "Звонкие на конце не оглушаются", k: "d ≠ t",
+  b: `<p>В русском «дуб» звучит как «дуп». В английском <b>так нельзя</b>: звонкая согласная на конце остаётся звонкой — и от этого зависит смысл: ${D("bad")} (плохой) и ${D("bat")} (бита), ${D("eyes")} (глаза) и ${D("ice")} (лёд).</p><p>Подсказка: гласная перед звонкой звучит <b>длиннее</b>: ${D("bad")} — «бэ-э-д», ${D("bat")} — коротко «бэт».</p>`,
+  bad: "Самая частая ошибка русских: «дог» превращается в «док», «бэд» в «бэт». Носитель слышит другое слово.",
+  ex: [["bad", "плохой"], ["bat", "бита"], ["dog", "собака"], ["dock", "док"], ["eyes", "глаза"], ["ice", "лёд"], ["bag", "сумка"], ["back", "спина"]] },
+{ id: "stress", t: "Ударение и «проглатывание»", k: "ə",
+  b: `<p>В английском ударные слова звучат громко и чётко, а маленькие служебные — ${D("a")}, ${D("the")}, ${D("to")}, ${D("and")}, ${D("of")}, ${D("can")}, ${D("was")} — <b>проглатываются</b> до короткого неясного звука [ə]:</p><p>${D("fish and chips")} ≈ «фиш н чипс», ${D("a cup of tea")} ≈ «э кап э ти», ${D("I want to go")} ≈ «ай уонтэ гоу».</p><p>Ударение в слове может переезжать: ${D("photograph")} — ${D("photography")}.</p>`,
+  bad: "Произносить каждое слово одинаково чётко — получается речь робота, и носителям труднее понять.",
+  ex: [["fish and chips", "рыба с картошкой"], ["a cup of tea", "чашка чая"], ["I want to go", "я хочу пойти"], ["I can swim", "я умею плавать"], ["photograph", "фотография"], ["photography", "фотографирование"]] },
+{ id: "soft", t: "Согласные не смягчаются", k: "ti ≠ ть",
+  b: `<p>В русском согласная перед «и/е» мягкая. В английском — <b>твёрдая</b>: ${D("tea")} — не «тьи», ${D("deep")} — не «дьип», ${D("need")} — не «ньид».</p><p>Ещё: ${D("t")}, ${D("d")}, ${D("n")}, ${D("l")} произносятся не на зубах, а кончиком языка <b>на бугорках за верхними зубами</b> — звук чуть «суше».</p><p>${D("p")}, ${D("t")}, ${D("k")} в начале ударного слога — с <b>выдохом</b>: ${D("pen")} ≈ «пʰэн», ${D("time")} ≈ «тʰайм».</p>`,
+  ex: [["tea", "чай"], ["deep", "глубокий"], ["need", "нужно"], ["team", "команда"], ["pen", "ручка"], ["time", "время"], ["key", "ключ"]] }
+]},
+{ group: "Согласные, которых нет в русском", items: [
+{ id: "th", t: "th — язык между зубами", k: "th",
+  b: `<p>Кончик языка <b>просунь между зубами</b> и дуй воздух. Два звука:</p><p><b>глухой</b> [θ]: ${D("think")}, ${D("three")}, ${D("thanks")}, ${D("month")}.<br><b>звонкий</b> [ð]: ${D("this")}, ${D("the")}, ${D("mother")}, ${D("they")}.</p>`,
+  bad: "Заменять на с, з, ф или д: «синк», «зэ», «дэй». think превращается в sink (раковина), three в tree (дерево).",
+  ex: [["think", "думать"], ["three", "три"], ["thanks", "спасибо"], ["this", "это"], ["the", "(артикль)"], ["mother", "мама"], ["they", "они"]] },
+{ id: "w", t: "w — не «в»", k: "w",
+  b: `<p>Вытяни губы трубочкой, как для «у», и сразу раскрой их. Зубы губы <b>не касаются</b>: ${D("we")} ≈ «уи», ${D("what")} ≈ «уот», ${D("window")}.</p><p>Русское «в» — это английское ${D("v")}: ${D("very")}, ${D("vest")}.</p>`,
+  bad: "«Вот» вместо what, «вэст» вместо west. А wine (вино) и vine (лоза) — разные слова.",
+  ex: [["we", "мы"], ["what", "что"], ["window", "окно"], ["west", "запад"], ["vest", "жилет"], ["wine", "вино"], ["very", "очень"]] },
+{ id: "h", t: "h — просто выдох", k: "h",
+  b: `<p>Английский h — это <b>лёгкий выдох</b>, как будто дышишь на стекло: ${D("hello")}, ${D("have")}, ${D("house")}. Никакого хрипа.</p>`,
+  bad: "Русское «х» с трением в горле: «хэллоу» звучит грубо.",
+  ex: [["hello", "привет"], ["have", "иметь"], ["house", "дом"], ["happy", "счастливый"], ["who", "кто"]] },
+{ id: "r", t: "r — без раската", k: "r",
+  b: `<p>Кончик языка <b>загни назад</b> и не касайся им нёба — язык не дрожит: ${D("red")}, ${D("right")}, ${D("very")}.</p><p>В <b>американском</b> r слышно везде: ${D("car")}, ${D("first")}. В <b>британском</b> после гласной r не читается: car ≈ «каа».</p>`,
+  bad: "Раскатистое русское «р» — самый узнаваемый русский акцент.",
+  ex: [["red", "красный"], ["right", "правильно"], ["very", "очень"], ["car", "машина"], ["first", "первый"], ["sorry", "извини"]] },
+{ id: "ng", t: "ng — без «г»", k: "-ing",
+  b: `<p>${D("ng")} — один носовой звук, как «н», но задней частью языка. <b>Никакого «г»</b> в конце: ${D("sing")}, ${D("long")}, ${D("thinking")} — не «синкинг».</p>`,
+  ex: [["sing", "петь"], ["long", "длинный"], ["thinking", "думающий"], ["morning", "утро"], ["going", "идущий"]] },
+{ id: "l", t: "Тёмное l на конце", k: "l",
+  b: `<p>В конце слова и перед согласной l «тёмное», глубокое, почти как русское твёрдое «л» с оттенком «у»: ${D("feel")}, ${D("milk")}, ${D("people")}. В начале — светлее: ${D("light")}, ${D("love")}.</p>`,
+  ex: [["feel", "чувствовать"], ["milk", "молоко"], ["people", "люди"], ["light", "свет"], ["love", "любовь"]] }
+]},
+{ group: "Гласные", items: [
+{ id: "long", t: "Краткие и долгие", k: "i / ee",
+  b: `<p>Долгота меняет смысл: ${D("ship")} (корабль) — ${D("sheep")} (овца), ${D("live")} — ${D("leave")}, ${D("full")} — ${D("fool")}.</p><p><b>Краткое i</b> — короткий звук между русскими «и» и «ы». <b>Долгое ee</b> — длинное напряжённое «ии» с улыбкой.</p>`,
+  bad: "Говорить ship и sheep одинаково «шип». Тяни долгие звуки честно.",
+  ex: [["ship", "корабль"], ["sheep", "овца"], ["sit", "сидеть"], ["seat", "место"], ["live", "жить"], ["leave", "уходить"], ["full", "полный"], ["fool", "дурак"]] },
+{ id: "ae", t: "æ — между «а» и «э»", k: "æ",
+  b: `<p>Широко открой рот, как для «а», а скажи «э»: ${D("cat")}, ${D("bad")}, ${D("man")}, ${D("apple")}. Звук открытый, «лягушачий».</p><p>Сравни: ${D("bad")} — ${D("bed")}, ${D("man")} — ${D("men")}.</p>`,
+  bad: "Говорить «мэн» узко, как русское «э», — получается men (мужчины) вместо man.",
+  ex: [["cat", "кошка"], ["bad", "плохой"], ["bed", "кровать"], ["man", "мужчина"], ["men", "мужчины"], ["apple", "яблоко"]] },
+{ id: "uh", t: "ʌ — короткое «а»", k: "u",
+  b: `<p>Короткое «а», рот почти не открывается: ${D("cup")}, ${D("love")}, ${D("but")}, ${D("money")}, ${D("come")}. Пишется часто через u или o, но это не «у» и не «о».</p><p>Сравни: ${D("cap")} — ${D("cup")}, ${D("hat")} — ${D("hut")}.</p>`,
+  ex: [["cup", "чашка"], ["cap", "кепка"], ["love", "любовь"], ["money", "деньги"], ["come", "приходить"], ["but", "но"]] },
+{ id: "er", t: "ɜː — bird, work", k: "ir/or/ur",
+  b: `<p>Язык лежит посередине, губы нейтрально, звук длинный, похож на «ё» без «й» и без округления: ${D("bird")}, ${D("work")}, ${D("girl")}, ${D("learn")}, ${D("first")}.</p><p>Сравни: ${D("work")} (работать) — ${D("walk")} (гулять).</p>`,
+  bad: "Читать по буквам «вОрк», «гИрл», «бИрд».",
+  ex: [["bird", "птица"], ["work", "работать"], ["walk", "гулять"], ["girl", "девушка"], ["learn", "учить"], ["first", "первый"]] },
+{ id: "diph", t: "Двойные гласные", k: "o = оу",
+  b: `<p>Многие гласные в английском — <b>скользящие</b>: ${D("go")}, ${D("no")}, ${D("home")} — «оу» (в британском «эу»), а не чистое «о». ${D("day")} — «эй», ${D("my")} — «ай», ${D("now")} — «ау», ${D("boy")} — «ой».</p>`,
+  bad: "«Го», «хом», «фон» вместо «гоу», «хоум», «фоун».",
+  ex: [["go", "идти"], ["home", "дом"], ["phone", "телефон"], ["day", "день"], ["late", "поздно"], ["now", "сейчас"]] }
+]},
+{ group: "Окончания и немые буквы", items: [
+{ id: "ed", t: "-ed: три варианта", k: "-ed",
+  b: `<p>После глухих звуков (p, k, s, sh, ch, f) — <b>[t]</b>: ${D("worked")} ≈ «уёркт», ${D("stopped")}, ${D("watched")}.<br>После звонких и гласных — <b>[d]</b>: ${D("played")}, ${D("called")}, ${D("lived")}.<br>После t и d — <b>[ɪd]</b>: ${D("wanted")}, ${D("needed")}, ${D("decided")}.</p>`,
+  bad: "Всегда читать «-ед»: «уоркед», «плэйед». Слог «ед» появляется только после t и d.",
+  ex: [["worked", "работал"], ["watched", "смотрел"], ["played", "играл"], ["called", "звонил"], ["wanted", "хотел"], ["needed", "нуждался"]] },
+{ id: "s", t: "-s: три варианта", k: "-s",
+  b: `<p>После глухих — <b>[s]</b>: ${D("cats")}, ${D("works")}.<br>После звонких и гласных — <b>[z]</b>: ${D("dogs")}, ${D("plays")}, ${D("friends")}.<br>После шипящих (s, sh, ch, x) — <b>[ɪz]</b>: ${D("watches")}, ${D("buses")}.</p>`,
+  ex: [["cats", "кошки"], ["works", "работает"], ["dogs", "собаки"], ["plays", "играет"], ["watches", "смотрит"], ["buses", "автобусы"]] },
+{ id: "silent", t: "Немые буквы", k: "k̶now",
+  b: `<p>Многие буквы не читаются — остались от старого произношения: ${D("know")} (k), ${D("write")} (w), ${D("listen")} (t), ${D("hour")} (h), ${D("island")} (s), ${D("walk")} (l), ${D("half")} (l), ${D("Wednesday")} (d), ${D("comfortable")} (о «проглатывается»).</p>`,
+  ex: [["know", "знать"], ["write", "писать"], ["listen", "слушать"], ["hour", "час"], ["island", "остров"], ["Wednesday", "среда"], ["comfortable", "удобный"]] }
+]},
+{ group: "Мелодия речи", items: [
+{ id: "into", t: "Интонация вопросов", k: "↗ ↘",
+  b: `<p><b>Вопрос «да/нет»</b> — голос в конце <b>вверх</b>: ${D("Are you OK?")} ↗<br><b>Вопрос с вопросительным словом</b> — голос в конце <b>вниз</b>: ${D("Where are you from?")} ↘</p><p>В американском t между гласными звучит как быстрое мягкое «д»: ${D("water")} ≈ «уоДер», ${D("better")}, ${D("party")}.</p>`,
+  bad: "Русская вопросительная интонация (резкий подъём и падение на ударном слоге) звучит для англичан раздражённо или удивлённо.",
+  ex: [["Are you OK?", "ты в порядке?"], ["Where are you from?", "откуда ты?"], ["Do you like it?", "тебе нравится?"], ["water", "вода"], ["better", "лучше"]] }
+]}
+];
+
+const PAIRS = [
+["ship", "корабль", "sheep", "овца", "краткое i — долгое ee"], ["sit", "сидеть", "seat", "место", "краткое i — долгое ea"],
+["live", "жить", "leave", "уходить", "краткое i — долгое ea"], ["full", "полный", "fool", "дурак", "краткое u — долгое oo"],
+["bad", "плохой", "bed", "кровать", "æ — e"], ["man", "мужчина", "men", "мужчины", "æ — e"], ["cap", "кепка", "cup", "чашка", "æ — ʌ"],
+["hat", "шляпа", "hut", "хижина", "æ — ʌ"], ["bad", "плохой", "bat", "бита", "звонкое d — глухое t на конце"], ["dog", "собака", "dock", "док", "g — k на конце"],
+["eyes", "глаза", "ice", "лёд", "z — s на конце"], ["bag", "сумка", "back", "спина", "g — k на конце"], ["think", "думать", "sink", "раковина", "th — s"],
+["three", "три", "tree", "дерево", "th — t"], ["they", "они", "day", "день", "th — d"], ["west", "запад", "vest", "жилет", "w — v"],
+["wine", "вино", "vine", "лоза", "w — v"], ["work", "работать", "walk", "гулять", "ɜː — ɔː"], ["cat", "кошка", "cut", "резать", "æ — ʌ"]
+];
+
+const SHEET = `
+<h2>Шпаргалка</h2>
+<p class="muted small">Нажми на английское слово — услышишь, как оно звучит.</p>
+<h3>Местоимения и be / do / have</h3>
+<div class="tscroll"><table class="tbl"><tr><th>кто</th><th>кого</th><th>чей</th><th>be</th><th>do</th><th>have</th></tr>
+<tr><td>${D("I")}</td><td>${D("me")}</td><td>${D("my")}</td><td>${D("am")}</td><td>${D("do")}</td><td>${D("have")}</td></tr>
+<tr><td>${D("you")}</td><td>${D("you")}</td><td>${D("your")}</td><td>${D("are")}</td><td>${D("do")}</td><td>${D("have")}</td></tr>
+<tr><td>${D("he")}</td><td>${D("him")}</td><td>${D("his")}</td><td>${D("is")}</td><td>${D("does")}</td><td>${D("has")}</td></tr>
+<tr><td>${D("she")}</td><td>${D("her")}</td><td>${D("her")}</td><td>${D("is")}</td><td>${D("does")}</td><td>${D("has")}</td></tr>
+<tr><td>${D("it")}</td><td>${D("it")}</td><td>${D("its")}</td><td>${D("is")}</td><td>${D("does")}</td><td>${D("has")}</td></tr>
+<tr><td>${D("we")}</td><td>${D("us")}</td><td>${D("our")}</td><td>${D("are")}</td><td>${D("do")}</td><td>${D("have")}</td></tr>
+<tr><td>${D("they")}</td><td>${D("them")}</td><td>${D("their")}</td><td>${D("are")}</td><td>${D("do")}</td><td>${D("have")}</td></tr></table></div>
+<h3>Времена</h3>
+<div class="tscroll"><table class="tbl"><tr><th>время</th><th>формула</th><th>пример</th><th>когда</th></tr>
+<tr><td>Present Simple</td><td>V / V-s</td><td>${D("She works.")}</td><td>обычно, всегда</td></tr>
+<tr><td>Present Continuous</td><td>am/is/are + V-ing</td><td>${D("She's working.")}</td><td>прямо сейчас</td></tr>
+<tr><td>Past Simple</td><td>V-ed / 2-я форма</td><td>${D("She worked.")}</td><td>в прошлом, известно когда</td></tr>
+<tr><td>Present Perfect</td><td>have/has + 3-я форма</td><td>${D("She has worked.")}</td><td>результат сейчас, опыт</td></tr>
+<tr><td>Future</td><td>will + V</td><td>${D("She'll work.")}</td><td>решение сейчас, прогноз</td></tr>
+<tr><td>Plans</td><td>am/is/are going to + V</td><td>${D("She's going to work.")}</td><td>решено заранее</td></tr></table></div>
+<p class="small muted">Вопрос и «не»: ${D("Do you…? / don't")}, ${D("Does she…? / doesn't")}, ${D("Did you…? / didn't")} — и глагол в начальной форме.</p>
+<h3>Неправильные глаголы</h3>
+<div class="tscroll"><table class="tbl"><tr><th>V1</th><th>V2 (прош.)</th><th>V3 (perfect)</th><th></th></tr>
+${[["be", "was / were", "been", "быть"], ["go", "went", "gone", "идти"], ["do", "did", "done", "делать"], ["have", "had", "had", "иметь"], ["see", "saw", "seen", "видеть"], ["get", "got", "got", "получать"], ["make", "made", "made", "делать"], ["take", "took", "taken", "брать"], ["come", "came", "come", "приходить"], ["know", "knew", "known", "знать"], ["think", "thought", "thought", "думать"], ["say", "said", "said", "сказать"], ["tell", "told", "told", "рассказать"], ["give", "gave", "given", "давать"], ["find", "found", "found", "найти"], ["buy", "bought", "bought", "купить"], ["bring", "brought", "brought", "принести"], ["eat", "ate", "eaten", "есть"], ["drink", "drank", "drunk", "пить"], ["write", "wrote", "written", "писать"], ["read", "read", "read", "читать"], ["speak", "spoke", "spoken", "говорить"], ["leave", "left", "left", "уходить"], ["feel", "felt", "felt", "чувствовать"], ["meet", "met", "met", "встречать"], ["sleep", "slept", "slept", "спать"], ["lose", "lost", "lost", "терять"], ["forget", "forgot", "forgotten", "забыть"], ["begin", "began", "begun", "начинать"], ["pay", "paid", "paid", "платить"]].map(([a, b, c, r]) => `<tr><td>${D(a)}</td><td>${D(b)}</td><td>${D(c)}</td><td>${r}</td></tr>`).join("")}</table></div>
+<h3>Артикли</h3>
+<p><b>a / an</b> — какой-то один, впервые (${D("a car")}, ${D("an hour")}).<br><b>the</b> — тот самый, понятно какой (${D("the car")}, ${D("the sun")}).<br><b>—</b> — вообще, мн. число или неисчисляемое (${D("cars")}, ${D("water")}).</p>
+<h3>in / on / at</h3>
+<p><b>at</b> — точка: ${D("at 5")}, ${D("at night")}, ${D("at home")}.<br><b>on</b> — день, поверхность: ${D("on Monday")}, ${D("on the table")}, ${D("on the bus")}.<br><b>in</b> — период, внутри: ${D("in July")}, ${D("in the morning")}, ${D("in London")}, ${D("in a car")}.</p>
+<h3>Модальные</h3>
+<p>${D("can")} могу · ${D("could")} мог бы · ${D("should")} стоит · ${D("have to")} надо · ${D("must")} должен · ${D("mustn't")} нельзя · ${D("don't have to")} не обязательно · ${D("might")} может быть</p>
+<h3>Условные</h3>
+<p>Реально: ${D("If it rains, I'll stay.")}<br>Нереально: ${D("If I had time, I'd go.")}<br>Прошлое: ${D("If I had known, I would have come.")}</p>
+<h3>Вопросительные слова</h3>
+<p>${D("who")} кто · ${D("what")} что · ${D("where")} где · ${D("when")} когда · ${D("why")} почему · ${D("how")} как · ${D("which")} который · ${D("whose")} чей · ${D("how much")} сколько (денег) · ${D("how many")} сколько (штук) · ${D("how long")} как долго</p>
+<h3>Числа</h3>
+<p>${D("one")} 1 · ${D("two")} 2 · ${D("three")} 3 · ${D("four")} 4 · ${D("five")} 5 · ${D("six")} 6 · ${D("seven")} 7 · ${D("eight")} 8 · ${D("nine")} 9 · ${D("ten")} 10 · ${D("eleven")} 11 · ${D("twelve")} 12 · ${D("thirteen")} 13 · ${D("thirty")} 30 · ${D("fifteen")} 15 · ${D("fifty")} 50 · ${D("a hundred")} 100</p>
+<p class="small muted">thirteen и thirty различаются ударением: thirTEEN — THIRty.</p>`;
+</script>
+
+<script>
+const KEY = "en-v1";
+const DAY = 86400000;
+const IV = [0, 1, 2, 4, 8, 16, 35, 75, 150, 300];
+const CARDS = {};
+const ORDER = [];
+LESSONS.forEach((L, li) => L.items.forEach((it, i) => {
+  const id = L.id + "-" + i;
+  CARDS[id] = { id, de: it[0], ru: it[1], note: it[2] || "", li };
+  ORDER.push(id);
+}));
+const RULE_TITLE = {};
+PRON.forEach(g => g.items.forEach(r => RULE_TITLE[r.id] = r.t));
+
+let S = { c: {}, read: {}, day: { d: "", n: 0, r: 0 }, streak: { last: "", n: 0 }, set: { newPerDay: 8, rate: 0.9, auto: true, accent: "us" } };
+try {
+  const raw = localStorage.getItem(KEY);
+  if (raw) { const o = JSON.parse(raw); S = Object.assign(S, o); S.set = Object.assign({ newPerDay: 8, rate: 0.9, auto: true, accent: "us" }, o.set || {}); }
+} catch (e) {}
+function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+
+const $ = (sel, root = document) => root.querySelector(sel);
+const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+function dayKey(t) { const d = new Date(t); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); }
+function startOfDay(t) { const d = new Date(t); d.setHours(0, 0, 0, 0); return d.getTime(); }
+const today = () => dayKey(Date.now());
+const yesterday = () => dayKey(Date.now() - DAY);
+function syncDay() { if (S.day.d !== today()) S.day = { d: today(), n: 0, r: 0 }; }
+function streakNow() { return (S.streak.last === today() || S.streak.last === yesterday()) ? S.streak.n : 0; }
+function touchStreak() {
+  if (S.streak.last === today()) return;
+  S.streak.n = S.streak.last === yesterday() ? S.streak.n + 1 : 1;
+  S.streak.last = today();
+}
+
+const TTS = { ok: "speechSynthesis" in window, voice: null, loaded: false };
+const NOVELTY = /Eddy|Flo|Grandma|Grandpa|Reed|Rocko|Sandy|Shelley|Albert|Bad News|Bahh|Bells|Boing|Bubbles|Cellos|Good News|Jester|Organ|Superstar|Trinoids|Whisper|Wobble|Zarvox/i;
+function loadVoices() {
+  if (!TTS.ok) return;
+  const vs = speechSynthesis.getVoices();
+  if (!vs.length) return;
+  TTS.loaded = true;
+  const en = vs.filter(v => /^en([-_]|$)/i.test(v.lang));
+  const pool = en.filter(v => !NOVELTY.test(v.name));
+  const want = S.set.accent === "gb" ? /en[-_]GB/i : /en[-_]US/i;
+  const score = v => (want.test(v.lang) ? 8 : 0) + (/premium|enhanced|natural|neural|improved/i.test(v.name) ? 3 : 0) + (/Samantha|Ava|Allison|Alex|Daniel|Serena|Kate|Arthur|Google/i.test(v.name) ? 2 : 0) + (v.localService ? 1 : 0);
+  TTS.voice = (pool.length ? pool : en).sort((a, b) => score(b) - score(a))[0] || null;
+  document.querySelectorAll(".voice-note").forEach(el => el.innerHTML = voiceNote());
+}
+if (TTS.ok) { loadVoices(); speechSynthesis.addEventListener ? speechSynthesis.addEventListener("voiceschanged", loadVoices) : (speechSynthesis.onvoiceschanged = loadVoices); setTimeout(loadVoices, 600); }
+function langCode() { return S.set.accent === "gb" ? "en-GB" : "en-US"; }
+function hasVoice() { return TTS.ok && (!!TTS.voice || !TTS.loaded); }
+function say(text, slow) {
+  if (!TTS.ok) return;
+  const clean = String(text).replace(/[«»„“"]/g, "").replace(/\s+[–—-]\s+/g, ", ").replace(/\s*\/\s*/g, ", ").replace(/\s*→\s*/g, ", ");
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(clean);
+  u.lang = langCode();
+  if (TTS.voice) u.voice = TTS.voice;
+  u.rate = slow ? 0.55 : S.set.rate;
+  speechSynthesis.speak(u);
+}
+function voiceNote() {
+  if (!TTS.ok) return `<div class="warn">Этот браузер не умеет озвучивать текст. Открой страницу в Safari или Chrome.</div>`;
+  if (TTS.loaded && !TTS.voice) return `<div class="warn">Не найден английский голос. На iPhone: Настройки → Универсальный доступ → Устный контент → Голоса → Английский → скачай «Samantha» или «Ava» (американский) либо «Daniel» (британский), лучше «улучшенный». Потом перезапусти страницу.</div>`;
+  return "";
+}
+
+const SRC = window.SpeechRecognition || window.webkitSpeechRecognition;
+const normDe = s => s.toLowerCase().replace(/[’‘]/g, "'").replace(/[^a-z0-9' ]/g, " ").replace(/\s+/g, " ").trim();
+function micHTML(de) { return SRC ? `<button data-mic="${esc(de)}">🎙 Скажи сам</button>` : ""; }
+let recActive = null;
+function startMic(btn) {
+  const target = btn.dataset.mic;
+  const box = btn.closest(".speakwrap") || btn.parentElement.parentElement;
+  let out = box.querySelector(".heard");
+  if (!out) { out = document.createElement("div"); out.className = "heard"; btn.parentElement.after(out); }
+  if (recActive) { try { recActive.abort(); } catch (e) {} recActive = null; }
+  if (TTS.ok) speechSynthesis.cancel();
+  let r;
+  try { r = new SRC(); } catch (e) { out.className = "heard bad"; out.textContent = "Микрофон недоступен."; return; }
+  recActive = r;
+  r.lang = langCode(); r.interimResults = false; r.maxAlternatives = 5; r.continuous = false;
+  out.className = "heard"; out.textContent = "Говори…";
+  btn.disabled = true;
+  r.onresult = e => {
+    const alts = Array.from(e.results[0]).map(a => a.transcript);
+    const t = normDe(target).split(" ");
+    let best = alts[0] || "", bestScore = -1;
+    alts.forEach(a => {
+      const h = normDe(a).split(" ");
+      const sc = t.filter(w => h.includes(w)).length / t.length;
+      if (sc > bestScore) { bestScore = sc; best = a; }
+    });
+    if (bestScore >= 1) { out.className = "heard ok"; out.textContent = `✓ Распознано точно: «${best}»`; }
+    else if (bestScore >= 0.6) { out.className = "heard"; out.textContent = `Почти. Услышано: «${best}». Послушай образец и сравни.`; }
+    else { out.className = "heard bad"; out.textContent = `Не похоже. Услышано: «${best}». Послушай медленно и повтори.`; }
+  };
+  r.onerror = e => {
+    out.className = "heard bad";
+    out.textContent = e.error === "not-allowed" ? "Нет доступа к микрофону — разреши его в настройках браузера." : e.error === "no-speech" ? "Ничего не услышал. Попробуй ещё раз, говори громче." : "Не получилось распознать. Попробуй ещё.";
+  };
+  r.onend = () => { btn.disabled = false; if (out.textContent === "Говори…") out.textContent = ""; recActive = null; };
+  try { r.start(); } catch (e) { btn.disabled = false; }
+}
+
+function deHTML(c) { return esc(c.de); }
+function speakRow(de) {
+  return `<div class="speakwrap"><div class="speak"><button data-say="${esc(de)}">▶ Слушать</button><button data-say="${esc(de)}" data-slow="1">🐢 Медленно</button>${micHTML(de)}</div><div class="heard"></div></div>`;
+}
+const tokens = de => de.split(/\s+/).map(t => t.replace(/^[¿¡«„"]+|[.,!?;:»"“]+$/g, "")).filter(Boolean);
+
+function introduced(id) { return !!S.c[id]; }
+function stageClass(id) { const st = S.c[id]; if (!st) return ""; return st.s >= 3 ? "s2" : "s1"; }
+function lessonStats(L) {
+  const ids = L.items.map((_, i) => L.id + "-" + i);
+  return { total: ids.length, seen: ids.filter(introduced).length, solid: ids.filter(id => S.c[id] && S.c[id].s >= 3).length };
+}
+function dueIds() {
+  const end = startOfDay(Date.now()) + DAY;
+  return ORDER.filter(id => S.c[id] && S.c[id].due < end).sort((a, b) => S.c[a].due - S.c[b].due);
+}
+function nextNewIds(k, lessonIdx) {
+  const f = S.set.focus;
+  const pool = lessonIdx != null ? ORDER.filter(id => CARDS[id].li === lessonIdx)
+    : f != null && LESSONS[f] ? ORDER.filter(id => CARDS[id].li === f).concat(ORDER.filter(id => CARDS[id].li !== f)) : ORDER;
+  return pool.filter(id => !introduced(id)).slice(0, k);
+}
+function grade(id, g) {
+  if (W.practice) return;
+  const st = S.c[id];
+  const now = Date.now();
+  if (g === 0) { st.s = Math.floor(st.s / 3); st.due = now; st.l = (st.l || 0) + 1; }
+  else if (g === 1) { st.s = Math.max(st.s, 1); st.due = startOfDay(now) + Math.max(1, Math.round(IV[st.s] / 2)) * DAY; }
+  else { st.s = Math.min(st.s + 1, IV.length - 1); st.due = startOfDay(now) + IV[st.s] * DAY; }
+  st.n = (st.n || 0) + 1;
+  syncDay(); S.day.r++; touchStreak(); save(); renderStats();
+}
+function modeFor(id, it) {
+  const st = S.c[id];
+  if (!st || it.intro) return "intro";
+  const long = tokens(CARDS[id].de).length >= 3;
+  if (W.practice) return long && Math.random() < 0.5 ? "build" : "recognize";
+  if (it.retry || st.s === 0) return "recognize";
+  if (st.s === 1) return hasVoice() && TTS.voice ? "listen" : "recognize";
+  if (st.s <= 3) return long ? "build" : "recall";
+  return st.s % 2 === 0 && long ? "build" : "recall";
+}
+
+let W = null;
+function buildQueue(reviews, fresh) {
+  const q = [];
+  const seenLessons = new Set();
+  const newBlock = [];
+  for (let g = 0; g < fresh.length; g += 4) {
+    const grp = fresh.slice(g, g + 4);
+    grp.forEach(id => {
+      const li = CARDS[id].li;
+      if (!S.read[LESSONS[li].id] && !seenLessons.has(li)) { seenLessons.add(li); newBlock.push({ type: "theory", li }); }
+      newBlock.push({ type: "card", id, intro: true });
+    });
+    grp.forEach(id => newBlock.push({ type: "card", id, test: true }));
+  }
+  const head = reviews.slice(0, 8).map(id => ({ type: "card", id }));
+  const tail = reviews.slice(8).map(id => ({ type: "card", id }));
+  return head.concat(newBlock, tail);
+}
+function startSession(opts) {
+  syncDay();
+  let reviews = [], fresh = [];
+  if (opts.lesson != null) {
+    if (opts.practice) reviews = shuffle(LESSONS[opts.lesson].items.map((_, i) => LESSONS[opts.lesson].id + "-" + i).filter(introduced));
+    else fresh = nextNewIds(99, opts.lesson);
+  } else {
+    reviews = dueIds().slice(0, 150);
+    fresh = nextNewIds(opts.extra != null ? opts.extra : Math.max(0, S.set.newPerDay - S.day.n));
+  }
+  W = { queue: buildQueue(reviews, fresh), idx: 0, practice: !!opts.practice, ok: 0, bad: 0, fresh: fresh.length, reviews: reviews.length, from: opts.lesson != null ? "lessons" : "today" };
+  if (!W.queue.length) { W = null; renderToday(); return; }
+  showTab("today");
+  renderItem();
+}
+function cur() { return W.queue[W.idx]; }
+function advance() {
+  W.idx++;
+  if (W.idx >= W.queue.length) { renderDone(); return; }
+  renderItem();
+}
+function requeue(id) { const pos = Math.min(W.queue.length, W.idx + 4); W.queue.splice(pos, 0, { type: "card", id, retry: true }); }
+function headerHTML() {
+  const total = W.queue.length;
+  return `<div class="progress"><i style="width:${Math.round(W.idx / total * 100)}%"></i></div>
+  <div class="ptext"><span>${W.idx + 1} из ${total}</span><button class="btn ghost small" data-act="quit">Закончить</button></div>`;
+}
+function renderItem() {
+  const it = cur();
+  const P = $("#p-today");
+  if (it.type === "theory") {
+    const L = LESSONS[it.li];
+    P.innerHTML = headerHTML() + `<div class="kind">новая тема</div><h2>Урок ${it.li + 1}. ${esc(L.title)}</h2><div class="theory">${L.theory}</div>
+    <div class="row center" style="margin-top:16px"><button class="btn" data-act="theory-ok">Понятно, к фразам</button></div>`;
+    return;
+  }
+  const c = CARDS[it.id];
+  const mode = it.test ? "recognize" : modeFor(it.id, it);
+  it.mode = mode;
+  const lessonTag = `<p class="small muted" style="text-align:center;margin:4px 0 0">Урок ${c.li + 1} · ${esc(LESSONS[c.li].title)}</p>`;
+  const noteHTML = c.note ? `<div class="note">${esc(c.note)}</div>` : "";
+  if (mode === "intro") {
+    if (!S.c[it.id] && !W.practice) { S.c[it.id] = { s: 0, due: Date.now(), n: 0, l: 0 }; syncDay(); S.day.n++; touchStreak(); save(); renderStats(); }
+    P.innerHTML = headerHTML() + `<div class="kind">новая фраза</div>${lessonTag}
+      <div class="big de" data-say="${esc(c.de)}">${deHTML(c)}</div>${speakRow(c.de)}
+      <div class="ru">${esc(c.ru)}</div>${noteHTML}
+      <p class="small muted" style="text-align:center;margin-top:12px">Послушай 2–3 раза и повтори вслух. Так фраза запомнится вместе со звуком.</p>
+      <div class="row center" style="margin-top:12px"><button class="btn" data-act="next">Дальше</button></div>`;
+    if (S.set.auto) say(c.de);
+  } else if (mode === "recognize") {
+    P.innerHTML = headerHTML() + `<div class="kind">что это значит?</div>${lessonTag}
+      <div class="big de" data-say="${esc(c.de)}">${deHTML(c)}</div>${speakRow(c.de)}
+      <div id="rev"><div class="row center" style="margin-top:16px"><button class="btn" data-act="show">Показать перевод</button></div></div>`;
+    if (S.set.auto) say(c.de);
+  } else if (mode === "recall") {
+    P.innerHTML = headerHTML() + `<div class="kind">как сказать по-английски?</div>${lessonTag}
+      <div class="big">${esc(c.ru)}</div><p class="small muted" style="text-align:center">Скажи вслух, потом проверь.</p>
+      <div id="rev"><div class="row center" style="margin-top:16px"><button class="btn" data-act="show">Проверить</button></div></div>`;
+  } else if (mode === "listen") {
+    const others = shuffle(ORDER.filter(x => x !== it.id && CARDS[x].ru !== c.ru && (introduced(x) || CARDS[x].li === c.li)));
+    const same = others.filter(x => CARDS[x].li === c.li);
+    const picks = [];
+    [...same, ...others].forEach(x => { if (picks.length < 3 && !picks.some(p => CARDS[p].ru === CARDS[x].ru)) picks.push(x); });
+    it.opts = shuffle([it.id, ...picks]);
+    P.innerHTML = headerHTML() + `<div class="kind">послушай и выбери</div>${lessonTag}
+      <div class="speak" style="margin-top:18px"><button data-say="${esc(c.de)}">▶ Ещё раз</button><button data-say="${esc(c.de)}" data-slow="1">🐢 Медленно</button></div>
+      <div class="opts">${it.opts.map(x => `<button data-opt="${x}">${esc(CARDS[x].ru)}</button>`).join("")}</div><div id="rev"></div>`;
+    say(c.de);
+  } else if (mode === "build") {
+    it.tok = tokens(c.de);
+    it.pool = shuffle(it.tok.map((t, i) => ({ t, i })));
+    if (it.pool.every((p, k) => p.i === k) && it.pool.length > 1) it.pool.push(it.pool.shift());
+    it.ans = [];
+    P.innerHTML = headerHTML() + `<div class="kind">собери фразу</div>${lessonTag}
+      <div class="big" style="font-size:24px">${esc(c.ru)}</div>
+      <div class="answer" id="ans"></div><div class="tiles" id="tiles"></div><div id="rev"></div>`;
+    drawTiles();
+  }
+}
+function drawTiles() {
+  const it = cur();
+  $("#ans").innerHTML = it.ans.map((k, j) => `<button class="tile" data-un="${j}">${esc(it.pool[k].t)}</button>`).join("");
+  $("#tiles").innerHTML = it.pool.map((p, k) => `<button class="tile${it.ans.includes(k) ? " used" : ""}" data-tile="${k}">${esc(p.t)}</button>`).join("");
+  if (it.ans.length === it.pool.length && !it.done) {
+    it.done = true;
+    const got = it.ans.map(k => it.pool[k].t).join(" ");
+    const right = got === it.tok.join(" ");
+    const c = CARDS[it.id];
+    $("#tiles").innerHTML = "";
+    $("#ans").querySelectorAll("button").forEach(b => b.disabled = true);
+    $("#rev").innerHTML = `<div class="verdict ${right ? "ok" : "bad"}">${right ? "Верно!" : "Не так. Правильно:"}</div>
+      <div class="big de" data-say="${esc(c.de)}" style="font-size:26px">${deHTML(c)}</div>${speakRow(c.de)}
+      ${c.note ? `<div class="note">${esc(c.note)}</div>` : ""}
+      <div class="row center" style="margin-top:14px"><button class="btn" data-act="next">Дальше</button></div>`;
+    say(c.de);
+    if (right) W.ok++; else { W.bad++; requeue(it.id); }
+    grade(it.id, right ? 2 : 0);
+  }
+}
+function showAnswer() {
+  const it = cur(), c = CARDS[it.id];
+  const noteHTML = c.note ? `<div class="note">${esc(c.note)}</div>` : "";
+  const gradesHTML = `<div class="grades"><button class="g0" data-grade="0">Не вспомнил</button><button class="g1" data-grade="1">С трудом</button><button class="g2" data-grade="2">Помню</button></div>`;
+  if (it.mode === "recall") {
+    $("#rev").innerHTML = `<div class="reveal"><div class="big de" data-say="${esc(c.de)}">${deHTML(c)}</div>${speakRow(c.de)}${noteHTML}${gradesHTML}</div>`;
+    say(c.de);
+  } else {
+    $("#rev").innerHTML = `<div class="reveal"><div class="ru">${esc(c.ru)}</div>${noteHTML}${gradesHTML}</div>`;
+  }
+}
+function renderDone() {
+  const P = $("#p-today");
+  const total = W.ok + W.bad;
+  const pct = total ? Math.round(W.ok / total * 100) : 100;
+  const from = W.from;
+  W = null;
+  P.innerHTML = `<div class="kind">готово</div><h2 style="text-align:center">Well done! 🎉</h2>
+    <p style="text-align:center">${total ? `Правильно с первого раза: <b>${pct}%</b>.` : ""} Серия: <b>${streakNow()} дн.</b></p>
+    <p class="muted" style="text-align:center">Завтра приложение само покажет то, что начнёт забываться. Главное — заходить каждый день хотя бы на 5 минут.</p>
+    <div class="row center" style="margin-top:14px"><button class="btn" data-act="home">${from === "lessons" ? "К урокам" : "На главную"}</button></div>`;
+  if (from === "lessons") P.querySelector("[data-act=home]").dataset.act = "to-lessons";
+}
+
+function renderToday() {
+  if (W) { renderItem(); return; }
+  syncDay();
+  const due = dueIds().length;
+  const newLeft = Math.min(Math.max(0, S.set.newPerDay - S.day.n), nextNewIds(999).length);
+  const learned = ORDER.filter(id => S.c[id] && S.c[id].s >= 3).length;
+  const seen = ORDER.filter(introduced).length;
+  const nextNew = nextNewIds(1)[0];
+  const curLesson = nextNew ? LESSONS[CARDS[nextNew].li] : null;
+  let main;
+  if (due + newLeft > 0) {
+    main = `<div class="plan"><div><b class="today-num">${due}</b><span>повторить</span></div><div><b class="today-num">${newLeft}</b><span>новых фраз</span></div><div><b class="today-num">~${Math.max(1, Math.round((due * 9 + newLeft * 30) / 60))}</b><span>минут</span></div></div>
+      <div class="row center"><button class="btn" data-act="start">Начать</button></div>
+      ${curLesson ? `<p class="small muted" style="text-align:center;margin-top:10px">Сейчас новые фразы из урока ${CARDS[nextNew].li + 1}: «${esc(curLesson.title)}»</p>` : ""}`;
+  } else {
+    main = `<p style="text-align:center"><b>На сегодня всё сделано.</b> Серия: ${streakNow()} дн.</p>
+      ${nextNew ? `<div class="row center"><button class="btn ghost" data-act="extra">Взять ещё 5 новых фраз</button></div>` : `<p style="text-align:center" class="muted">Все уроки пройдены — теперь только повторения.</p>`}`;
+  }
+  $("#p-today").innerHTML = `<div class="voice-note">${voiceNote()}</div>
+    <h2>Занятие на сегодня</h2>${main}
+    <label class="focus">Новые фразы брать из <select id="set-focus"><option value="">всех уроков по порядку</option>${LESSONS.map((L, i) => { const st = lessonStats(L); return `<option value="${i}"${S.set.focus === i ? " selected" : ""}>${i + 1}. ${esc(L.title)} (${st.seen}/${st.total})</option>`; }).join("")}</select></label>
+    <p class="small muted" style="margin-top:18px">Выучено надёжно: <b>${learned}</b> из ${ORDER.length} фраз · начато: ${seen}</p>
+    <details><summary>Как это работает</summary>
+      <p class="small" style="margin-top:8px">• Ты учишь не отдельные слова, а <b>целые фразы</b> — так сразу видна грамматика и слова не путаются.<br>
+      • Перед новыми фразами — короткое объяснение <b>почему так</b>.<br>
+      • Каждую фразу слушай и <b>повторяй вслух</b>. Кнопка 🎙 проверит, понимает ли тебя английское распознавание речи.<br>
+      • Приложение само решает, когда что повторить: то, что знаешь хорошо, — реже (через 2, 4, 8, 16 дней…), то, что забыл, — чаще. Поэтому хватает <b>5–10 минут в день</b>.<br>
+      • Пропустил день — ничего страшного, повторения просто подождут.</p></details>
+    <details><summary>Настройки</summary><div class="settings">
+      <label>Новых фраз в день <select id="set-new">${[3, 5, 8, 10, 15, 20].map(v => `<option value="${v}"${v === S.set.newPerDay ? " selected" : ""}>${v}</option>`).join("")}</select></label>
+      <label>Скорость речи <select id="set-rate">${[[0.7, "медленно"], [0.8, "чуть медленнее"], [0.9, "обычно"], [1, "быстро"]].map(([v, t]) => `<option value="${v}"${v === S.set.rate ? " selected" : ""}>${t}</option>`).join("")}</select></label>
+      <label>Акцент <select id="set-accent"><option value="us"${S.set.accent === "us" ? " selected" : ""}>американский</option><option value="gb"${S.set.accent === "gb" ? " selected" : ""}>британский</option></select></label>
+      <label>Озвучивать автоматически <input type="checkbox" id="set-auto"${S.set.auto ? " checked" : ""}></label>
+      <button class="btn ghost small" data-act="reset" style="justify-self:start">Сбросить весь прогресс</button>
+    </div></details>`;
+}
+
+let openLesson = null;
+function renderLessons() {
+  const P = $("#p-lessons");
+  if (openLesson == null) {
+    P.innerHTML = `<h2>Уроки</h2><p class="small muted">Иди по порядку: каждый урок опирается на предыдущий. Новые фразы из уроков сами попадают в «Сегодня», но можно открыть любой урок и почитать объяснение заранее.</p>
+    <div class="lessons">${LESSONS.map((L, i) => {
+      const st = lessonStats(L);
+      return `<button class="lesson${st.seen === st.total ? " done" : ""}" data-lesson="${i}"><div class="n">${i + 1}</div><div><b>${esc(L.title)}</b><span>${esc(L.sub)}</span></div><div class="cnt">${S.set.focus === i ? '<span class="cur">сейчас</span>' : ""}${st.seen}/${st.total}</div></button>`;
+    }).join("")}</div>`;
+    return;
+  }
+  const L = LESSONS[openLesson];
+  S.read[L.id] = true; save();
+  const st = lessonStats(L);
+  const left = st.total - st.seen;
+  const nav = `<div class="lnav"><button class="btn ghost small" data-goto="${openLesson - 1}"${openLesson === 0 ? " disabled" : ""}>← Урок ${openLesson}</button><button class="btn ghost small" data-act="back">Все уроки</button><button class="btn ghost small" data-goto="${openLesson + 1}"${openLesson === LESSONS.length - 1 ? " disabled" : ""}>Урок ${openLesson + 2} →</button></div>`;
+  const isFocus = S.set.focus === openLesson;
+  P.innerHTML = `${nav}
+    <h2 style="margin-top:14px">Урок ${openLesson + 1}. ${esc(L.title)}</h2>
+    <div class="theory">${L.theory}</div>
+    <h3>Фразы урока</h3><p class="small muted">Нажми на фразу — услышишь её. Точка справа: серая — ещё не учил, жёлтая — учишь, зелёная — выучено.</p>
+    <div class="phrases">${L.items.map((_, i) => {
+      const id = L.id + "-" + i, c = CARDS[id];
+      return `<div class="ph"><button class="play" data-say="${esc(c.de)}" aria-label="Слушать">▶</button><div><div class="dd" data-say="${esc(c.de)}">${deHTML(c)}</div><div class="rr">${esc(c.ru)}</div>${c.note ? `<div class="nn">${esc(c.note)}</div>` : ""}</div><div class="dot ${stageClass(id)}"></div></div>`;
+    }).join("")}</div>
+    <div class="row" style="margin-top:16px">
+      ${left ? `<button class="btn" data-act="learn-lesson">Учить фразы урока (${left})</button>` : ""}
+      ${st.seen ? `<button class="btn ghost" data-act="practice-lesson">Потренироваться</button>` : ""}
+    </div>
+    ${st.seen ? `<p class="small muted" style="margin-top:8px">«Потренироваться» не сбивает расписание повторений — просто прогон для себя.</p>` : ""}
+    ${left ? (isFocus ? `<p class="small" style="margin-top:12px">✓ Новые фразы во вкладке «Сегодня» берутся из этого урока. <button class="chip" data-act="unfocus">Вернуть по порядку</button></p>` : `<div class="row" style="margin-top:12px"><button class="btn ghost small" data-act="focus">Брать новые фразы на «Сегодня» отсюда</button></div>`) : ""}
+    <div style="margin-top:18px">${nav}</div>`;
+}
+
+let PD = { pair: null, pick: null, score: 0, total: 0 };
+let SD = { pair: null, side: 0 };
+function newPair() { PD.pair = PAIRS[Math.floor(Math.random() * PAIRS.length)]; PD.pick = Math.random() < 0.5 ? 0 : 1; PD.answered = false; }
+function newSay() { SD.pair = PAIRS[Math.floor(Math.random() * PAIRS.length)]; SD.side = Math.random() < 0.5 ? 0 : 1; }
+function drillHTML() {
+  if (!PD.pair) newPair();
+  const p = PD.pair;
+  const word = i => p[i * 2];
+  const res = PD.answered ? `<p class="small" style="margin:10px 0 0">${PD.answered === "ok" ? "✓ Верно." : "✗ Прозвучало другое."} ${D(p[0])} — ${p[1]}, ${D(p[2])} — ${p[3]}. Разница: <b>${p[4]}</b>.</p>
+     <div class="row" style="margin-top:8px"><button class="btn small" data-act="pair-next">Следующая пара</button></div>` : "";
+  return `<div class="drill"><b>Различи на слух</b> <span class="small muted">· ${PD.score}/${PD.total}</span>
+    <p class="small" style="margin:4px 0 0">Тренирует ухо на звуки, которых нет в русском. Нажми «Слушать» и выбери слово.</p>
+    <div class="speak" style="justify-content:flex-start;margin-top:10px"><button data-act="pair-play">▶ Слушать</button><button data-act="pair-slow">🐢 Медленно</button></div>
+    <div class="pair">${[0, 1].map(i => {
+      let cls = "";
+      if (PD.answered) { if (i === PD.pick) cls = "right"; else if (PD.chosen === i) cls = "wrong"; }
+      return `<button class="${cls}" data-pairpick="${i}"${PD.answered ? " disabled" : ""}>${esc(word(i))}</button>`;
+    }).join("")}</div>${res}</div>`;
+}
+function sayDrillHTML() {
+  if (!SRC) return "";
+  if (!SD.pair) newSay();
+  const p = SD.pair, w = p[SD.side * 2], gl = p[SD.side * 2 + 1], other = p[(1 - SD.side) * 2];
+  return `<div class="drill speakwrap"><b>Произнеси так, чтобы тебя поняли</b>
+    <p class="small" style="margin:4px 0 0">Скажи слово в микрофон. Если распознается как «${esc(other)}» — значит, звук не тот (${esc(p[4])}).</p>
+    <div class="big de" style="font-size:30px" data-say="${esc(w)}">${esc(w)}</div><p style="text-align:center;margin:0" class="muted">${esc(gl)}</p>
+    <div class="speak"><button data-say="${esc(w)}">▶ Образец</button><button data-say="${esc(w)}" data-slow="1">🐢</button><button data-mic="${esc(w)}">🎙 Сказать</button><button data-act="say-next">Другое слово</button></div><div class="heard"></div></div>`;
+}
+function renderPron() {
+  $("#p-pron").innerHTML = `<div class="voice-note">${voiceNote()}</div><h2>Произношение</h2>
+    <p>Английский <b>не читается по буквам</b>, поэтому главное — слушать и повторять. Ниже — звуки и привычки, которые выдают русский акцент. У каждого правила есть <b>типичная ошибка русских</b> — проверь, не делаешь ли ты её.</p>
+    <p class="small muted">Нажимай на слова — их озвучит английский голос. Повторяй вслух сразу за ним.</p>
+    <div id="drill1">${drillHTML()}</div><div id="drill2">${sayDrillHTML()}</div>
+    ${PRON.map(g => `<h3>${esc(g.group)}</h3>` + g.items.map(r => `<div class="rule" id="r-${r.id}"><h3><code>${esc(r.k)}</code> ${esc(r.t)}</h3>${r.b}${r.bad ? `<div class="bad"><b>Ошибка:</b> ${esc(r.bad)}</div>` : ""}<div class="ex">${r.ex.map(([w, gl]) => `<button data-say="${esc(w)}"><b>${esc(w)}</b> <span>${esc(gl)}</span></button>`).join("")}</div></div>`).join("")).join("")}`;
+}
+
+function renderStats() {
+  syncDay();
+  const due = dueIds().length;
+  $("#stats").innerHTML = `<span>серия <b>${streakNow()}</b> дн.</span><span>выучено <b>${ORDER.filter(id => S.c[id] && S.c[id].s >= 3).length}</b></span><span>к повторению <b>${due}</b></span>`;
+}
+let currentTab = "today";
+function showTab(name) {
+  currentTab = name;
+  document.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-selected", String(t.dataset.tab === name)));
+  ["today", "lessons", "pron", "sheet"].forEach(t => $("#p-" + t).hidden = t !== name);
+  if (name === "today") renderToday();
+  if (name === "lessons") renderLessons();
+  if (name === "pron") renderPron();
+  if (name === "sheet") $("#p-sheet").innerHTML = SHEET;
+  try { localStorage.setItem(KEY + "-tab", name); } catch (e) {}
+}
+function gotoRule(id) {
+  showTab("pron");
+  const el = $("#r-" + id);
+  if (!el) return;
+  el.scrollIntoView({ behavior: "smooth", block: "start" });
+  el.classList.add("flash");
+  setTimeout(() => el.classList.remove("flash"), 1600);
+}
+
+document.addEventListener("click", e => {
+  const t = e.target.closest("button, [data-say], .de");
+  if (!t) return;
+  if (t.classList.contains("tab")) { showTab(t.dataset.tab); return; }
+  if (t.dataset.mic) { startMic(t); return; }
+  if (t.dataset.rule) { gotoRule(t.dataset.rule); return; }
+  if (t.dataset.goto != null) { openLesson = Math.max(0, Math.min(LESSONS.length - 1, +t.dataset.goto)); renderLessons(); window.scrollTo(0, 0); return; }
+  if (t.dataset.lesson) { openLesson = +t.dataset.lesson; renderLessons(); window.scrollTo(0, 0); return; }
+  if (t.dataset.opt) {
+    const it = cur();
+    if (it.done) return;
+    it.done = true;
+    const right = t.dataset.opt === it.id;
+    document.querySelectorAll("[data-opt]").forEach(b => { b.disabled = true; if (b.dataset.opt === it.id) b.classList.add("right"); });
+    if (!right) t.classList.add("wrong");
+    const c = CARDS[it.id];
+    $("#rev").innerHTML = `<div class="reveal"><div class="big de" data-say="${esc(c.de)}" style="font-size:26px">${deHTML(c)}</div>${speakRow(c.de)}<div class="row center" style="margin-top:12px"><button class="btn" data-act="next">Дальше</button></div></div>`;
+    if (right) W.ok++; else { W.bad++; requeue(it.id); }
+    grade(it.id, right ? 2 : 0);
+    return;
+  }
+  if (t.dataset.tile != null) { const it = cur(); const k = +t.dataset.tile; if (!it.ans.includes(k) && !it.done) { it.ans.push(k); drillTilesSafe(); } return; }
+  if (t.dataset.un != null) { const it = cur(); if (!it.done) { it.ans.splice(+t.dataset.un, 1); drillTilesSafe(); } return; }
+  if (t.dataset.grade != null) {
+    const it = cur(), g = +t.dataset.grade;
+    if (g === 2) W.ok++; else W.bad++;
+    if (g === 0) requeue(it.id);
+    if (it.test && g > 0) { if (!W.practice) { S.c[it.id].s = Math.max(S.c[it.id].s, g === 2 ? 1 : 0); S.c[it.id].due = g === 2 ? startOfDay(Date.now()) + DAY : Date.now(); if (g === 1) requeue(it.id); syncDay(); S.day.r++; save(); renderStats(); } }
+    else grade(it.id, g);
+    advance();
+    return;
+  }
+  if (t.dataset.pairpick != null) {
+    if (PD.answered) return;
+    PD.chosen = +t.dataset.pairpick; PD.total++;
+    if (PD.chosen === PD.pick) { PD.score++; PD.answered = "ok"; } else PD.answered = "bad";
+    $("#drill1").innerHTML = drillHTML();
+    return;
+  }
+  const act = t.dataset.act;
+  if (act) {
+    if (act === "start") startSession({});
+    else if (act === "extra") startSession({ extra: 5 });
+    else if (act === "next") advance();
+    else if (act === "show") showAnswer();
+    else if (act === "theory-ok") { S.read[LESSONS[cur().li].id] = true; save(); advance(); }
+    else if (act === "quit") { W = null; renderToday(); renderStats(); }
+    else if (act === "home") renderToday();
+    else if (act === "to-lessons") { showTab("lessons"); }
+    else if (act === "back") { openLesson = null; renderLessons(); }
+    else if (act === "focus") { S.set.focus = openLesson; save(); renderLessons(); }
+    else if (act === "unfocus") { S.set.focus = null; save(); renderLessons(); }
+    else if (act === "learn-lesson") startSession({ lesson: openLesson });
+    else if (act === "practice-lesson") startSession({ lesson: openLesson, practice: true });
+    else if (act === "pair-play") say(PD.pair[PD.pick * 2]);
+    else if (act === "pair-slow") say(PD.pair[PD.pick * 2], true);
+    else if (act === "pair-next") { newPair(); $("#drill1").innerHTML = drillHTML(); say(PD.pair[PD.pick * 2]); }
+    else if (act === "say-next") { newSay(); $("#drill2").innerHTML = sayDrillHTML(); }
+    else if (act === "reset") {
+      if (confirm("Точно стереть весь прогресс? Это нельзя отменить.")) { S.c = {}; S.read = {}; S.day = { d: today(), n: 0, r: 0 }; S.streak = { last: "", n: 0 }; save(); renderToday(); renderStats(); }
+    }
+    return;
+  }
+  const sayText = t.dataset.say || (t.classList.contains("de") ? t.textContent : null);
+  if (sayText) say(sayText, !!t.dataset.slow);
+});
+function drillTilesSafe() { if (W && cur() && cur().mode === "build") drawTiles(); }
+document.addEventListener("change", e => {
+  if (e.target.id === "set-new") { S.set.newPerDay = +e.target.value; save(); renderToday(); }
+  if (e.target.id === "set-rate") { S.set.rate = +e.target.value; save(); say("Hi! How are you?"); }
+  if (e.target.id === "set-focus") { S.set.focus = e.target.value === "" ? null : +e.target.value; save(); renderToday(); }
+  if (e.target.id === "set-accent") { S.set.accent = e.target.value; save(); loadVoices(); say("Hi! How are you?"); }
+  if (e.target.id === "set-auto") { S.set.auto = e.target.checked; save(); }
+});
+
+renderStats();
+let startTab = "today";
+try { startTab = localStorage.getItem(KEY + "-tab") || "today"; } catch (e) {}
+showTab(["today", "lessons", "pron", "sheet"].includes(startTab) ? startTab : "today");
+</script>
+<script>
+if ("serviceWorker" in navigator) { window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {})); }
+</script>
+</body>
+</html>
