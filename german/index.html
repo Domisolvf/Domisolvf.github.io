@@ -1,0 +1,1196 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Немецкий A1</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Deutsch">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#f6f3ef" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14110f" media="(prefers-color-scheme: dark)">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" type="image/png" href="icon-512.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Golos+Text:wght@400;500;600&family=PT+Serif:wght@400;700&display=swap">
+<style>
+html { -webkit-text-size-adjust: 100%; }
+[hidden] { display: none !important; }
+:root {
+  --paper: #f6f3ef; --grid: #e8e1d8; --sheet: #ffffff; --text: #221c1a; --muted: #6c625d; --line: #ddd4cb;
+  --ink: #9c2a3c; --ink-soft: #f6e6e8; --gold: #b7860b; --gold-soft: #fbf1d6;
+  --bad: #c9372c; --bad-soft: #fbe8e6; --ok: #23784a; --ok-soft: #e3f3e9;
+  --g-m: #2c5bc9; --g-f: #c9372c; --g-n: #23824a;
+  --f-hand: "Caveat", "Segoe Print", cursive;
+  --f-ui: "Golos Text", "Segoe UI", system-ui, sans-serif;
+  --f-word: "PT Serif", Georgia, serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #14110f; --grid: #1e1a17; --sheet: #1c1816; --text: #ede6e1; --muted: #a59a93; --line: #362f2b;
+    --ink: #ff8fa0; --ink-soft: #3a2228; --gold: #e8bd4a; --gold-soft: #33290f;
+    --bad: #ff7b6e; --bad-soft: #3b1f1c; --ok: #64d396; --ok-soft: #163024;
+    --g-m: #8fb0ff; --g-f: #ff8a7e; --g-n: #6fd69c; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #14110f; --grid: #1e1a17; --sheet: #1c1816; --text: #ede6e1; --muted: #a59a93; --line: #362f2b;
+  --ink: #ff8fa0; --ink-soft: #3a2228; --gold: #e8bd4a; --gold-soft: #33290f;
+  --bad: #ff7b6e; --bad-soft: #3b1f1c; --ok: #64d396; --ok-soft: #163024;
+  --g-m: #8fb0ff; --g-f: #ff8a7e; --g-n: #6fd69c; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background-color: var(--paper);
+  background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 22px 22px; color: var(--text); font: 16px/1.5 var(--f-ui);
+  padding: calc(20px + env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) calc(48px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+}
+.wrap { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
+header { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 6px 16px; }
+h1 { font: 700 30px/1.1 var(--f-word); margin: 0; }
+.sub { font: 500 22px/1 var(--f-hand); color: var(--ink); }
+.stats { font-size: 13px; color: var(--muted); display: flex; gap: 14px; flex-wrap: wrap; font-variant-numeric: tabular-nums; }
+.stats b { color: var(--text); font-weight: 600; }
+.tabs { display: flex; gap: 4px; flex-wrap: wrap; }
+.tab { font: 500 15px var(--f-ui); color: var(--muted); background: transparent; border: 1px solid transparent; padding: 7px 13px; border-radius: 8px; cursor: pointer; }
+@media (max-width: 420px) { .tab { font-size: 14px; padding: 6px 7px; white-space: nowrap; } .tabs { gap: 0; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; } .tabs::-webkit-scrollbar { display: none; } }
+.tab[aria-selected="true"] { background: var(--sheet); color: var(--ink); border-color: var(--line); }
+.sheet { background: var(--sheet); border: 1px solid var(--line); border-radius: 6px; padding: 22px 22px 26px; min-width: 0; box-shadow: 0 10px 30px -20px rgba(40, 20, 10, .4); }
+@media (max-width: 560px) { .sheet { padding: 18px 16px 22px; } }
+h2 { font: 700 22px/1.25 var(--f-word); margin: 0 0 10px; }
+h3 { font: 600 17px/1.3 var(--f-ui); margin: 22px 0 8px; }
+p { margin: 0 0 10px; }
+.muted { color: var(--muted); }
+.small { font-size: 13.5px; }
+.hand { font: 700 22px/1.1 var(--f-hand); color: var(--ink); }
+
+.btn { font: 600 15px var(--f-ui); background: var(--ink); color: var(--sheet); border: 0; border-radius: 9px; padding: 11px 18px; cursor: pointer; }
+.btn.ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--line); }
+.btn.small { padding: 7px 12px; font-size: 14px; }
+.btn:disabled { opacity: .45; cursor: default; }
+.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.row.center { justify-content: center; }
+.grades { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 18px; }
+.grades button { font: 600 15px var(--f-ui); border-radius: 9px; padding: 12px 6px; cursor: pointer; border: 1.5px solid var(--line); background: var(--sheet); color: var(--text); }
+.grades .g0 { color: var(--bad); border-color: var(--bad); background: var(--bad-soft); }
+.grades .g1 { color: var(--gold); border-color: var(--gold); background: var(--gold-soft); }
+.grades .g2 { color: var(--ok); border-color: var(--ok); background: var(--ok-soft); }
+
+.progress { height: 4px; background: var(--line); border-radius: 2px; overflow: hidden; margin-bottom: 4px; }
+.progress i { display: block; height: 100%; background: var(--ink); width: 0; transition: width .3s; }
+.ptext { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; display: flex; justify-content: space-between; gap: 8px; }
+.kind { font: 700 20px var(--f-hand); color: var(--gold); text-align: center; margin-top: 14px; }
+.big { font: 400 clamp(26px, 6.5vw, 38px)/1.25 var(--f-word); text-align: center; padding: 14px 0 6px; overflow-wrap: anywhere; }
+.big.de { cursor: pointer; }
+.ru { font-size: 19px; text-align: center; }
+.note { background: var(--gold-soft); border-radius: 8px; padding: 8px 12px; font-size: 14.5px; margin: 12px 0 0; }
+.speak { display: flex; gap: 8px; justify-content: center; margin: 6px 0 4px; flex-wrap: wrap; }
+.speak button, .play { font: 500 14px var(--f-ui); color: var(--ink); background: var(--ink-soft); border: 0; border-radius: 99px; padding: 7px 14px; cursor: pointer; }
+.heard { text-align: center; font-size: 14.5px; min-height: 0; margin-top: 6px; }
+.heard.ok { color: var(--ok); } .heard.bad { color: var(--bad); }
+.reveal { margin-top: 18px; border-top: 1px dashed var(--line); padding-top: 14px; }
+
+.de { color: var(--ink); cursor: pointer; font-family: var(--f-word); }
+span.de, b.de { text-decoration: underline dotted; text-underline-offset: 3px; }
+.g-m { color: var(--g-m); font-weight: 700; } .g-f { color: var(--g-f); font-weight: 700; } .g-n { color: var(--g-n); font-weight: 700; }
+
+.readbox { margin-top: 12px; padding: 12px; border: 1px solid var(--line); border-radius: 10px; }
+.readbox .w { font: 22px var(--f-word); text-align: center; margin-bottom: 10px; line-height: 1.6; }
+.readbox mark { background: var(--gold-soft); color: inherit; border-radius: 3px; padding: 0 1px; border-bottom: 2px solid var(--gold); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font: 500 13.5px var(--f-ui); border: 1px solid var(--line); background: var(--sheet); color: var(--text); border-radius: 99px; padding: 4px 10px; cursor: pointer; }
+.chip b { font-family: var(--f-word); color: var(--ink); }
+
+.opts { display: grid; gap: 8px; margin-top: 16px; }
+.opts button { font: 16px var(--f-ui); text-align: left; padding: 12px 14px; border-radius: 10px; border: 1.5px solid var(--line); background: var(--sheet); color: var(--text); cursor: pointer; }
+.opts button.right { border-color: var(--ok); background: var(--ok-soft); }
+.opts button.wrong { border-color: var(--bad); background: var(--bad-soft); }
+
+.answer { min-height: 54px; border-bottom: 2px solid var(--line); display: flex; flex-wrap: wrap; gap: 6px; padding: 8px 0; justify-content: center; margin-top: 14px; }
+.tiles { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 16px; }
+.tile { font: 19px var(--f-word); padding: 7px 13px; border-radius: 9px; border: 1.5px solid var(--line); background: var(--sheet); color: var(--text); cursor: pointer; box-shadow: 0 2px 0 var(--line); }
+.tile.used { visibility: hidden; }
+.verdict { text-align: center; margin-top: 14px; font-weight: 600; }
+.verdict.ok { color: var(--ok); } .verdict.bad { color: var(--bad); }
+
+.lessons { display: grid; gap: 8px; }
+.lesson { display: grid; grid-template-columns: 34px 1fr auto; gap: 12px; align-items: center; text-align: left; width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--sheet); color: var(--text); cursor: pointer; font: inherit; }
+.lesson .n { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font: 700 15px var(--f-ui); background: var(--ink-soft); color: var(--ink); }
+.lesson.done .n { background: var(--ok-soft); color: var(--ok); }
+.lesson b { display: block; font-size: 16px; }
+.lesson span { color: var(--muted); font-size: 13.5px; }
+.lesson .cnt { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.theory { font-size: 15.5px; }
+.theory table, .tbl { border-collapse: collapse; margin: 8px 0 14px; font-size: 15px; }
+.theory td, .theory th, .tbl td, .tbl th { border: 1px solid var(--line); padding: 5px 10px; text-align: left; vertical-align: top; }
+.theory th, .tbl th { background: var(--ink-soft); font-weight: 600; }
+.tscroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.phrases { display: grid; gap: 0; margin-top: 6px; }
+.ph { display: grid; grid-template-columns: 36px 1fr 10px; gap: 10px; align-items: start; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.ph .play { padding: 0; width: 34px; height: 34px; }
+.ph .dd { font: 18px var(--f-word); cursor: pointer; }
+.ph .rr { font-size: 14.5px; color: var(--muted); }
+.ph .nn { font-size: 13.5px; color: var(--gold); margin-top: 2px; }
+.dot { width: 10px; height: 10px; border-radius: 50%; background: var(--line); margin-top: 8px; }
+.dot.s1 { background: var(--gold); } .dot.s2 { background: var(--ok); }
+
+.rule { border: 1px solid var(--line); border-radius: 10px; padding: 14px; margin-bottom: 10px; scroll-margin-top: 16px; transition: box-shadow .4s; }
+.rule.flash { box-shadow: 0 0 0 3px var(--gold); }
+.rule h3 { margin: 0 0 6px; display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+.rule h3 code { font: 700 18px var(--f-word); color: var(--ink); background: var(--ink-soft); padding: 0 7px; border-radius: 6px; }
+.rule .bad { background: var(--bad-soft); border-radius: 8px; padding: 7px 10px; font-size: 14.5px; margin: 8px 0; }
+.ex { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.ex button { font: 15px var(--f-ui); border: 1px solid var(--line); background: var(--sheet); color: var(--text); border-radius: 8px; padding: 5px 10px; cursor: pointer; }
+.ex button b { font: 700 17px var(--f-word); color: var(--ink); font-weight: 400; }
+.ex button span { color: var(--muted); font-size: 13px; }
+.drill { border: 1.5px solid var(--gold); background: var(--gold-soft); border-radius: 12px; padding: 14px; margin-bottom: 16px; }
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+.pair button { font: 22px var(--f-word); padding: 12px 6px; border-radius: 10px; border: 1.5px solid var(--line); background: var(--sheet); color: var(--text); cursor: pointer; }
+.pair button.right { border-color: var(--ok); background: var(--ok-soft); }
+.pair button.wrong { border-color: var(--bad); background: var(--bad-soft); }
+.warn { background: var(--bad-soft); border-radius: 10px; padding: 10px 12px; font-size: 14.5px; }
+.settings { display: grid; gap: 10px; margin-top: 8px; font-size: 15px; }
+.settings label { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+select { font: 15px var(--f-ui); color: var(--text); background: var(--sheet); border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px; }
+.today-num { font: 700 46px/1 var(--f-word); color: var(--ink); }
+.plan { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; text-align: center; margin: 12px 0 16px; }
+.plan div { border: 1px solid var(--line); border-radius: 10px; padding: 10px 4px; }
+.plan span { display: block; font-size: 13px; color: var(--muted); }
+details { border-top: 1px solid var(--line); padding-top: 10px; margin-top: 18px; }
+summary { cursor: pointer; font-weight: 600; color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Немецкий A1</h1>
+      <div class="sub">понимать, а не зубрить</div>
+    </div>
+    <div class="stats" id="stats"></div>
+  </header>
+  <nav class="tabs" role="tablist">
+    <button class="tab" role="tab" data-tab="today" aria-selected="true">Сегодня</button>
+    <button class="tab" role="tab" data-tab="lessons" aria-selected="false">Уроки</button>
+    <button class="tab" role="tab" data-tab="pron" aria-selected="false">Произношение</button>
+    <button class="tab" role="tab" data-tab="sheet" aria-selected="false">Шпаргалка</button>
+  </nav>
+  <section class="sheet" id="p-today"></section>
+  <section class="sheet" id="p-lessons" hidden></section>
+  <section class="sheet" id="p-pron" hidden></section>
+  <section class="sheet" id="p-sheet" hidden></section>
+</div>
+
+<script>
+const D = s => `<span class="de">${s}</span>`;
+
+const LESSONS = [
+{ id: "hallo", title: "Первые фразы", sub: "привет, спасибо, как дела",
+theory: `<p>Главное про немецкий: он <b>читается по правилам</b>. Выучи ~20 правил во вкладке «Произношение» — и сможешь правильно прочитать любое слово, даже незнакомое. Проходи её параллельно с первыми уроками.</p>
+<p>Сразу три вещи:</p>
+<p>1) Ударение почти всегда на <b>первый слог</b>: ${D("Abend")}, ${D("danke")}, ${D("Morgen")}.<br>
+2) Все <b>существительные — с большой буквы</b>: ${D("der Tag")}, ${D("die Nacht")}.<br>
+3) Гласные бывают <b>долгими и краткими</b>, и это меняет смысл: ${D("Staat")} (государство) и ${D("Stadt")} (город).</p>
+<p>${D("Guten Tag")} — вежливо, со взрослыми и незнакомыми. ${D("Hallo")} — почти везде. ${D("Tschüss")} — «пока» для своих. На юге Германии и в Австрии услышишь ${D("Servus")} и ${D("Grüß Gott")}.</p>
+<p>На ${D("Wie geht's?")} отвечают коротко: ${D("Gut, danke. Und dir?")} — и это не вопрос «как прошёл день», а просто вежливость, как в английском.</p>`,
+items: [
+["Hallo!", "Привет!"], ["Guten Morgen!", "Доброе утро!"], ["Guten Tag!", "Добрый день!", "Вежливо, со взрослыми и незнакомыми."],
+["Guten Abend!", "Добрый вечер!"], ["Gute Nacht!", "Спокойной ночи!"], ["Tschüss!", "Пока!"],
+["Auf Wiedersehen!", "До свидания!"], ["Danke!", "Спасибо!"], ["Danke schön!", "Большое спасибо!"],
+["Bitte!", "Пожалуйста! / Не за что!", "Bitte — и просьба, и ответ на «спасибо»."], ["Entschuldigung!", "Извините!"],
+["Ja.", "Да."], ["Nein.", "Нет."], ["Wie geht's?", "Как дела?"], ["Gut, danke.", "Хорошо, спасибо."], ["Und dir?", "А у тебя?"]
+]},
+{ id: "kennen", title: "Знакомство", sub: "имя, откуда, сколько лет",
+theory: `<p><b>Ты и Вы.</b> ${D("du")} — «ты»: друзьям, сверстникам, семье. ${D("Sie")} с большой буквы — вежливое «Вы» (к одному или нескольким), глагол стоит в форме «они»: ${D("Wie heißen Sie?")}. Немецкие подростки между собой всегда на du, к учителю и продавцу — на Sie.</p>
+<p><b>Окончания глагола</b> уже видны: ${D("ich komme")}, ${D("du kommst")}. Подробно — в уроке 4.</p>
+<p><b>Возраст</b> — через «быть», а не «иметь»: ${D("Ich bin 16 Jahre alt")} = «я 16 лет стар». Типичная ошибка русских — <s>Ich habe 16 Jahre</s>.</p>
+<p><b>Откуда и где:</b> ${D("aus")} — откуда (${D("Ich komme aus Russland")}), ${D("in")} — где (${D("Ich wohne in Moskau")}).</p>
+<p>Две фразы-спасателя выучи первыми: ${D("Ich verstehe nicht")} и ${D("Langsamer, bitte")}. С ними любой разговор не развалится.</p>`,
+items: [
+["Wie heißt du?", "Как тебя зовут?"], ["Ich heiße Max.", "Меня зовут Макс."], ["Wie heißen Sie?", "Как вас зовут?", "Вежливая форма: Sie + глагол как у «они»."],
+["Ich bin Anna.", "Я Анна."], ["Woher kommst du?", "Откуда ты?"], ["Ich komme aus Russland.", "Я из России."],
+["Wo wohnst du?", "Где ты живёшь?"], ["Ich wohne in Berlin.", "Я живу в Берлине."], ["Wie alt bist du?", "Сколько тебе лет?"],
+["Ich bin sechzehn Jahre alt.", "Мне шестнадцать лет.", "Дословно «я шестнадцать лет стар». Не haben!"], ["Freut mich!", "Очень приятно!"],
+["Ich spreche ein bisschen Deutsch.", "Я немного говорю по-немецки."], ["Ich verstehe nicht.", "Я не понимаю."],
+["Kannst du das wiederholen?", "Можешь повторить?"], ["Langsamer, bitte.", "Помедленнее, пожалуйста."]
+]},
+{ id: "sein", title: "Глагол sein — «быть»", sub: "я есть, ты есть, он есть",
+theory: `<p>В русском «я студент» — без глагола. В немецком <b>глагол обязателен всегда</b>: ${D("Ich bin Schüler")} = «я есть школьник». Без него фраза ломается.</p>
+<div class="tscroll"><table><tr><th>кто</th><th>sein</th><th></th></tr>
+<tr><td>${D("ich")} — я</td><td>${D("bin")}</td><td>${D("Ich bin müde.")}</td></tr>
+<tr><td>${D("du")} — ты</td><td>${D("bist")}</td><td>${D("Du bist nett.")}</td></tr>
+<tr><td>${D("er / sie / es")} — он / она / оно</td><td>${D("ist")}</td><td>${D("Er ist hier.")}</td></tr>
+<tr><td>${D("wir")} — мы</td><td>${D("sind")}</td><td>${D("Wir sind Schüler.")}</td></tr>
+<tr><td>${D("ihr")} — вы (компания)</td><td>${D("seid")}</td><td>${D("Ihr seid zu spät.")}</td></tr>
+<tr><td>${D("sie / Sie")} — они / Вы</td><td>${D("sind")}</td><td>${D("Sie sind nett.")}</td></tr></table></div>
+<p><b>Профессии и роли — без артикля:</b> ${D("Ich bin Schüler")}, а не <s>ein Schüler</s>.</p>
+<p><b>«Холодно», «поздно»</b> — в немецком нужно подлежащее, ставят пустое ${D("es")}: ${D("Es ist kalt")}. Предложение без подлежащего немцу режет слух.</p>
+<p>Вопрос «да/нет» — глагол вперёд: ${D("Du bist müde")} → ${D("Bist du müde?")}</p>`,
+items: [
+["Ich bin müde.", "Я устал."], ["Du bist nett.", "Ты милый."], ["Er ist mein Bruder.", "Он мой брат."],
+["Sie ist meine Schwester.", "Она моя сестра."], ["Das ist mein Freund.", "Это мой друг."], ["Wir sind Schüler.", "Мы школьники.", "Профессии и роли — без артикля."],
+["Ihr seid zu spät.", "Вы опоздали.", "ihr — «вы» к компании друзей."], ["Sie sind sehr nett.", "Они очень милые. / Вы очень милы."],
+["Bist du müde?", "Ты устал?"], ["Wo ist die Toilette?", "Где туалет?"], ["Das ist gut.", "Это хорошо."],
+["Das ist nicht schlecht.", "Это неплохо."], ["Ich bin krank.", "Я болею."], ["Es ist kalt.", "Холодно.", "Нужно пустое подлежащее es."], ["Es ist spät.", "Поздно."]
+]},
+{ id: "verb", title: "Глаголы: настоящее время", sub: "окончания -e, -st, -t, -en",
+theory: `<p>Почти все глаголы в словаре заканчиваются на <b>-en</b>: ${D("lernen")}, ${D("machen")}. Отрезаешь -en — получаешь основу ${D("lern-")} — и приклеиваешь окончание. Окончания одни и те же у сотен глаголов, их надо выучить один раз:</p>
+<div class="tscroll"><table><tr><th></th><th>окончание</th><th>lernen</th><th>arbeiten</th></tr>
+<tr><td>ich</td><td><b>-e</b></td><td>${D("lerne")}</td><td>${D("arbeite")}</td></tr>
+<tr><td>du</td><td><b>-st</b></td><td>${D("lernst")}</td><td>${D("arbeitest")}</td></tr>
+<tr><td>er / sie / es</td><td><b>-t</b></td><td>${D("lernt")}</td><td>${D("arbeitet")}</td></tr>
+<tr><td>wir</td><td><b>-en</b></td><td>${D("lernen")}</td><td>${D("arbeiten")}</td></tr>
+<tr><td>ihr</td><td><b>-t</b></td><td>${D("lernt")}</td><td>${D("arbeitet")}</td></tr>
+<tr><td>sie / Sie</td><td><b>-en</b></td><td>${D("lernen")}</td><td>${D("arbeiten")}</td></tr></table></div>
+<p>Если основа кончается на <b>-t/-d</b> (${D("arbeiten")}, ${D("finden")}), вставляется <b>-e-</b>, чтобы выговорить: ${D("du arbeitest")}. Если на <b>-s/-ß/-z</b> — у du только <b>-t</b>: ${D("du heißt")}.</p>
+<p><b>Одно время на всё.</b> ${D("Ich lerne")} = «я учу», «я сейчас учу» и даже «я буду учить»: ${D("Ich mache das morgen")} — «сделаю завтра». Никаких «continuous» нет.</p>
+<p>«Домой» — особая фраза: ${D("nach Hause")} (куда), ${D("zu Hause")} (где).</p>`,
+items: [
+["Ich lerne Deutsch.", "Я учу немецкий."], ["Du lernst schnell.", "Ты быстро учишься."], ["Er spielt Fußball.", "Он играет в футбол."],
+["Wir machen Hausaufgaben.", "Мы делаем домашку."], ["Was machst du?", "Что ты делаешь?"], ["Ich höre Musik.", "Я слушаю музыку."],
+["Sie kocht gut.", "Она хорошо готовит."], ["Ihr wohnt in Moskau.", "Вы живёте в Москве."], ["Wir gehen nach Hause.", "Мы идём домой.", "nach Hause — куда, zu Hause — где."],
+["Ich arbeite heute.", "Я сегодня работаю."], ["Du arbeitest viel.", "Ты много работаешь.", "Основа на -t → вставка -e-: arbeit-e-st."],
+["Ich trinke Wasser.", "Я пью воду."], ["Was trinkst du?", "Что ты пьёшь?"], ["Ich mache das morgen.", "Я сделаю это завтра.", "Настоящее время + «завтра» = будущее."],
+["Ich liebe dich.", "Я тебя люблю."]
+]},
+{ id: "stark", title: "Сильные глаголы и haben", sub: "fahren → du fährst",
+theory: `<p>Часть частых глаголов у <b>du</b> и <b>er/sie/es</b> меняет гласную в корне. Окончания те же, меняется только буква внутри:</p>
+<div class="tscroll"><table><tr><th>инфинитив</th><th>ich</th><th>du</th><th>er/sie/es</th></tr>
+<tr><td>${D("fahren")} ехать</td><td>${D("fahre")}</td><td>${D("fährst")}</td><td>${D("fährt")}</td></tr>
+<tr><td>${D("schlafen")} спать</td><td>${D("schlafe")}</td><td>${D("schläfst")}</td><td>${D("schläft")}</td></tr>
+<tr><td>${D("essen")} есть</td><td>${D("esse")}</td><td>${D("isst")}</td><td>${D("isst")}</td></tr>
+<tr><td>${D("sprechen")} говорить</td><td>${D("spreche")}</td><td>${D("sprichst")}</td><td>${D("spricht")}</td></tr>
+<tr><td>${D("nehmen")} брать</td><td>${D("nehme")}</td><td>${D("nimmst")}</td><td>${D("nimmt")}</td></tr>
+<tr><td>${D("lesen")} читать</td><td>${D("lese")}</td><td>${D("liest")}</td><td>${D("liest")}</td></tr>
+<tr><td>${D("sehen")} видеть</td><td>${D("sehe")}</td><td>${D("siehst")}</td><td>${D("sieht")}</td></tr></table></div>
+<p>Схема: <b>a → ä</b>, <b>e → i</b> или <b>e → ie</b>. У wir/ihr/sie всё обычно: ${D("wir fahren")}.</p>
+<p><b>haben</b> — «иметь», неправильный: ${D("ich habe")}, ${D("du hast")}, ${D("er hat")}, ${D("wir haben")}, ${D("ihr habt")}, ${D("sie haben")}.</p>
+<p>Немцы «имеют» голод и жажду: ${D("Ich habe Hunger")} — «я голоден», ${D("Ich habe Durst")} — «хочу пить». «У меня есть время» — ${D("Ich habe Zeit")}.</p>
+<p><b>gern</b> = «с удовольствием»; ставится после глагола и превращает его в «люблю делать»: ${D("Ich spiele gern Gitarre")} — «люблю играть на гитаре».</p>`,
+items: [
+["Ich fahre nach Berlin.", "Я еду в Берлин."], ["Du fährst zu schnell.", "Ты едешь слишком быстро.", "fahren → du fährst (a → ä)."],
+["Er isst gern Pizza.", "Он любит пиццу.", "gern = «с удовольствием»: ест с удовольствием."], ["Was isst du gern?", "Что ты любишь есть?"],
+["Sprichst du Englisch?", "Ты говоришь по-английски?", "sprechen → du sprichst (e → i)."], ["Sie liest ein Buch.", "Она читает книгу."],
+["Siehst du das?", "Ты это видишь?"], ["Er schläft noch.", "Он ещё спит."], ["Ich habe Hunger.", "Я голоден.", "Дословно «имею голод»."],
+["Hast du Zeit?", "У тебя есть время?"], ["Er hat keine Zeit.", "У него нет времени."], ["Wir haben Durst.", "Мы хотим пить."],
+["Ich nehme das.", "Я возьму это."], ["Ich spiele gern Gitarre.", "Я люблю играть на гитаре."]
+]},
+{ id: "artikel", title: "Род: der, die, das", sub: "артикль — часть слова", gender: true,
+theory: `<p>У каждого существительного есть род, и он <b>часто не совпадает с русским</b>: ${D("die Sonne")} (ж.), ${D("der Mond")} (м.), ${D("das Mädchen")} (ср.! «девочка»).</p>
+<div class="tscroll"><table><tr><th>род</th><th>«этот/тот»</th><th>«какой-то»</th></tr>
+<tr><td><span class="g-m">мужской</span></td><td>${D("der")}</td><td>${D("ein")}</td></tr>
+<tr><td><span class="g-f">женский</span></td><td>${D("die")}</td><td>${D("eine")}</td></tr>
+<tr><td><span class="g-n">средний</span></td><td>${D("das")}</td><td>${D("ein")}</td></tr>
+<tr><td>множ. число</td><td>${D("die")}</td><td>—</td></tr></table></div>
+<p><b>Главное правило: учи слово только вместе с артиклем.</b> Не «Tisch — стол», а «<span class="g-m">der</span> Tisch». Здесь артикли раскрашены: <span class="g-m">der синий</span>, <span class="g-f">die красный</span>, <span class="g-n">das зелёный</span> — представляй слово этого цвета.</p>
+<p>Подсказки, которые работают почти всегда:</p>
+<p>• <span class="g-f">die</span>: на <b>-ung, -heit, -keit, -schaft, -ion, -tät</b> (${D("die Zeitung")}, ${D("die Information")}) и большинство на <b>-e</b> (${D("die Schule")}).<br>
+• <span class="g-n">das</span>: на <b>-chen, -lein</b> (уменьшительные: ${D("das Mädchen")}), почти все на <b>-um</b>, <b>-ment</b>.<br>
+• <span class="g-m">der</span>: дни, месяцы, времена года (${D("der Montag")}, ${D("der Mai")}), слова на <b>-er</b> про людей (${D("der Lehrer")}).</p>
+<p>${D("der/die/das")} — «тот самый, известный»; ${D("ein/eine")} — «какой-то, один». ${D("Das ist ein Hund. Der Hund ist groß.")} — сначала «какая-то собака», потом «эта собака».</p>`,
+items: [
+["der Tisch", "стол"], ["die Tür", "дверь"], ["das Fenster", "окно"], ["der Hund", "собака (пёс)"], ["die Katze", "кошка"],
+["das Haus", "дом"], ["die Schule", "школа", "Большинство слов на -e — женского рода."], ["das Mädchen", "девочка", "Средний род из-за -chen."],
+["die Zeitung", "газета", "-ung всегда die."], ["der Montag", "понедельник", "Дни недели — der."],
+["Das ist ein Hund.", "Это собака."], ["Das ist eine Katze.", "Это кошка."], ["Der Hund ist groß.", "Собака большая."],
+["Die Sonne scheint.", "Светит солнце."], ["Das Wetter ist schön.", "Погода хорошая."]
+]},
+{ id: "kein", title: "Множественное число, kein и nicht", sub: "как сказать «нет»",
+theory: `<p><b>Множественное число</b> образуется по-разному, общего правила нет: ${D("der Hund – die Hunde")}, ${D("das Kind – die Kinder")}, ${D("das Buch – die Bücher")}, ${D("die Frau – die Frauen")}. Поэтому слова учат тройкой: артикль + слово + мн. число. Хорошая новость: артикль во мн. числе всегда ${D("die")}.</p>
+<p><b>Два отрицания</b>, и путать их нельзя:</p>
+<p>• ${D("kein")} — «никакой, ни одного» — отрицает <b>существительное</b> без артикля или с ein. Это буквально «не + ein»: ${D("Das ist ein Problem")} → ${D("Das ist kein Problem")}. Склоняется как ein: ${D("kein / keine / keinen")}.<br>
+• ${D("nicht")} — всё остальное: глагол, прилагательное, слово с der/die/das: ${D("Ich komme nicht")}, ${D("Das ist nicht gut")}.</p>
+<p>Ошибка русских: <s>Ich habe nicht Zeit</s> → правильно ${D("Ich habe keine Zeit")}.</p>
+<p>В ${D("Ich habe keinen Hund")} у kein появилось -en — это винительный падеж мужского рода, разберём в уроке 9.</p>`,
+items: [
+["die Hunde", "собаки", "der Hund → die Hunde"], ["die Kinder", "дети", "das Kind → die Kinder"], ["die Bücher", "книги", "das Buch → die Bücher"],
+["die Freunde", "друзья", "der Freund → die Freunde"], ["Ich habe keinen Hund.", "У меня нет собаки.", "keinen — винительный падеж (урок 9)."],
+["Das ist kein Problem.", "Это не проблема."], ["Ich habe keine Ahnung.", "Понятия не имею."], ["Ich habe keine Geschwister.", "У меня нет братьев и сестёр."],
+["Das ist nicht gut.", "Это нехорошо."], ["Ich komme nicht.", "Я не приду."], ["Ich weiß es nicht.", "Я этого не знаю."],
+["Er ist nicht hier.", "Его здесь нет."], ["Nicht schlecht!", "Неплохо!"], ["Ich spreche nicht gut Deutsch.", "Я плохо говорю по-немецки."]
+]},
+{ id: "wort", title: "Порядок слов", sub: "глагол — на втором месте",
+theory: `<p>Это самое важное правило немецкой грамматики. В русском слова можно переставлять как угодно. В немецком <b>спрягаемый глагол в утверждении стоит строго на 2-м месте</b>. Что угодно может быть первым — но глагол всегда второй:</p>
+<div class="tscroll"><table><tr><th>1</th><th>2 — глагол</th><th>остальное</th></tr>
+<tr><td>${D("Ich")}</td><td>${D("gehe")}</td><td>${D("morgen ins Kino.")}</td></tr>
+<tr><td>${D("Morgen")}</td><td>${D("gehe")}</td><td>${D("ich ins Kino.")}</td></tr>
+<tr><td>${D("Ins Kino")}</td><td>${D("gehe")}</td><td>${D("ich morgen.")}</td></tr></table></div>
+<p>Если первым стоит не «я», подлежащее переходит <b>за глагол</b>: ${D("Heute habe ich keine Zeit")}. Русские часто говорят <s>Heute ich habe</s> — это сразу слышно.</p>
+<p><b>Вопрос с вопросительным словом:</b> слово + глагол + подлежащее: ${D("Wann kommst du?")}<br>
+<b>Вопрос «да/нет»:</b> глагол на первое место: ${D("Kommst du?")}</p>
+<p>Вопросительные слова: ${D("wer")} кто, ${D("was")} что, ${D("wo")} где, ${D("wohin")} куда, ${D("woher")} откуда, ${D("wann")} когда, ${D("warum")} почему, ${D("wie")} как, ${D("wie viel")} сколько.</p>
+<p>Связки ${D("und")}, ${D("aber")}, ${D("oder")} места не занимают: ${D("…, und dann gehe ich")} — после dann снова глагол.</p>`,
+items: [
+["Heute habe ich keine Zeit.", "Сегодня у меня нет времени.", "Heute на 1 месте → глагол 2-й, ich — после."],
+["Morgen gehe ich ins Kino.", "Завтра я иду в кино."], ["Am Wochenende spielen wir Fußball.", "На выходных мы играем в футбол."],
+["Jetzt verstehe ich das.", "Теперь я это понимаю."], ["Wann kommst du?", "Когда ты придёшь?"], ["Warum lernst du Deutsch?", "Почему ты учишь немецкий?"],
+["Wer ist das?", "Кто это?"], ["Was ist das?", "Что это?"], ["Wohin gehst du?", "Куда ты идёшь?"], ["Wie viel kostet das?", "Сколько это стоит?"],
+["Hast du Hunger?", "Ты голоден?", "Вопрос да/нет — глагол на первом месте."], ["Vielleicht komme ich später.", "Может, я приду позже."],
+["Zuerst esse ich, dann lerne ich.", "Сначала я ем, потом учусь."]
+]},
+{ id: "akk", title: "Винительный падеж (Akkusativ)", sub: "кого? что? — der → den",
+theory: `<p>Падежей в немецком всего четыре, и окончания меняются в основном у <b>артикля</b>, а не у слова. Винительный (Akkusativ) — «кого? что?» — после большинства глаголов: ${D("haben")}, ${D("brauchen")}, ${D("kaufen")}, ${D("sehen")}, ${D("suchen")}, ${D("mögen")}, ${D("es gibt")}.</p>
+<p><b>Меняется только мужской род</b> — остальное как было:</p>
+<div class="tscroll"><table><tr><th></th><th>кто? (Nom.)</th><th>кого? (Akk.)</th></tr>
+<tr><td><span class="g-m">м.</span></td><td>${D("der / ein / kein")}</td><td><b>${D("den / einen / keinen")}</b></td></tr>
+<tr><td><span class="g-f">ж.</span></td><td>${D("die / eine")}</td><td>${D("die / eine")}</td></tr>
+<tr><td><span class="g-n">ср.</span></td><td>${D("das / ein")}</td><td>${D("das / ein")}</td></tr>
+<tr><td>мн.</td><td>${D("die")}</td><td>${D("die")}</td></tr></table></div>
+<p>То же у притяжательных: ${D("mein Bruder")} → ${D("Ich habe einen Bruder")}, ${D("Ich besuche meinen Bruder")}.</p>
+<p><b>Местоимения:</b> ${D("ich → mich")}, ${D("du → dich")}, ${D("er → ihn")}, ${D("sie → sie")}, ${D("es → es")}, ${D("wir → uns")}, ${D("ihr → euch")}, ${D("sie/Sie → sie/Sie")}.</p>
+<p>${D("es gibt")} — «есть, имеется»: ${D("Es gibt hier einen Supermarkt")} — «здесь есть супермаркет».</p>
+<p>Внимание: ${D("Ich mag den Film")} — «мне нравится фильм», но по-немецки «я» — подлежащее, а фильм — в винительном.</p>`,
+items: [
+["Ich habe einen Bruder.", "У меня есть брат.", "ein → einen: мужской род в Akkusativ."], ["Ich brauche einen Stift.", "Мне нужна ручка.", "der Stift — мужского рода."],
+["Ich suche den Bahnhof.", "Я ищу вокзал."], ["Er kauft einen Apfel.", "Он покупает яблоко."], ["Siehst du den Mann?", "Ты видишь того мужчину?"],
+["Ich mag den Film.", "Мне нравится этот фильм."], ["Ich kenne ihn.", "Я его знаю."], ["Ich vermisse dich.", "Я по тебе скучаю."],
+["Hörst du mich?", "Ты меня слышишь?"], ["Es gibt hier einen Supermarkt.", "Здесь есть супермаркет."], ["Gibt es hier WLAN?", "Здесь есть вайфай?"],
+["Ich nehme die Pizza.", "Я возьму пиццу.", "Женский род не меняется."], ["Wir besuchen unseren Opa.", "Мы навещаем нашего дедушку."]
+]},
+{ id: "zahl", title: "Числа и время", sub: "einundzwanzig, halb vier",
+theory: `<p><b>0–12</b> учатся наизусть: ${D("null, eins, zwei, drei, vier, fünf, sechs, sieben, acht, neun, zehn, elf, zwölf")}.</p>
+<p><b>13–19</b> = число + ${D("zehn")}: ${D("dreizehn")}, ${D("vierzehn")}. Внимание: ${D("sechzehn")} (без s), ${D("siebzehn")} (без en).</p>
+<p><b>Десятки</b> на -zig: ${D("zwanzig, dreißig, vierzig, fünfzig")}. Исключение — ${D("dreißig")} с ß.</p>
+<p><b>21–99 — наоборот!</b> Сначала единицы, потом «und», потом десятки: 21 = ${D("einundzwanzig")} — «один-и-двадцать». 47 = ${D("siebenundvierzig")}. Как «двадцать четыре» читать справа налево. Немцы так и записывают на слух — привыкай.</p>
+<p><b>Который час:</b> ${D("Wie spät ist es?")} — ${D("Es ist drei Uhr")}.<br>
+${D("Viertel nach acht")} — 8:15, ${D("Viertel vor neun")} — 8:45.<br>
+<b>Ловушка:</b> ${D("halb vier")} — это <b>3:30</b>, «половина к четырём», как наше «половина четвёртого». Не 4:30!</p>
+<p>«В 8 часов» — ${D("um acht Uhr")}.</p>`,
+items: [
+["eins, zwei, drei", "один, два, три"], ["vier, fünf, sechs", "четыре, пять, шесть"], ["sieben, acht, neun, zehn", "семь, восемь, девять, десять"],
+["elf, zwölf", "одиннадцать, двенадцать"], ["dreizehn, zwanzig", "тринадцать, двадцать"], ["einundzwanzig", "двадцать один", "Единицы впереди: «один-и-двадцать»."],
+["dreißig, hundert", "тридцать, сто"], ["Wie spät ist es?", "Который час?"], ["Es ist drei Uhr.", "Три часа."],
+["Es ist halb vier.", "Половина четвёртого (3:30).", "Не 4:30! «Половина к четырём»."], ["Es ist Viertel nach acht.", "Четверть девятого (8:15)."],
+["Es ist Viertel vor neun.", "Без четверти девять (8:45)."], ["Um wie viel Uhr?", "Во сколько?"], ["Der Unterricht beginnt um acht.", "Уроки начинаются в восемь."],
+["Das kostet zehn Euro.", "Это стоит десять евро."]
+]},
+{ id: "modal", title: "Модальные глаголы", sub: "могу, хочу, надо + рамка",
+theory: `<div class="tscroll"><table><tr><th></th><th>können<br><small>мочь, уметь</small></th><th>müssen<br><small>быть должным</small></th><th>wollen<br><small>хотеть</small></th><th>dürfen<br><small>иметь право</small></th><th>möchten<br><small>хотел бы</small></th></tr>
+<tr><td>ich</td><td>${D("kann")}</td><td>${D("muss")}</td><td>${D("will")}</td><td>${D("darf")}</td><td>${D("möchte")}</td></tr>
+<tr><td>du</td><td>${D("kannst")}</td><td>${D("musst")}</td><td>${D("willst")}</td><td>${D("darfst")}</td><td>${D("möchtest")}</td></tr>
+<tr><td>er/sie</td><td>${D("kann")}</td><td>${D("muss")}</td><td>${D("will")}</td><td>${D("darf")}</td><td>${D("möchte")}</td></tr>
+<tr><td>wir</td><td>${D("können")}</td><td>${D("müssen")}</td><td>${D("wollen")}</td><td>${D("dürfen")}</td><td>${D("möchten")}</td></tr></table></div>
+<p>Особенность: у <b>ich и er</b> форма одинаковая и без окончания: ${D("ich kann")}, ${D("er kann")}.</p>
+<p><b>Рамка.</b> Модальный глагол стоит на 2-м месте, а второй глагол уходит <b>в самый конец</b> в начальной форме:</p>
+<p>${D("Ich kann gut schwimmen.")}<br>${D("Ich muss morgen früh in die Schule gehen.")}</p>
+<p>Между ними — всё остальное. Немец часто узнаёт главный смысл только в конце фразы — поэтому немцы слушают до конца и не перебивают.</p>
+<p><b>Ловушки:</b><br>
+• ${D("ich will")} — «я хочу», а не «я буду» (как английское will). Звучит резковато; вежливо — ${D("ich möchte")}.<br>
+• ${D("Du musst nicht")} — «тебе <b>не обязательно</b>», а не «нельзя»! «Нельзя» — ${D("du darfst nicht")}.<br>
+• ${D("man")} — «люди вообще»: ${D("Hier darf man nicht rauchen")} — «здесь нельзя курить».</p>`,
+items: [
+["Ich kann schwimmen.", "Я умею плавать."], ["Kannst du mir helfen?", "Можешь мне помочь?"], ["Ich will schlafen.", "Я хочу спать."],
+["Ich muss jetzt gehen.", "Мне пора идти."], ["Du musst das nicht machen.", "Тебе не обязательно это делать.", "muss nicht = не обязан. «Нельзя» = darf nicht."],
+["Darf ich reinkommen?", "Можно войти?"], ["Hier darf man nicht rauchen.", "Здесь нельзя курить."], ["Ich möchte einen Kaffee.", "Я бы хотел кофе."],
+["Was möchtest du trinken?", "Что ты будешь пить?"], ["Wir wollen ins Kino gehen.", "Мы хотим пойти в кино.", "Второй глагол — в самом конце."],
+["Er kann gut kochen.", "Он хорошо готовит."], ["Ich kann das nicht verstehen.", "Я не могу этого понять."], ["Was soll ich machen?", "Что мне делать?", "sollen — «должен» по чужому указанию."]
+]},
+{ id: "trenn", title: "Отделяемые приставки", sub: "aufstehen → ich stehe auf",
+theory: `<p>У многих глаголов есть приставка, которая в предложении <b>отрывается и улетает в конец</b>. Это та же «рамка», что у модальных:</p>
+<p>${D("aufstehen")} — вставать → ${D("Ich stehe um sieben Uhr auf.")}<br>
+${D("anrufen")} — звонить → ${D("Ich rufe dich später an.")}<br>
+${D("einkaufen")} — закупаться → ${D("Wir kaufen heute ein.")}</p>
+<p>Отделяемые приставки — это обычные маленькие слова: <b>an, auf, aus, ein, mit, zu, ab, vor, weg, zurück, fern</b>. На них всегда <b>ударение</b>: <b>auf</b>stehen, <b>an</b>rufen.</p>
+<p>Не отделяются никогда (и безударны): <b>be-, ver-, er-, ge-, ent-, emp-, zer-, miss-</b>: ${D("verstehen")} → ${D("Ich verstehe das")}.</p>
+<p>Если в предложении есть модальный глагол, приставка остаётся на месте — весь глагол целиком идёт в конец: ${D("Ich muss früh aufstehen")}.</p>
+<p>Отсюда главный совет: <b>дослушивай фразу до конца</b>. ${D("Ich mache das Licht …")} — ещё непонятно; ${D("… an")} — включаю, ${D("… aus")} — выключаю.</p>`,
+items: [
+["Ich stehe um sieben Uhr auf.", "Я встаю в семь.", "aufstehen: auf улетает в конец."], ["Wann stehst du auf?", "Когда ты встаёшь?"],
+["Ich rufe dich später an.", "Я позвоню тебе позже."], ["Wir kaufen im Supermarkt ein.", "Мы закупаемся в супермаркете."], ["Er sieht fern.", "Он смотрит телевизор.", "fernsehen — смотреть ТВ."],
+["Mach die Tür zu!", "Закрой дверь!"], ["Mach das Licht aus!", "Выключи свет!"], ["Der Zug kommt um zehn an.", "Поезд прибывает в десять."],
+["Kommst du mit?", "Пойдёшь с нами?"], ["Ich muss früh aufstehen.", "Мне надо рано вставать.", "С модальным глагол целиком в конце."],
+["Ich räume mein Zimmer auf.", "Я убираю свою комнату."], ["Wann fängt der Film an?", "Когда начинается фильм?"], ["Ich verstehe das.", "Я это понимаю.", "ver- не отделяется."]
+]},
+{ id: "dativ", title: "Дательный падеж (Dativ)", sub: "кому? с кем? — mit dem, mir",
+theory: `<p>Дательный — «кому? где? с кем?». Его требуют предлоги <b>mit, bei, zu, aus, von, nach, seit</b> (запоминалка: «мит-бай-цу-аус-фон-нах-зайт» — выучи как считалочку) и глаголы ${D("helfen")}, ${D("danken")}, ${D("gefallen")}, ${D("gehören")}, ${D("schmecken")}.</p>
+<div class="tscroll"><table><tr><th></th><th>кто?</th><th>кому? (Dat.)</th></tr>
+<tr><td><span class="g-m">м.</span></td><td>${D("der / ein")}</td><td>${D("dem / einem")}</td></tr>
+<tr><td><span class="g-f">ж.</span></td><td>${D("die / eine")}</td><td>${D("der / einer")}</td></tr>
+<tr><td><span class="g-n">ср.</span></td><td>${D("das / ein")}</td><td>${D("dem / einem")}</td></tr>
+<tr><td>мн.</td><td>${D("die")}</td><td>${D("den")} + <b>-n</b> на слове</td></tr></table></div>
+<p><b>Местоимения:</b> ${D("mir")} мне, ${D("dir")} тебе, ${D("ihm")} ему, ${D("ihr")} ей, ${D("uns")} нам, ${D("euch")} вам, ${D("ihnen / Ihnen")} им / Вам.</p>
+<p><b>Слияния</b>, их говорят всегда: ${D("zu dem → zum")}, ${D("zu der → zur")}, ${D("bei dem → beim")}, ${D("von dem → vom")}, ${D("in dem → im")}.</p>
+<p><b>«Мне холодно / скучно / нравится»</b> — в немецком так же, как в русском, через «мне»: ${D("Mir ist kalt")}, ${D("Das gefällt mir")}. Ошибка: <s>Ich bin kalt</s> — звучит как «я холодный человек».</p>
+<p><b>seit</b> + настоящее время = «уже столько-то»: ${D("Seit zwei Jahren lerne ich Deutsch")} — «учу уже два года (и продолжаю)».</p>`,
+items: [
+["Ich fahre mit dem Bus.", "Я еду на автобусе.", "mit + Dativ: der Bus → mit dem Bus."], ["Ich wohne bei meinen Eltern.", "Я живу у родителей."],
+["Ich gehe zum Arzt.", "Я иду к врачу.", "zum = zu dem."], ["Ich gehe zur Schule.", "Я иду в школу.", "zur = zu der."], ["Er kommt aus der Schweiz.", "Он из Швейцарии."],
+["Das ist ein Geschenk von meiner Mutter.", "Это подарок от мамы."], ["Hilf mir bitte!", "Помоги мне, пожалуйста!"], ["Das gefällt mir.", "Мне это нравится."],
+["Wie geht es dir?", "Как у тебя дела?", "Полная форма Wie geht's?"], ["Mir ist kalt.", "Мне холодно.", "Не «Ich bin kalt»!"], ["Mir ist langweilig.", "Мне скучно."],
+["Das schmeckt mir.", "Мне вкусно."], ["Gehört das dir?", "Это твоё?"], ["Ich gebe dir das Buch.", "Я даю тебе книгу."],
+["Seit zwei Jahren lerne ich Deutsch.", "Я учу немецкий уже два года."]
+]},
+{ id: "perfekt", title: "Прошедшее время (Perfekt)", sub: "ich habe gemacht",
+theory: `<p>В разговоре о прошлом немцы говорят почти только так: <b>haben / sein</b> на 2-м месте + <b>причастие (Partizip II)</b> в конце. Снова рамка!</p>
+<p>${D("Ich habe Pizza gegessen.")} — «Я ел пиццу» (дословно «я имею пиццу съеденной»).</p>
+<p><b>Как делать причастие:</b><br>
+• Обычные глаголы: <b>ge- + основа + -t</b>: ${D("machen → gemacht")}, ${D("spielen → gespielt")}, ${D("kaufen → gekauft")}.<br>
+• Сильные: <b>ge- … -en</b>, корень часто меняется — учить: ${D("essen → gegessen")}, ${D("trinken → getrunken")}, ${D("sehen → gesehen")}, ${D("schlafen → geschlafen")}, ${D("gehen → gegangen")}, ${D("fahren → gefahren")}.<br>
+• Без ge-: глаголы на <b>-ieren</b> (${D("studiert")}) и с неотделяемыми приставками (${D("verstanden")}, ${D("besucht")}).<br>
+• С отделяемой приставкой ge- встаёт внутрь: ${D("aufgestanden")}, ${D("eingekauft")}.</p>
+<p><b>haben или sein?</b> Почти всегда haben. <b>sein</b> — когда есть движение из точки А в точку Б или смена состояния: ${D("gehen, fahren, kommen, fliegen, aufstehen, passieren, bleiben")}: ${D("Ich bin nach Hause gegangen")}.</p>
+<p>Для <b>sein</b> и <b>haben</b> в прошлом говорят короче: ${D("ich war")} — «я был», ${D("ich hatte")} — «у меня было».</p>`,
+items: [
+["Ich habe Hausaufgaben gemacht.", "Я сделал домашку."], ["Was hast du gestern gemacht?", "Что ты делал вчера?"], ["Ich habe Pizza gegessen.", "Я ел пиццу."],
+["Wir haben einen Film gesehen.", "Мы посмотрели фильм."], ["Er hat lange geschlafen.", "Он долго спал."], ["Ich bin nach Hause gegangen.", "Я пошёл домой.", "Движение → sein."],
+["Sie ist nach Berlin gefahren.", "Она поехала в Берлин."], ["Was ist passiert?", "Что случилось?"], ["Ich bin um sieben aufgestanden.", "Я встал в семь."],
+["Ich habe das nicht verstanden.", "Я этого не понял.", "ver- → без ge-."], ["Wir haben Oma besucht.", "Мы навестили бабушку."],
+["Ich war gestern krank.", "Вчера я болел."], ["Ich hatte keine Zeit.", "У меня не было времени."], ["Wo warst du?", "Где ты был?"]
+]},
+{ id: "stadt", title: "Кафе, магазин, дорога", sub: "фразы для поездки",
+theory: `<p>Фразы, которые реально понадобятся в Германии.</p>
+<p><b>В кафе</b> вежливо заказывают через ${D("Ich hätte gern …")} — «мне бы хотелось». ${D("Ich will …")} звучит грубо.</p>
+<p>Когда просишь счёт, официант почти всегда спросит ${D("Zusammen oder getrennt?")} — платите вместе или каждый за себя. В Германии раздельный счёт — норма.</p>
+<p><b>Чаевые</b> — около 5–10 %. Их не оставляют на столе, а называют сумму при оплате: счёт 18,40 → говоришь ${D("Zwanzig, bitte")} или ${D("Stimmt so")} — «сдачи не надо».</p>
+<p>Во многих местах до сих пор берут только наличные — спрашивай ${D("Kann ich mit Karte zahlen?")}</p>
+<p><b>Дорога:</b> ${D("links")} налево, ${D("rechts")} направо, ${D("geradeaus")} прямо. Незнакомым взрослым — всегда на Sie.</p>`,
+items: [
+["Ich hätte gern ein Wasser.", "Мне, пожалуйста, воды.", "Вежливый заказ."], ["Die Rechnung, bitte.", "Счёт, пожалуйста."],
+["Zusammen oder getrennt?", "Вместе или раздельно?", "Так спросит официант."], ["Kann ich mit Karte zahlen?", "Можно оплатить картой?"],
+["Stimmt so.", "Сдачи не надо."], ["Wo ist der Bahnhof?", "Где вокзал?"], ["Gehen Sie geradeaus.", "Идите прямо."],
+["Dann links und dann rechts.", "Потом налево, потом направо."], ["Ist das weit von hier?", "Это далеко отсюда?"],
+["Eine Fahrkarte nach München, bitte.", "Билет до Мюнхена, пожалуйста."], ["Ich suche eine Apotheke.", "Я ищу аптеку."],
+["Haben Sie das in Größe M?", "У вас есть это в размере M?"], ["Das ist zu teuer.", "Это слишком дорого."], ["Schönen Tag noch!", "Хорошего дня!"]
+]}
+];
+
+const PRON = [
+{ group: "Основа", items: [
+{ id: "stress", t: "Ударение", k: "´",
+  b: `<p>Почти всегда на <b>первый слог</b>: ${D("Arbeit")}, ${D("Mutter")}, ${D("Bahnhof")}. В сложных словах — на первую часть.</p><p>Исключения: приставки <b>be-, ge-, ver-, er-, ent-, zer-</b> безударны (${D("verstehen")} — ударение на «ште»). Заимствования на -ion, -ieren, -ität, -ie — ударение в конце: ${D("Information")}, ${D("studieren")}, ${D("Universität")}.</p>`,
+  ex: [["Arbeit", "работа"], ["Mutter", "мама"], ["Bahnhof", "вокзал"], ["verstehen", "понимать"], ["Information", "информация"], ["studieren", "учиться в вузе"]] },
+{ id: "long", t: "Долгие и краткие гласные", k: "a / aa",
+  b: `<p>Главное отличие от русского. В немецком гласная бывает <b>долгой</b> (тянется почти вдвое дольше) или <b>краткой</b> (резкой, обрубленной) — и это разные слова.</p>
+<p><b>Долгая</b>, если: после неё одна согласная (${D("Name")}), после неё h (${D("Sohn")}), она удвоена (${D("Tee")}, ${D("Boot")}), это ie (${D("Liebe")}).<br><b>Краткая</b>, если после неё две согласные или удвоенная (${D("Bett")}, ${D("Mutter")}, ${D("kommen")}).</p>`,
+  bad: "Русские говорят всё одинаково средней длины. Тяни долгие честно — это звучит странно для тебя, но правильно для немца.",
+  ex: [["Staat", "государство"], ["Stadt", "город"], ["Beet", "грядка"], ["Bett", "кровать"], ["ihn", "его"], ["in", "в"], ["Ofen", "печь"], ["offen", "открытый"]] },
+{ id: "knack", t: "Твёрдый приступ", k: "|a",
+  b: `<p>Слово или корень, начинающиеся с гласной, произносятся с <b>лёгким щелчком в горле</b> — как в русском «на|утро» или при отрывистом «а!». Слова <b>не сливаются</b>.</p>`,
+  bad: "«ама́бент» вместо am |Abend, «эрист» вместо er |ist. Делай микро-паузу перед гласной.",
+  ex: [["am Abend", "вечером"], ["er isst", "он ест"], ["ein Apfel", "яблоко"], ["beantworten", "отвечать (be|antworten)"]] },
+{ id: "e", t: "Безударное e и -en", k: "-e",
+  b: `<p>Безударное <b>e</b> на конце — короткий неясный звук, как «е» в русском «по́ле»: ${D("bitte")}, ${D("Name")}. Не «битэ» с чётким «э».</p><p>В окончании <b>-en</b> гласная почти проглатывается: ${D("haben")} ≈ «хаабн», ${D("machen")} ≈ «махн».</p>`,
+  ex: [["bitte", "пожалуйста"], ["Name", "имя"], ["Schule", "школа"], ["haben", "иметь"], ["machen", "делать"]] },
+{ id: "soft", t: "Согласные не смягчаются", k: "te ≠ тье",
+  b: `<p>В русском согласные перед е/и смягчаются: «те» = [тʲэ]. В немецком — <b>нет</b>: ${D("Tee")} — «тэ:», ${D("Liebe")} — «лиибэ» без «ль». Немецкое l — среднее между «л» и «ль».</p><p>Глухие <b>p, t, k</b> в начале слова произносятся с <b>лёгким выдохом</b>: ${D("Tee")} ≈ «тʰэ:», ${D("kalt")} ≈ «кʰальт».</p>`,
+  bad: "«Тье», «дье», «лье» с мягкостью — сразу выдаёт русский акцент.",
+  ex: [["Tee", "чай"], ["Liebe", "любовь"], ["denken", "думать"], ["Tisch", "стол"], ["kalt", "холодный"], ["Park", "парк"]] }
+]},
+{ group: "Гласные и сочетания", items: [
+{ id: "ei", t: "ei = ай, ie = ии", k: "ei / ie",
+  b: `<p>Две самые путаемые пары. Запоминалка: <b>читай вторую букву так, как её называют по-английски</b>: в <b>ei</b> вторая i — «ай», в <b>ie</b> вторая e — «и».</p><p><b>ei</b> (и ai, ey) = «ай»: ${D("mein")}, ${D("drei")}, ${D("Zeit")}.<br><b>ie</b> = долгое «ии»: ${D("die")}, ${D("vier")}, ${D("Liebe")}.</p>`,
+  ex: [["mein", "мой"], ["drei", "три"], ["Zeit", "время"], ["vier", "четыре"], ["Liebe", "любовь"], ["Wein", "вино"], ["Wien", "Вена"]] },
+{ id: "eu", t: "eu, äu = ой", k: "eu / äu",
+  b: `<p>Оба сочетания читаются <b>«ой»</b>: ${D("heute")} — «хойтэ», ${D("Deutsch")} — «дойч», ${D("Häuser")} — «хойзер».</p>`,
+  bad: "Читают по буквам: «еу», «Деутш». Никогда!",
+  ex: [["heute", "сегодня"], ["neu", "новый"], ["Deutsch", "немецкий"], ["Freund", "друг"], ["Häuser", "дома"], ["träumen", "мечтать"]] },
+{ id: "au", t: "au = ау", k: "au",
+  b: `<p>Один слог, ударение на «а», «у» короткое: ${D("Haus")}, ${D("Frau")}, ${D("auch")}.</p>`,
+  ex: [["Haus", "дом"], ["Frau", "женщина"], ["auch", "тоже"], ["kaufen", "покупать"]] },
+{ id: "vow", t: "e и o: долгие — узкие", k: "e / o",
+  b: `<p>Долгое <b>e</b> — узкое, губы растянуты в улыбке, почти «и»: ${D("Tee")}, ${D("gehen")}, ${D("leben")}. Не «эй»! Краткое e — открытое «э»: ${D("Bett")}, ${D("essen")}.</p><p>Долгое <b>o</b> — губы сильно округлены, звук «закрытый», без скольжения в «у»: ${D("rot")}, ${D("Sohn")}, ${D("Boot")}.</p>`,
+  ex: [["Tee", "чай"], ["gehen", "идти"], ["Bett", "кровать"], ["rot", "красный"], ["Sohn", "сын"], ["Sonne", "солнце"]] }
+]},
+{ group: "Умлауты ä, ö, ü", items: [
+{ id: "umlaut", t: "ä, ö, ü — новые звуки", k: "ä ö ü",
+  b: `<p><b>ä</b> = открытое «э»: ${D("Mädchen")}, ${D("Käse")}.</p>
+<p><b>ö</b>: скажи «э» и, не меняя языка, вытяни губы как для «о». ${D("schön")}, ${D("hören")}, ${D("können")}.</p>
+<p><b>ü</b>: скажи «и» и, не двигая языком, вытяни губы трубочкой как для «у». ${D("über")}, ${D("müde")}, ${D("fünf")}, ${D("Tür")}.</p>`,
+  bad: "ö — это не «ё», а ü — не «ю»! В «ё» и «ю» спрятан звук «й», и согласная перед ними смягчается: «шён», «мюдэ». В немецком никакого «й» и смягчения нет. Проверка: скажи ü перед зеркалом — губы трубочкой, язык как на «и».",
+  ex: [["schön", "красивый"], ["schon", "уже"], ["hören", "слышать"], ["über", "над, о"], ["müde", "усталый"], ["Tür", "дверь"], ["Tier", "зверь"], ["fünf", "пять"], ["Mädchen", "девочка"]] }
+]},
+{ group: "Согласные", items: [
+{ id: "ch", t: "ch — два разных звука", k: "ch",
+  b: `<p><b>После a, o, u, au</b> — глубокий «х», как в русском «ах»: ${D("Bach")}, ${D("Buch")}, ${D("auch")}, ${D("noch")}.</p>
+<p><b>Во всех остальных случаях</b> (после e, i, ä, ö, ü, ei, eu, после согласных, в -chen) — мягкий звук <b>[ç]</b>. Как его найти: шёпотом скажи «хи», протяни «х» — язык прижат к нёбу, воздух шипит. Похоже на очень мягкое «хь», почти «щ» без свиста.</p>
+<p><b>chs</b> = «кс»: ${D("sechs")}.</p>`,
+  bad: "Говорят «их» с грубым «х», или «иш», или «ик». ich — это «ихь» с мягким шипящим «хь», ни один из трёх вариантов не правильный.",
+  ex: [["ich", "я"], ["nicht", "не"], ["Milch", "молоко"], ["Mädchen", "девочка"], ["Küche", "кухня"], ["Buch", "книга"], ["auch", "тоже"], ["Dach", "крыша"], ["sechs", "шесть"]] },
+{ id: "ig", t: "-ig на конце = ихь", k: "-ig",
+  b: `<p>В конце слова <b>-ig</b> читается как <b>ich</b>: ${D("zwanzig")} — «цванцихь», ${D("richtig")}, ${D("König")}. На юге Германии и в Австрии говорят «-ик» — тоже поймут, но стандарт — «ихь».</p>`,
+  ex: [["zwanzig", "двадцать"], ["richtig", "правильно"], ["wenig", "мало"], ["König", "король"], ["billig", "дешёвый"]] },
+{ id: "sch", t: "sch = ш, tsch = ч", k: "sch",
+  b: `<p>Твёрдое «ш», губы чуть вперёд: ${D("Schule")}, ${D("Fisch")}. <b>tsch</b> = «ч», но твёрдое: ${D("Deutsch")}, ${D("tschüss")}.</p>`,
+  ex: [["Schule", "школа"], ["schön", "красивый"], ["Fisch", "рыба"], ["Deutsch", "немецкий"], ["tschüss", "пока"]] },
+{ id: "spst", t: "sp, st в начале = шп, шт", k: "sp st",
+  b: `<p>В начале слова или корня: ${D("sprechen")} — «шпрехен», ${D("Straße")} — «штрасэ», ${D("verstehen")} — «фэаштеэн».</p><p>В середине и в конце — обычные «сп», «ст»: ${D("Fenster")}, ${D("ist")}, ${D("Kunst")}.</p>`,
+  ex: [["sprechen", "говорить"], ["Sport", "спорт"], ["Straße", "улица"], ["Stadt", "город"], ["verstehen", "понимать"], ["Fenster", "окно"], ["ist", "есть"]] },
+{ id: "s", t: "s перед гласной = з", k: "s",
+  b: `<p><b>s</b> перед гласной (в начале слова или между гласными) — звонкое «з»: ${D("sie")} — «зи», ${D("Sonne")}, ${D("lesen")}, ${D("Reise")}.</p><p>В конце слова и перед согласной — «с»: ${D("Haus")}, ${D("das")}.</p>`,
+  bad: "«Си» вместо «зи», «Сонэ» вместо «Зонэ».",
+  ex: [["sie", "она"], ["Sonne", "солнце"], ["sagen", "сказать"], ["lesen", "читать"], ["Reise", "поездка"], ["Haus", "дом"]] },
+{ id: "ss", t: "ss и ß = с", k: "ß",
+  b: `<p><b>ß</b> («эсцет») и <b>ss</b> — всегда глухое «с». ß пишется после долгой гласной или дифтонга (${D("Straße")}, ${D("heißen")}), ss — после краткой (${D("Wasser")}, ${D("essen")}).</p><p>Поэтому ß подсказывает длину: ${D("Fuß")} (долгое у) и ${D("Fluss")} (краткое у).</p>`,
+  ex: [["Straße", "улица"], ["heißen", "называться"], ["Fuß", "нога"], ["Wasser", "вода"], ["essen", "есть"], ["Fluss", "река"]] },
+{ id: "z", t: "z = ц", k: "z / tz",
+  b: `<p><b>z</b> и <b>tz</b> — всегда «ц»: ${D("Zeit")} — «цайт», ${D("zehn")}, ${D("Katze")}. <b>-tion</b> = «цион»: ${D("Information")}.</p>`,
+  bad: "Читать z как «з» по-английски: «Зайт». Неправильно — «Цайт».",
+  ex: [["Zeit", "время"], ["zehn", "десять"], ["Zug", "поезд"], ["Katze", "кошка"], ["Platz", "место"], ["Information", "информация"]] },
+{ id: "vw", t: "v = ф, w = в", k: "v / w",
+  b: `<p><b>v</b> в немецких словах = «ф»: ${D("Vater")} — «фатер», ${D("viel")}, ${D("vier")}, ${D("von")}. В заимствованиях = «в»: ${D("Vase")}, ${D("Klavier")}, ${D("November")}.</p><p><b>w</b> = «в»: ${D("Wasser")}, ${D("wie")}, ${D("wohnen")}.</p>`,
+  ex: [["Vater", "отец"], ["viel", "много"], ["vier", "четыре"], ["für", "для"], ["Vase", "ваза"], ["Wasser", "вода"], ["wie", "как"]] },
+{ id: "jq", t: "j = й, qu = кв", k: "j / qu",
+  b: `<p><b>j</b> = «й»: ${D("ja")} — «йа», ${D("jetzt")}, ${D("Jahr")}. <b>qu</b> = «кв»: ${D("Quatsch")}, ${D("bequem")}.</p>`,
+  ex: [["ja", "да"], ["jetzt", "сейчас"], ["Jahr", "год"], ["jung", "молодой"], ["Quatsch", "ерунда"], ["bequem", "удобный"]] },
+{ id: "h", t: "h: выдох или немая", k: "h",
+  b: `<p><b>В начале слога</b> h — это просто <b>выдох</b>, как будто дышишь на стекло: ${D("Haus")}, ${D("hier")}, ${D("Hallo")}. Не русское «х» с хрипом!</p><p><b>После гласной</b> h не читается вообще — она только показывает, что гласная долгая: ${D("gehen")} — «гээн», ${D("Uhr")}, ${D("Sohn")}, ${D("fahren")}.</p>`,
+  bad: "«Хаус» с грубым «х» и «гехен» с произнесённым h.",
+  ex: [["Haus", "дом"], ["hier", "здесь"], ["Hund", "собака"], ["gehen", "идти"], ["Uhr", "часы"], ["fahren", "ехать"]] },
+{ id: "ng", t: "ng — без «г»", k: "ng",
+  b: `<p><b>ng</b> — один носовой звук, как в английском «sing». Никакого «г» в конце: ${D("lang")} — «ланъ», ${D("Hunger")} — «хуне(р)», а не «хунгер». В <b>nk</b> то же носовое + «к»: ${D("danke")}.</p>`,
+  ex: [["lang", "длинный"], ["singen", "петь"], ["jung", "молодой"], ["Zeitung", "газета"], ["Hunger", "голод"], ["danke", "спасибо"]] },
+{ id: "devoice", t: "Оглушение на конце", k: "b d g",
+  b: `<p>Как в русском: <b>b, d, g</b> в конце слова звучат как <b>п, т, к</b>: ${D("Tag")} — «таак», ${D("Kind")} — «кинт», ${D("gelb")} — «гельп». Это тебе легко.</p>`,
+  ex: [["Tag", "день"], ["Kind", "ребёнок"], ["Hund", "собака"], ["und", "и"], ["gelb", "жёлтый"], ["Abend", "вечер"]] },
+{ id: "misc", t: "ph, th, ck", k: "ph th ck",
+  b: `<p><b>ph</b> = «ф» (${D("Physik")}), <b>th</b> = «т» (${D("Theater")}), <b>ck</b> = «к» после краткой гласной (${D("dick")}, ${D("Zucker")}). <b>y</b> в греческих словах = ü (${D("Typ")}).</p>`,
+  ex: [["Physik", "физика"], ["Theater", "театр"], ["dick", "толстый"], ["Zucker", "сахар"], ["Typ", "тип, парень"]] }
+]},
+{ group: "Немецкий R", items: [
+{ id: "r", t: "R — главный акцент", k: "r",
+  b: `<p><b>В начале слова и после согласной</b> — r горловое: звук рождается в глубине, там, где «х» в слове «ах». Представь, что тихо полощешь горло, — или скажи «х», но с голосом. Без раската языком: ${D("rot")}, ${D("Reise")}, ${D("drei")}, ${D("Brot")}.</p>
+<p><b>В конце слова после долгой гласной и в окончании -er</b> r превращается в <b>короткое «а»</b>:<br>${D("der")} ≈ «дэа», ${D("hier")} ≈ «хиа», ${D("Uhr")} ≈ «уа»,<br>${D("Mutter")} ≈ «мута», ${D("Vater")} ≈ «фата», ${D("aber")} ≈ «аба».<br>Так же в приставках <b>er-, ver-, zer-</b>: ${D("verstehen")} ≈ «фэаштээн».</p>`,
+  bad: "Самая слышная ошибка: «мутэр», «фатэр», «дэр» с раскатистым русским «р». Если горловое r пока не выходит — лучше вообще проглоти r, чем рычать по-русски.",
+  ex: [["rot", "красный"], ["drei", "три"], ["Brot", "хлеб"], ["der", "(артикль)"], ["hier", "здесь"], ["Uhr", "часы"], ["Mutter", "мама"], ["Vater", "папа"], ["aber", "но"], ["Lehrer", "учитель"]] }
+]}
+];
+
+const PAIRS = [
+["Staat", "государство", "Stadt", "город", "долгое aa — краткое a"], ["Beet", "грядка", "Bett", "кровать", "долгое ee — краткое e"],
+["Miete", "квартплата", "Mitte", "середина", "долгое ie — краткое i"], ["ihn", "его", "in", "в", "долгое ih — краткое i"],
+["Ofen", "печь", "offen", "открытый", "долгое o — краткое o"], ["bieten", "предлагать", "bitten", "просить", "долгое ie — краткое i"],
+["Höhle", "пещера", "Hölle", "ад", "долгое ö — краткое ö"], ["schon", "уже", "schön", "красивый", "o — ö"],
+["Mutter", "мама", "Mütter", "мамы", "u — ü"], ["Bruder", "брат", "Brüder", "братья", "u — ü"], ["Tür", "дверь", "Tier", "зверь", "ü — ie"],
+["vier", "четыре", "für", "для", "ie — ü"], ["lesen", "читать", "lösen", "решать", "e — ö"], ["Kirche", "церковь", "Kirsche", "вишня", "ch — sch"],
+["Wein", "вино", "Wien", "Вена", "ei — ie"], ["Dach", "крыша", "dich", "тебя", "ch после a — ch после i"],
+["Kuchen", "пирог", "Küchen", "кухни", "u — ü"], ["Haus", "дом", "Hose", "брюки", "au — o"]
+];
+
+const SHEET = `
+<h2>Шпаргалка</h2>
+<p class="muted small">Нажми на немецкое слово — услышишь, как оно звучит.</p>
+<h3>Местоимения, sein, haben</h3>
+<div class="tscroll"><table class="tbl"><tr><th></th><th>sein</th><th>haben</th><th>кого?</th><th>кому?</th><th>мой…</th></tr>
+<tr><td>${D("ich")} я</td><td>${D("bin")}</td><td>${D("habe")}</td><td>${D("mich")}</td><td>${D("mir")}</td><td>${D("mein")}</td></tr>
+<tr><td>${D("du")} ты</td><td>${D("bist")}</td><td>${D("hast")}</td><td>${D("dich")}</td><td>${D("dir")}</td><td>${D("dein")}</td></tr>
+<tr><td>${D("er")} он</td><td>${D("ist")}</td><td>${D("hat")}</td><td>${D("ihn")}</td><td>${D("ihm")}</td><td>${D("sein")}</td></tr>
+<tr><td>${D("sie")} она</td><td>${D("ist")}</td><td>${D("hat")}</td><td>${D("sie")}</td><td>${D("ihr")}</td><td>${D("ihr")}</td></tr>
+<tr><td>${D("es")} оно</td><td>${D("ist")}</td><td>${D("hat")}</td><td>${D("es")}</td><td>${D("ihm")}</td><td>${D("sein")}</td></tr>
+<tr><td>${D("wir")} мы</td><td>${D("sind")}</td><td>${D("haben")}</td><td>${D("uns")}</td><td>${D("uns")}</td><td>${D("unser")}</td></tr>
+<tr><td>${D("ihr")} вы</td><td>${D("seid")}</td><td>${D("habt")}</td><td>${D("euch")}</td><td>${D("euch")}</td><td>${D("euer")}</td></tr>
+<tr><td>${D("sie")} они</td><td>${D("sind")}</td><td>${D("haben")}</td><td>${D("sie")}</td><td>${D("ihnen")}</td><td>${D("ihr")}</td></tr>
+<tr><td>${D("Sie")} Вы</td><td>${D("sind")}</td><td>${D("haben")}</td><td>${D("Sie")}</td><td>${D("Ihnen")}</td><td>${D("Ihr")}</td></tr></table></div>
+<h3>Окончания глаголов</h3>
+<div class="tscroll"><table class="tbl"><tr><th>ich</th><th>du</th><th>er/sie/es</th><th>wir</th><th>ihr</th><th>sie/Sie</th></tr>
+<tr><td>-e</td><td>-st</td><td>-t</td><td>-en</td><td>-t</td><td>-en</td></tr>
+<tr><td>${D("mache")}</td><td>${D("machst")}</td><td>${D("macht")}</td><td>${D("machen")}</td><td>${D("macht")}</td><td>${D("machen")}</td></tr></table></div>
+<h3>Артикли по падежам</h3>
+<div class="tscroll"><table class="tbl"><tr><th></th><th><span class="g-m">м.</span></th><th><span class="g-f">ж.</span></th><th><span class="g-n">ср.</span></th><th>мн.</th></tr>
+<tr><td>кто? что?</td><td>${D("der")} / ${D("ein")}</td><td>${D("die")} / ${D("eine")}</td><td>${D("das")} / ${D("ein")}</td><td>${D("die")} / ${D("keine")}</td></tr>
+<tr><td>кого? что?</td><td><b>${D("den")} / ${D("einen")}</b></td><td>${D("die")} / ${D("eine")}</td><td>${D("das")} / ${D("ein")}</td><td>${D("die")} / ${D("keine")}</td></tr>
+<tr><td>кому? чему?</td><td>${D("dem")} / ${D("einem")}</td><td>${D("der")} / ${D("einer")}</td><td>${D("dem")} / ${D("einem")}</td><td>${D("den")} / ${D("keinen")} + -n</td></tr></table></div>
+<p class="small muted">mein, dein, kein склоняются так же, как ein: ${D("meinen Bruder")}, ${D("mit meiner Mutter")}.</p>
+<h3>Предлоги</h3>
+<p><b>+ кого/что (Akk):</b> ${D("durch")} через, ${D("für")} для, ${D("gegen")} против, ${D("ohne")} без, ${D("um")} вокруг / в (время).<br>
+<b>+ кому/чему (Dat):</b> ${D("aus")} из, ${D("bei")} у, ${D("mit")} с, ${D("nach")} в/после, ${D("seit")} с (времени), ${D("von")} от, ${D("zu")} к.<br>
+<b>Слияния:</b> ${D("zum")}, ${D("zur")}, ${D("beim")}, ${D("vom")}, ${D("im")}, ${D("ins")}, ${D("am")}.</p>
+<h3>Порядок слов</h3>
+<div class="tscroll"><table class="tbl"><tr><th>1</th><th>2</th><th>середина</th><th>конец</th></tr>
+<tr><td>${D("Ich")}</td><td>${D("lerne")}</td><td>${D("heute Deutsch.")}</td><td></td></tr>
+<tr><td>${D("Heute")}</td><td>${D("lerne")}</td><td>${D("ich Deutsch.")}</td><td></td></tr>
+<tr><td>${D("Ich")}</td><td>${D("muss")}</td><td>${D("heute Deutsch")}</td><td>${D("lernen.")}</td></tr>
+<tr><td>${D("Ich")}</td><td>${D("stehe")}</td><td>${D("um sieben")}</td><td>${D("auf.")}</td></tr>
+<tr><td>${D("Ich")}</td><td>${D("habe")}</td><td>${D("Deutsch")}</td><td>${D("gelernt.")}</td></tr>
+<tr><td>${D("Wann")}</td><td>${D("lernst")}</td><td>${D("du Deutsch?")}</td><td></td></tr></table></div>
+<p class="small muted">Вопрос «да/нет» — глагол на первом месте: ${D("Lernst du Deutsch?")}</p>
+<h3>Вопросительные слова</h3>
+<p>${D("wer")} кто · ${D("was")} что · ${D("wo")} где · ${D("wohin")} куда · ${D("woher")} откуда · ${D("wann")} когда · ${D("warum")} почему · ${D("wie")} как · ${D("wie viel")} сколько · ${D("welcher")} который</p>
+<h3>Perfekt с sein</h3>
+<p>${D("gehen – gegangen")}, ${D("fahren – gefahren")}, ${D("kommen – gekommen")}, ${D("fliegen – geflogen")}, ${D("laufen – gelaufen")}, ${D("bleiben – geblieben")}, ${D("aufstehen – aufgestanden")}, ${D("passieren – passiert")}, ${D("sein – gewesen")}</p>
+<h3>Частые сильные глаголы</h3>
+<p>${D("essen – gegessen")}, ${D("trinken – getrunken")}, ${D("sehen – gesehen")}, ${D("lesen – gelesen")}, ${D("schreiben – geschrieben")}, ${D("sprechen – gesprochen")}, ${D("nehmen – genommen")}, ${D("schlafen – geschlafen")}, ${D("finden – gefunden")}, ${D("helfen – geholfen")}, ${D("verstehen – verstanden")}</p>
+<h3>Числа</h3>
+<p>${D("null")} 0 · ${D("eins")} 1 · ${D("zwei")} 2 · ${D("drei")} 3 · ${D("vier")} 4 · ${D("fünf")} 5 · ${D("sechs")} 6 · ${D("sieben")} 7 · ${D("acht")} 8 · ${D("neun")} 9 · ${D("zehn")} 10 · ${D("elf")} 11 · ${D("zwölf")} 12 · ${D("sechzehn")} 16 · ${D("siebzehn")} 17 · ${D("zwanzig")} 20 · ${D("dreißig")} 30 · ${D("vierzig")} 40 · ${D("fünfzig")} 50 · ${D("hundert")} 100 · ${D("tausend")} 1000</p>
+<h3>Дни недели (все der)</h3>
+<p>${D("Montag")} · ${D("Dienstag")} · ${D("Mittwoch")} · ${D("Donnerstag")} · ${D("Freitag")} · ${D("Samstag")} · ${D("Sonntag")}</p>`;
+</script>
+
+<script>
+const KEY = "de-a1-v1";
+const DAY = 86400000;
+const IV = [0, 1, 2, 4, 8, 16, 35, 75, 150, 300];
+const CARDS = {};
+const ORDER = [];
+LESSONS.forEach((L, li) => L.items.forEach((it, i) => {
+  const id = L.id + "-" + i;
+  CARDS[id] = { id, de: it[0], ru: it[1], note: it[2] || "", li };
+  ORDER.push(id);
+}));
+const RULE_TITLE = {};
+PRON.forEach(g => g.items.forEach(r => RULE_TITLE[r.id] = r.t));
+
+let S = { c: {}, read: {}, day: { d: "", n: 0, r: 0 }, streak: { last: "", n: 0 }, set: { newPerDay: 8, rate: 0.9, auto: true } };
+try {
+  const raw = localStorage.getItem(KEY);
+  if (raw) { const o = JSON.parse(raw); S = Object.assign(S, o); S.set = Object.assign({ newPerDay: 8, rate: 0.9, auto: true }, o.set || {}); }
+} catch (e) {}
+function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+
+const $ = (sel, root = document) => root.querySelector(sel);
+const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+function dayKey(t) { const d = new Date(t); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); }
+function startOfDay(t) { const d = new Date(t); d.setHours(0, 0, 0, 0); return d.getTime(); }
+const today = () => dayKey(Date.now());
+const yesterday = () => dayKey(Date.now() - DAY);
+function syncDay() { if (S.day.d !== today()) S.day = { d: today(), n: 0, r: 0 }; }
+function streakNow() { return (S.streak.last === today() || S.streak.last === yesterday()) ? S.streak.n : 0; }
+function touchStreak() {
+  if (S.streak.last === today()) return;
+  S.streak.n = S.streak.last === yesterday() ? S.streak.n + 1 : 1;
+  S.streak.last = today();
+}
+
+const TTS = { ok: "speechSynthesis" in window, voice: null, loaded: false };
+const NOVELTY = /Eddy|Flo|Grandma|Grandpa|Reed|Rocko|Sandy|Shelley|Albert|Bad News|Bahh|Bells|Boing|Bubbles|Cellos|Good News|Jester|Organ|Superstar|Trinoids|Whisper|Wobble|Zarvox/i;
+function loadVoices() {
+  if (!TTS.ok) return;
+  const vs = speechSynthesis.getVoices();
+  if (!vs.length) return;
+  TTS.loaded = true;
+  const de = vs.filter(v => /^de([-_]|$)/i.test(v.lang));
+  const pool = de.filter(v => !NOVELTY.test(v.name));
+  const score = v => (/de[-_]DE/i.test(v.lang) ? 4 : 0) + (/premium|enhanced|natural|neural|erweitert/i.test(v.name) ? 3 : 0) + (/Anna|Helena|Katja|Petra|Google|Markus|Yannick/i.test(v.name) ? 2 : 0) + (v.localService ? 1 : 0);
+  TTS.voice = (pool.length ? pool : de).sort((a, b) => score(b) - score(a))[0] || null;
+  document.querySelectorAll(".voice-note").forEach(el => el.innerHTML = voiceNote());
+}
+if (TTS.ok) { loadVoices(); speechSynthesis.addEventListener ? speechSynthesis.addEventListener("voiceschanged", loadVoices) : (speechSynthesis.onvoiceschanged = loadVoices); setTimeout(loadVoices, 600); }
+function hasVoice() { return TTS.ok && (!!TTS.voice || !TTS.loaded); }
+function say(text, slow) {
+  if (!TTS.ok) return;
+  const clean = String(text).replace(/[«»„“"]/g, "").replace(/\s+[–—-]\s+/g, ", ").replace(/\s*\/\s*/g, ", ").replace(/\s*→\s*/g, ", ");
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(clean);
+  u.lang = "de-DE";
+  if (TTS.voice) u.voice = TTS.voice;
+  u.rate = slow ? 0.55 : S.set.rate;
+  speechSynthesis.speak(u);
+}
+function voiceNote() {
+  if (!TTS.ok) return `<div class="warn">Этот браузер не умеет озвучивать текст. Открой страницу в Safari или Chrome.</div>`;
+  if (TTS.loaded && !TTS.voice) return `<div class="warn">Не найден немецкий голос. На iPhone: Настройки → Универсальный доступ → Устный контент → Голоса → Немецкий → скачай «Anna» (лучше «улучшенный»). Потом перезапусти страницу.</div>`;
+  return "";
+}
+
+const SRC = window.SpeechRecognition || window.webkitSpeechRecognition;
+const normDe = s => s.toLowerCase().replace(/ß/g, "ss").replace(/[^a-zäöü0-9 ]/g, " ").replace(/\s+/g, " ").trim();
+function micHTML(de) { return SRC ? `<button data-mic="${esc(de)}">🎙 Скажи сам</button>` : ""; }
+let recActive = null;
+function startMic(btn) {
+  const target = btn.dataset.mic;
+  const box = btn.closest(".speakwrap") || btn.parentElement.parentElement;
+  let out = box.querySelector(".heard");
+  if (!out) { out = document.createElement("div"); out.className = "heard"; btn.parentElement.after(out); }
+  if (recActive) { try { recActive.abort(); } catch (e) {} recActive = null; }
+  if (TTS.ok) speechSynthesis.cancel();
+  let r;
+  try { r = new SRC(); } catch (e) { out.className = "heard bad"; out.textContent = "Микрофон недоступен."; return; }
+  recActive = r;
+  r.lang = "de-DE"; r.interimResults = false; r.maxAlternatives = 5; r.continuous = false;
+  out.className = "heard"; out.textContent = "Говори…";
+  btn.disabled = true;
+  r.onresult = e => {
+    const alts = Array.from(e.results[0]).map(a => a.transcript);
+    const t = normDe(target).split(" ");
+    let best = alts[0] || "", bestScore = -1;
+    alts.forEach(a => {
+      const h = normDe(a).split(" ");
+      const sc = t.filter(w => h.includes(w)).length / t.length;
+      if (sc > bestScore) { bestScore = sc; best = a; }
+    });
+    if (bestScore >= 1) { out.className = "heard ok"; out.textContent = `✓ Распознано точно: «${best}»`; }
+    else if (bestScore >= 0.6) { out.className = "heard"; out.textContent = `Почти. Услышано: «${best}». Послушай образец и сравни.`; }
+    else { out.className = "heard bad"; out.textContent = `Не похоже. Услышано: «${best}». Послушай медленно и повтори.`; }
+  };
+  r.onerror = e => {
+    out.className = "heard bad";
+    out.textContent = e.error === "not-allowed" ? "Нет доступа к микрофону — разреши его в настройках браузера." : e.error === "no-speech" ? "Ничего не услышал. Попробуй ещё раз, говори громче." : "Не получилось распознать. Попробуй ещё.";
+  };
+  r.onend = () => { btn.disabled = false; if (out.textContent === "Говори…") out.textContent = ""; recActive = null; };
+  try { r.start(); } catch (e) { btn.disabled = false; }
+}
+
+const LOAN_V = new Set(["vase", "klavier", "universität", "video", "november", "vanille", "villa", "visum", "vulkan", "privat", "interview", "nervös", "virus", "vegetarier", "reservieren", "oliven", "evangelisch", "silvester"]);
+const H_SOUND = new Set(["woher", "wohin", "daher", "dahin", "freiheit", "hoheit"]);
+const ST_PREF = ["ver", "be", "ge", "auf", "an", "aus", "ein", "mit", "zu", "vor", "ab", "ent", "aufge", "ausge", "ange", "einge", "mitge", "abge", "zuge", "vorge", "bahn"];
+const VOW = "aeiouäöüy";
+function stStart(w, i) {
+  if (i === 0) return true;
+  return ST_PREF.includes(w.slice(0, i)) && /^(steh|stand|stell|stimm|stör|sprech|sproch|sprach|spiel|stieg|steig)/.test(w.slice(i));
+}
+function analyzeWord(word) {
+  const w = word.toLowerCase(), n = w.length, segs = [];
+  let i = 0;
+  while (i < n) {
+    const rest = w.slice(i), prev = w[i - 1] || "", next = w[i + 1] || "";
+    let m = null;
+    if (rest.startsWith("tsch")) m = [4, "ч", "sch"];
+    else if (rest.startsWith("sch")) m = [3, "ш", "sch"];
+    else if (/^s[pt]/.test(rest) && stStart(w, i)) m = [2, rest[1] === "p" ? "шп" : "шт", "spst"];
+    else if (rest.startsWith("chs")) m = [3, "кс", "ch"];
+    else if (rest.startsWith("ch") && i > 0) {
+      const back = "aou".includes(prev) && !(prev === "u" && "eä".includes(w[i - 2] || ""));
+      m = [2, back ? "х" : "хь", "ch"];
+    }
+    else if (rest === "ig" && n > 3) m = [2, "ихь", "ig"];
+    else if (rest.startsWith("ei") || rest.startsWith("ai")) m = [2, "ай", "ei"];
+    else if (rest.startsWith("ie")) m = [2, "ии", "ei"];
+    else if (rest.startsWith("eu") || rest.startsWith("äu")) m = [2, "ой", "eu"];
+    else if (rest.startsWith("au")) m = [2, "ау", "au"];
+    else if (rest.startsWith("tion")) m = [4, "цион", "z"];
+    else if (rest.startsWith("tz")) m = [2, "ц", "z"];
+    else if (rest[0] === "z") m = [1, "ц", "z"];
+    else if (rest[0] === "ß" || rest.startsWith("ss")) m = [rest[0] === "ß" ? 1 : 2, "с", "ss"];
+    else if (rest.startsWith("qu")) m = [2, "кв", "jq"];
+    else if (rest.startsWith("ph")) m = [2, "ф", "misc"];
+    else if (rest.startsWith("th") && i === 0) m = [2, "т", "misc"];
+    else if (rest.startsWith("ck")) m = [2, "к", "misc"];
+    else if (rest.startsWith("ng") && !/^(an|ein|hin)ge/.test(w)) m = [2, "носовое н", "ng"];
+    else if (rest[0] === "s" && VOW.includes(next) && (i === 0 || VOW.includes(prev) || "lnr".includes(prev)) && !(w.startsWith("haus") && i === 3)) m = [1, "з", "s"];
+    else if (rest[0] === "v") m = [1, LOAN_V.has(w) ? "в" : "ф", "vw"];
+    else if (rest[0] === "w") m = [1, "в", "vw"];
+    else if (rest[0] === "j") m = [1, "й", "jq"];
+    else if (rest[0] === "h") {
+      if (i > 0 && VOW.includes(prev) && !H_SOUND.has(w)) m = [1, "не читается", "h"];
+      else if (i === 0) m = [1, "выдох", "h"];
+    }
+    else if ("äöü".includes(rest[0])) m = [1, rest[0] === "ä" ? "э" : rest[0], "umlaut"];
+    else if (rest === "er" && n > 3) m = [2, "а", "r"];
+    else if (i === 1 && /^(ver|zer)/.test(w) && rest.startsWith("er")) m = [2, "эа", "r"];
+    else if (rest[0] === "r") {
+      if (i === n - 1 && (VOW.includes(prev) || prev === "h")) m = [1, "а", "r"];
+      else if (i === 0 || !VOW.includes(prev)) m = [1, "горловое r", "r"];
+    }
+    else if (i === n - 1 && "bdg".includes(rest[0]) && n > 1) m = [1, { b: "п", d: "т", g: "к" }[rest[0]], "devoice"];
+    if (m) { segs.push({ t: word.slice(i, i + m[0]), s: m[1], r: m[2] }); i += m[0]; }
+    else { const last = segs[segs.length - 1]; if (last && !last.r) last.t += word[i]; else segs.push({ t: word[i] }); i++; }
+  }
+  return segs;
+}
+function readingHTML(de) {
+  const chips = new Map();
+  const words = de.split(/(\s+)/).map(tok => {
+    const mm = tok.match(/^([^A-Za-zÄÖÜäöüß]*)([A-Za-zÄÖÜäöüß]+)([^A-Za-zÄÖÜäöüß]*)$/);
+    if (!mm) return esc(tok);
+    const segs = analyzeWord(mm[2]);
+    segs.forEach(s => { if (s.r) { const k = s.t.toLowerCase() + "|" + s.s; if (!chips.has(k)) chips.set(k, s); } });
+    return esc(mm[1]) + segs.map(s => s.r ? `<mark>${esc(s.t)}</mark>` : esc(s.t)).join("") + esc(mm[3]);
+  }).join("");
+  const list = [...chips.values()].map(s => `<button class="chip" data-rule="${s.r}"><b>${esc(s.t.toLowerCase())}</b> → ${esc(s.s)}</button>`).join("");
+  return `<div class="readbox"><div class="w">${words}</div><div class="chips">${list || '<span class="muted small">Здесь всё читается как пишется.</span>'}</div><p class="small muted" style="margin:8px 0 0">Нажми на подсказку — откроется правило.</p></div>`;
+}
+
+function deHTML(c) {
+  const L = LESSONS[c.li];
+  if (L.gender) {
+    const m = c.de.match(/^(der|die|das) ([A-ZÄÖÜ]\S*)$/);
+    if (m) return `<span class="g-${{ der: "m", die: "f", das: "n" }[m[1]]}">${m[1]}</span> ${esc(m[2])}`;
+  }
+  return esc(c.de);
+}
+function speakRow(de) {
+  return `<div class="speakwrap"><div class="speak"><button data-say="${esc(de)}">▶ Слушать</button><button data-say="${esc(de)}" data-slow="1">🐢 Медленно</button>${micHTML(de)}<button data-read="${esc(de)}">Как читать</button></div><div class="heard"></div><div class="readslot"></div></div>`;
+}
+const tokens = de => de.split(/\s+/).map(t => t.replace(/^[¿¡«„"]+|[.,!?;:»"“]+$/g, "")).filter(Boolean);
+
+function introduced(id) { return !!S.c[id]; }
+function stageClass(id) { const st = S.c[id]; if (!st) return ""; return st.s >= 3 ? "s2" : "s1"; }
+function lessonStats(L) {
+  const ids = L.items.map((_, i) => L.id + "-" + i);
+  return { total: ids.length, seen: ids.filter(introduced).length, solid: ids.filter(id => S.c[id] && S.c[id].s >= 3).length };
+}
+function dueIds() {
+  const end = startOfDay(Date.now()) + DAY;
+  return ORDER.filter(id => S.c[id] && S.c[id].due < end).sort((a, b) => S.c[a].due - S.c[b].due);
+}
+function nextNewIds(k, lessonIdx) {
+  const pool = lessonIdx == null ? ORDER : ORDER.filter(id => CARDS[id].li === lessonIdx);
+  return pool.filter(id => !introduced(id)).slice(0, k);
+}
+function grade(id, g) {
+  if (W.practice) return;
+  const st = S.c[id];
+  const now = Date.now();
+  if (g === 0) { st.s = Math.floor(st.s / 3); st.due = now; st.l = (st.l || 0) + 1; }
+  else if (g === 1) { st.s = Math.max(st.s, 1); st.due = startOfDay(now) + Math.max(1, Math.round(IV[st.s] / 2)) * DAY; }
+  else { st.s = Math.min(st.s + 1, IV.length - 1); st.due = startOfDay(now) + IV[st.s] * DAY; }
+  st.n = (st.n || 0) + 1;
+  syncDay(); S.day.r++; touchStreak(); save(); renderStats();
+}
+function modeFor(id, it) {
+  const st = S.c[id];
+  if (!st || it.intro) return "intro";
+  const long = tokens(CARDS[id].de).length >= 3;
+  if (W.practice) return long && Math.random() < 0.5 ? "build" : "recognize";
+  if (it.retry || st.s === 0) return "recognize";
+  if (st.s === 1) return hasVoice() && TTS.voice ? "listen" : "recognize";
+  if (st.s <= 3) return long ? "build" : "recall";
+  return st.s % 2 === 0 && long ? "build" : "recall";
+}
+
+let W = null;
+function buildQueue(reviews, fresh) {
+  const q = [];
+  const seenLessons = new Set();
+  const newBlock = [];
+  for (let g = 0; g < fresh.length; g += 4) {
+    const grp = fresh.slice(g, g + 4);
+    grp.forEach(id => {
+      const li = CARDS[id].li;
+      if (!S.read[LESSONS[li].id] && !seenLessons.has(li)) { seenLessons.add(li); newBlock.push({ type: "theory", li }); }
+      newBlock.push({ type: "card", id, intro: true });
+    });
+    grp.forEach(id => newBlock.push({ type: "card", id, test: true }));
+  }
+  const head = reviews.slice(0, 8).map(id => ({ type: "card", id }));
+  const tail = reviews.slice(8).map(id => ({ type: "card", id }));
+  return head.concat(newBlock, tail);
+}
+function startSession(opts) {
+  syncDay();
+  let reviews = [], fresh = [];
+  if (opts.lesson != null) {
+    if (opts.practice) reviews = shuffle(LESSONS[opts.lesson].items.map((_, i) => LESSONS[opts.lesson].id + "-" + i).filter(introduced));
+    else fresh = nextNewIds(99, opts.lesson);
+  } else {
+    reviews = dueIds().slice(0, 150);
+    fresh = nextNewIds(opts.extra != null ? opts.extra : Math.max(0, S.set.newPerDay - S.day.n));
+  }
+  W = { queue: buildQueue(reviews, fresh), idx: 0, practice: !!opts.practice, ok: 0, bad: 0, fresh: fresh.length, reviews: reviews.length, from: opts.lesson != null ? "lessons" : "today" };
+  if (!W.queue.length) { W = null; renderToday(); return; }
+  showTab("today");
+  renderItem();
+}
+function cur() { return W.queue[W.idx]; }
+function advance() {
+  W.idx++;
+  if (W.idx >= W.queue.length) { renderDone(); return; }
+  renderItem();
+}
+function requeue(id) { const pos = Math.min(W.queue.length, W.idx + 4); W.queue.splice(pos, 0, { type: "card", id, retry: true }); }
+function headerHTML() {
+  const total = W.queue.length;
+  return `<div class="progress"><i style="width:${Math.round(W.idx / total * 100)}%"></i></div>
+  <div class="ptext"><span>${W.idx + 1} из ${total}</span><button class="btn ghost small" data-act="quit">Закончить</button></div>`;
+}
+function renderItem() {
+  const it = cur();
+  const P = $("#p-today");
+  if (it.type === "theory") {
+    const L = LESSONS[it.li];
+    P.innerHTML = headerHTML() + `<div class="kind">новая тема</div><h2>Урок ${it.li + 1}. ${esc(L.title)}</h2><div class="theory">${L.theory}</div>
+    <div class="row center" style="margin-top:16px"><button class="btn" data-act="theory-ok">Понятно, к фразам</button></div>`;
+    return;
+  }
+  const c = CARDS[it.id];
+  const mode = it.test ? "recognize" : modeFor(it.id, it);
+  it.mode = mode;
+  const lessonTag = `<p class="small muted" style="text-align:center;margin:4px 0 0">Урок ${c.li + 1} · ${esc(LESSONS[c.li].title)}</p>`;
+  const noteHTML = c.note ? `<div class="note">${esc(c.note)}</div>` : "";
+  if (mode === "intro") {
+    if (!S.c[it.id] && !W.practice) { S.c[it.id] = { s: 0, due: Date.now(), n: 0, l: 0 }; syncDay(); S.day.n++; touchStreak(); save(); renderStats(); }
+    P.innerHTML = headerHTML() + `<div class="kind">новая фраза</div>${lessonTag}
+      <div class="big de" data-say="${esc(c.de)}">${deHTML(c)}</div>${speakRow(c.de)}
+      <div class="ru">${esc(c.ru)}</div>${noteHTML}
+      <p class="small muted" style="text-align:center;margin-top:12px">Послушай 2–3 раза и повтори вслух. Так фраза запомнится вместе со звуком.</p>
+      <div class="row center" style="margin-top:12px"><button class="btn" data-act="next">Дальше</button></div>`;
+    if (S.set.auto) say(c.de);
+  } else if (mode === "recognize") {
+    P.innerHTML = headerHTML() + `<div class="kind">что это значит?</div>${lessonTag}
+      <div class="big de" data-say="${esc(c.de)}">${deHTML(c)}</div>${speakRow(c.de)}
+      <div id="rev"><div class="row center" style="margin-top:16px"><button class="btn" data-act="show">Показать перевод</button></div></div>`;
+    if (S.set.auto) say(c.de);
+  } else if (mode === "recall") {
+    P.innerHTML = headerHTML() + `<div class="kind">как сказать по-немецки?</div>${lessonTag}
+      <div class="big">${esc(c.ru)}</div><p class="small muted" style="text-align:center">Скажи вслух, потом проверь.</p>
+      <div id="rev"><div class="row center" style="margin-top:16px"><button class="btn" data-act="show">Проверить</button></div></div>`;
+  } else if (mode === "listen") {
+    const others = shuffle(ORDER.filter(x => x !== it.id && CARDS[x].ru !== c.ru && (introduced(x) || CARDS[x].li === c.li)));
+    const same = others.filter(x => CARDS[x].li === c.li);
+    const picks = [];
+    [...same, ...others].forEach(x => { if (picks.length < 3 && !picks.some(p => CARDS[p].ru === CARDS[x].ru)) picks.push(x); });
+    it.opts = shuffle([it.id, ...picks]);
+    P.innerHTML = headerHTML() + `<div class="kind">послушай и выбери</div>${lessonTag}
+      <div class="speak" style="margin-top:18px"><button data-say="${esc(c.de)}">▶ Ещё раз</button><button data-say="${esc(c.de)}" data-slow="1">🐢 Медленно</button></div>
+      <div class="opts">${it.opts.map(x => `<button data-opt="${x}">${esc(CARDS[x].ru)}</button>`).join("")}</div><div id="rev"></div>`;
+    say(c.de);
+  } else if (mode === "build") {
+    it.tok = tokens(c.de);
+    it.pool = shuffle(it.tok.map((t, i) => ({ t, i })));
+    if (it.pool.every((p, k) => p.i === k) && it.pool.length > 1) it.pool.push(it.pool.shift());
+    it.ans = [];
+    P.innerHTML = headerHTML() + `<div class="kind">собери фразу</div>${lessonTag}
+      <div class="big" style="font-size:24px">${esc(c.ru)}</div>
+      <div class="answer" id="ans"></div><div class="tiles" id="tiles"></div><div id="rev"></div>`;
+    drawTiles();
+  }
+}
+function drawTiles() {
+  const it = cur();
+  $("#ans").innerHTML = it.ans.map((k, j) => `<button class="tile" data-un="${j}">${esc(it.pool[k].t)}</button>`).join("");
+  $("#tiles").innerHTML = it.pool.map((p, k) => `<button class="tile${it.ans.includes(k) ? " used" : ""}" data-tile="${k}">${esc(p.t)}</button>`).join("");
+  if (it.ans.length === it.pool.length && !it.done) {
+    it.done = true;
+    const got = it.ans.map(k => it.pool[k].t).join(" ");
+    const right = got === it.tok.join(" ");
+    const c = CARDS[it.id];
+    $("#tiles").innerHTML = "";
+    $("#ans").querySelectorAll("button").forEach(b => b.disabled = true);
+    $("#rev").innerHTML = `<div class="verdict ${right ? "ok" : "bad"}">${right ? "Верно!" : "Не так. Правильно:"}</div>
+      <div class="big de" data-say="${esc(c.de)}" style="font-size:26px">${deHTML(c)}</div>${speakRow(c.de)}
+      ${c.note ? `<div class="note">${esc(c.note)}</div>` : ""}
+      <div class="row center" style="margin-top:14px"><button class="btn" data-act="next">Дальше</button></div>`;
+    say(c.de);
+    if (right) W.ok++; else { W.bad++; requeue(it.id); }
+    grade(it.id, right ? 2 : 0);
+  }
+}
+function showAnswer() {
+  const it = cur(), c = CARDS[it.id];
+  const noteHTML = c.note ? `<div class="note">${esc(c.note)}</div>` : "";
+  const gradesHTML = `<div class="grades"><button class="g0" data-grade="0">Не вспомнил</button><button class="g1" data-grade="1">С трудом</button><button class="g2" data-grade="2">Помню</button></div>`;
+  if (it.mode === "recall") {
+    $("#rev").innerHTML = `<div class="reveal"><div class="big de" data-say="${esc(c.de)}">${deHTML(c)}</div>${speakRow(c.de)}${noteHTML}${gradesHTML}</div>`;
+    say(c.de);
+  } else {
+    $("#rev").innerHTML = `<div class="reveal"><div class="ru">${esc(c.ru)}</div>${noteHTML}${gradesHTML}</div>`;
+  }
+}
+function renderDone() {
+  const P = $("#p-today");
+  const total = W.ok + W.bad;
+  const pct = total ? Math.round(W.ok / total * 100) : 100;
+  const from = W.from;
+  W = null;
+  P.innerHTML = `<div class="kind">готово</div><h2 style="text-align:center">Gut gemacht! 🎉</h2>
+    <p style="text-align:center">${total ? `Правильно с первого раза: <b>${pct}%</b>.` : ""} Серия: <b>${streakNow()} дн.</b></p>
+    <p class="muted" style="text-align:center">Завтра приложение само покажет то, что начнёт забываться. Главное — заходить каждый день хотя бы на 5 минут.</p>
+    <div class="row center" style="margin-top:14px"><button class="btn" data-act="home">${from === "lessons" ? "К урокам" : "На главную"}</button></div>`;
+  if (from === "lessons") P.querySelector("[data-act=home]").dataset.act = "to-lessons";
+}
+
+function renderToday() {
+  if (W) { renderItem(); return; }
+  syncDay();
+  const due = dueIds().length;
+  const newLeft = Math.min(Math.max(0, S.set.newPerDay - S.day.n), nextNewIds(999).length);
+  const learned = ORDER.filter(id => S.c[id] && S.c[id].s >= 3).length;
+  const seen = ORDER.filter(introduced).length;
+  const nextNew = nextNewIds(1)[0];
+  const curLesson = nextNew ? LESSONS[CARDS[nextNew].li] : null;
+  let main;
+  if (due + newLeft > 0) {
+    main = `<div class="plan"><div><b class="today-num">${due}</b><span>повторить</span></div><div><b class="today-num">${newLeft}</b><span>новых фраз</span></div><div><b class="today-num">~${Math.max(1, Math.round((due * 9 + newLeft * 30) / 60))}</b><span>минут</span></div></div>
+      <div class="row center"><button class="btn" data-act="start">${seen ? "Начать" : "Начать первый урок"}</button></div>
+      ${curLesson ? `<p class="small muted" style="text-align:center;margin-top:10px">Новые фразы из урока ${CARDS[nextNew].li + 1}: «${esc(curLesson.title)}»</p>` : ""}`;
+  } else {
+    main = `<p style="text-align:center"><b>На сегодня всё сделано.</b> Серия: ${streakNow()} дн.</p>
+      ${nextNew ? `<div class="row center"><button class="btn ghost" data-act="extra">Взять ещё 5 новых фраз</button></div>` : `<p style="text-align:center" class="muted">Все уроки пройдены — теперь только повторения.</p>`}`;
+  }
+  $("#p-today").innerHTML = `<div class="voice-note">${voiceNote()}</div>
+    <h2>Занятие на сегодня</h2>${main}
+    <p class="small muted" style="margin-top:18px">Выучено надёжно: <b>${learned}</b> из ${ORDER.length} фраз · начато: ${seen}</p>
+    <details><summary>Как это работает</summary>
+      <p class="small" style="margin-top:8px">• Ты учишь не отдельные слова, а <b>целые фразы</b> — так сразу видна грамматика и слова не путаются.<br>
+      • Перед новыми фразами — короткое объяснение <b>почему так</b>.<br>
+      • Каждую фразу слушай и <b>повторяй вслух</b>. Кнопка 🎙 проверит, понимает ли тебя немецкое распознавание речи.<br>
+      • Приложение само решает, когда что повторить: то, что знаешь хорошо, — реже (через 2, 4, 8, 16 дней…), то, что забыл, — чаще. Поэтому хватает <b>5–10 минут в день</b>.<br>
+      • Пропустил день — ничего страшного, повторения просто подождут.</p></details>
+    <details><summary>Настройки</summary><div class="settings">
+      <label>Новых фраз в день <select id="set-new">${[3, 5, 8, 10, 15, 20].map(v => `<option value="${v}"${v === S.set.newPerDay ? " selected" : ""}>${v}</option>`).join("")}</select></label>
+      <label>Скорость речи <select id="set-rate">${[[0.7, "медленно"], [0.8, "чуть медленнее"], [0.9, "обычно"], [1, "быстро"]].map(([v, t]) => `<option value="${v}"${v === S.set.rate ? " selected" : ""}>${t}</option>`).join("")}</select></label>
+      <label>Озвучивать автоматически <input type="checkbox" id="set-auto"${S.set.auto ? " checked" : ""}></label>
+      <button class="btn ghost small" data-act="reset" style="justify-self:start">Сбросить весь прогресс</button>
+    </div></details>`;
+}
+
+let openLesson = null;
+function renderLessons() {
+  const P = $("#p-lessons");
+  if (openLesson == null) {
+    P.innerHTML = `<h2>Уроки</h2><p class="small muted">Иди по порядку: каждый урок опирается на предыдущий. Новые фразы из уроков сами попадают в «Сегодня», но можно открыть любой урок и почитать объяснение заранее.</p>
+    <div class="lessons">${LESSONS.map((L, i) => {
+      const st = lessonStats(L);
+      return `<button class="lesson${st.seen === st.total ? " done" : ""}" data-lesson="${i}"><div class="n">${i + 1}</div><div><b>${esc(L.title)}</b><span>${esc(L.sub)}</span></div><div class="cnt">${st.seen}/${st.total}</div></button>`;
+    }).join("")}</div>`;
+    return;
+  }
+  const L = LESSONS[openLesson];
+  S.read[L.id] = true; save();
+  const st = lessonStats(L);
+  const left = st.total - st.seen;
+  P.innerHTML = `<button class="btn ghost small" data-act="back">← Все уроки</button>
+    <h2 style="margin-top:14px">Урок ${openLesson + 1}. ${esc(L.title)}</h2>
+    <div class="theory">${L.theory}</div>
+    <h3>Фразы урока</h3><p class="small muted">Нажми на фразу — услышишь её. Точка справа: серая — ещё не учил, жёлтая — учишь, зелёная — выучено.</p>
+    <div class="phrases">${L.items.map((_, i) => {
+      const id = L.id + "-" + i, c = CARDS[id];
+      return `<div class="ph"><button class="play" data-say="${esc(c.de)}" aria-label="Слушать">▶</button><div><div class="dd" data-say="${esc(c.de)}">${deHTML(c)}</div><div class="rr">${esc(c.ru)}</div>${c.note ? `<div class="nn">${esc(c.note)}</div>` : ""}</div><div class="dot ${stageClass(id)}"></div></div>`;
+    }).join("")}</div>
+    <div class="row" style="margin-top:16px">
+      ${left ? `<button class="btn" data-act="learn-lesson">Учить фразы урока (${left})</button>` : ""}
+      ${st.seen ? `<button class="btn ghost" data-act="practice-lesson">Потренироваться</button>` : ""}
+    </div>
+    ${st.seen ? `<p class="small muted" style="margin-top:8px">«Потренироваться» не сбивает расписание повторений — просто прогон для себя.</p>` : ""}`;
+}
+
+let PD = { pair: null, pick: null, score: 0, total: 0 };
+let SD = { pair: null, side: 0 };
+function newPair() { PD.pair = PAIRS[Math.floor(Math.random() * PAIRS.length)]; PD.pick = Math.random() < 0.5 ? 0 : 1; PD.answered = false; }
+function newSay() { SD.pair = PAIRS[Math.floor(Math.random() * PAIRS.length)]; SD.side = Math.random() < 0.5 ? 0 : 1; }
+function drillHTML() {
+  if (!PD.pair) newPair();
+  const p = PD.pair;
+  const word = i => p[i * 2];
+  const res = PD.answered ? `<p class="small" style="margin:10px 0 0">${PD.answered === "ok" ? "✓ Верно." : "✗ Прозвучало другое."} ${D(p[0])} — ${p[1]}, ${D(p[2])} — ${p[3]}. Разница: <b>${p[4]}</b>.</p>
+     <div class="row" style="margin-top:8px"><button class="btn small" data-act="pair-next">Следующая пара</button></div>` : "";
+  return `<div class="drill"><b>Различи на слух</b> <span class="small muted">· ${PD.score}/${PD.total}</span>
+    <p class="small" style="margin:4px 0 0">Тренирует ухо на звуки, которых нет в русском. Нажми «Слушать» и выбери слово.</p>
+    <div class="speak" style="justify-content:flex-start;margin-top:10px"><button data-act="pair-play">▶ Слушать</button><button data-act="pair-slow">🐢 Медленно</button></div>
+    <div class="pair">${[0, 1].map(i => {
+      let cls = "";
+      if (PD.answered) { if (i === PD.pick) cls = "right"; else if (PD.chosen === i) cls = "wrong"; }
+      return `<button class="${cls}" data-pairpick="${i}"${PD.answered ? " disabled" : ""}>${esc(word(i))}</button>`;
+    }).join("")}</div>${res}</div>`;
+}
+function sayDrillHTML() {
+  if (!SRC) return "";
+  if (!SD.pair) newSay();
+  const p = SD.pair, w = p[SD.side * 2], gl = p[SD.side * 2 + 1], other = p[(1 - SD.side) * 2];
+  return `<div class="drill speakwrap"><b>Произнеси так, чтобы тебя поняли</b>
+    <p class="small" style="margin:4px 0 0">Скажи слово в микрофон. Если распознается как «${esc(other)}» — значит, звук не тот (${esc(p[4])}).</p>
+    <div class="big de" style="font-size:30px" data-say="${esc(w)}">${esc(w)}</div><p style="text-align:center;margin:0" class="muted">${esc(gl)}</p>
+    <div class="speak"><button data-say="${esc(w)}">▶ Образец</button><button data-say="${esc(w)}" data-slow="1">🐢</button><button data-mic="${esc(w)}">🎙 Сказать</button><button data-act="say-next">Другое слово</button></div><div class="heard"></div></div>`;
+}
+function renderPron() {
+  $("#p-pron").innerHTML = `<div class="voice-note">${voiceNote()}</div><h2>Произношение</h2>
+    <p>Немецкий читается <b>по правилам почти без исключений</b> — в отличие от английского. Выучи правила ниже, и сможешь правильно прочитать любое слово. В каждом правиле есть <b>типичная ошибка русских</b> — проверь, не делаешь ли ты её.</p>
+    <p class="small muted">Нажимай на слова — их озвучит немецкий голос. Повторяй вслух сразу за ним.</p>
+    <div id="drill1">${drillHTML()}</div><div id="drill2">${sayDrillHTML()}</div>
+    ${PRON.map(g => `<h3>${esc(g.group)}</h3>` + g.items.map(r => `<div class="rule" id="r-${r.id}"><h3><code>${esc(r.k)}</code> ${esc(r.t)}</h3>${r.b}${r.bad ? `<div class="bad"><b>Ошибка:</b> ${esc(r.bad)}</div>` : ""}<div class="ex">${r.ex.map(([w, gl]) => `<button data-say="${esc(w)}"><b>${esc(w)}</b> <span>${esc(gl)}</span></button>`).join("")}</div></div>`).join("")).join("")}`;
+}
+
+function renderStats() {
+  syncDay();
+  const due = dueIds().length;
+  $("#stats").innerHTML = `<span>серия <b>${streakNow()}</b> дн.</span><span>выучено <b>${ORDER.filter(id => S.c[id] && S.c[id].s >= 3).length}</b></span><span>к повторению <b>${due}</b></span>`;
+}
+let currentTab = "today";
+function showTab(name) {
+  currentTab = name;
+  document.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-selected", String(t.dataset.tab === name)));
+  ["today", "lessons", "pron", "sheet"].forEach(t => $("#p-" + t).hidden = t !== name);
+  if (name === "today") renderToday();
+  if (name === "lessons") renderLessons();
+  if (name === "pron") renderPron();
+  if (name === "sheet") $("#p-sheet").innerHTML = SHEET;
+  try { localStorage.setItem(KEY + "-tab", name); } catch (e) {}
+}
+function gotoRule(id) {
+  showTab("pron");
+  const el = $("#r-" + id);
+  if (!el) return;
+  el.scrollIntoView({ behavior: "smooth", block: "start" });
+  el.classList.add("flash");
+  setTimeout(() => el.classList.remove("flash"), 1600);
+}
+
+document.addEventListener("click", e => {
+  const t = e.target.closest("button, [data-say], .de");
+  if (!t) return;
+  if (t.classList.contains("tab")) { showTab(t.dataset.tab); return; }
+  if (t.dataset.mic) { startMic(t); return; }
+  if (t.dataset.read) {
+    const slot = t.closest(".speakwrap").querySelector(".readslot");
+    slot.innerHTML = slot.innerHTML ? "" : readingHTML(t.dataset.read);
+    return;
+  }
+  if (t.dataset.rule) { gotoRule(t.dataset.rule); return; }
+  if (t.dataset.lesson) { openLesson = +t.dataset.lesson; renderLessons(); window.scrollTo(0, 0); return; }
+  if (t.dataset.opt) {
+    const it = cur();
+    if (it.done) return;
+    it.done = true;
+    const right = t.dataset.opt === it.id;
+    document.querySelectorAll("[data-opt]").forEach(b => { b.disabled = true; if (b.dataset.opt === it.id) b.classList.add("right"); });
+    if (!right) t.classList.add("wrong");
+    const c = CARDS[it.id];
+    $("#rev").innerHTML = `<div class="reveal"><div class="big de" data-say="${esc(c.de)}" style="font-size:26px">${deHTML(c)}</div>${speakRow(c.de)}<div class="row center" style="margin-top:12px"><button class="btn" data-act="next">Дальше</button></div></div>`;
+    if (right) W.ok++; else { W.bad++; requeue(it.id); }
+    grade(it.id, right ? 2 : 0);
+    return;
+  }
+  if (t.dataset.tile != null) { const it = cur(); const k = +t.dataset.tile; if (!it.ans.includes(k) && !it.done) { it.ans.push(k); drillTilesSafe(); } return; }
+  if (t.dataset.un != null) { const it = cur(); if (!it.done) { it.ans.splice(+t.dataset.un, 1); drillTilesSafe(); } return; }
+  if (t.dataset.grade != null) {
+    const it = cur(), g = +t.dataset.grade;
+    if (g === 2) W.ok++; else W.bad++;
+    if (g === 0) requeue(it.id);
+    if (it.test && g > 0) { if (!W.practice) { S.c[it.id].s = Math.max(S.c[it.id].s, g === 2 ? 1 : 0); S.c[it.id].due = g === 2 ? startOfDay(Date.now()) + DAY : Date.now(); if (g === 1) requeue(it.id); syncDay(); S.day.r++; save(); renderStats(); } }
+    else grade(it.id, g);
+    advance();
+    return;
+  }
+  if (t.dataset.pairpick != null) {
+    if (PD.answered) return;
+    PD.chosen = +t.dataset.pairpick; PD.total++;
+    if (PD.chosen === PD.pick) { PD.score++; PD.answered = "ok"; } else PD.answered = "bad";
+    $("#drill1").innerHTML = drillHTML();
+    return;
+  }
+  const act = t.dataset.act;
+  if (act) {
+    if (act === "start") startSession({});
+    else if (act === "extra") startSession({ extra: 5 });
+    else if (act === "next") advance();
+    else if (act === "show") showAnswer();
+    else if (act === "theory-ok") { S.read[LESSONS[cur().li].id] = true; save(); advance(); }
+    else if (act === "quit") { W = null; renderToday(); renderStats(); }
+    else if (act === "home") renderToday();
+    else if (act === "to-lessons") { showTab("lessons"); }
+    else if (act === "back") { openLesson = null; renderLessons(); }
+    else if (act === "learn-lesson") startSession({ lesson: openLesson });
+    else if (act === "practice-lesson") startSession({ lesson: openLesson, practice: true });
+    else if (act === "pair-play") say(PD.pair[PD.pick * 2]);
+    else if (act === "pair-slow") say(PD.pair[PD.pick * 2], true);
+    else if (act === "pair-next") { newPair(); $("#drill1").innerHTML = drillHTML(); say(PD.pair[PD.pick * 2]); }
+    else if (act === "say-next") { newSay(); $("#drill2").innerHTML = sayDrillHTML(); }
+    else if (act === "reset") {
+      if (confirm("Точно стереть весь прогресс? Это нельзя отменить.")) { S.c = {}; S.read = {}; S.day = { d: today(), n: 0, r: 0 }; S.streak = { last: "", n: 0 }; save(); renderToday(); renderStats(); }
+    }
+    return;
+  }
+  const sayText = t.dataset.say || (t.classList.contains("de") ? t.textContent : null);
+  if (sayText) say(sayText, !!t.dataset.slow);
+});
+function drillTilesSafe() { if (W && cur() && cur().mode === "build") drawTiles(); }
+document.addEventListener("change", e => {
+  if (e.target.id === "set-new") { S.set.newPerDay = +e.target.value; save(); renderToday(); }
+  if (e.target.id === "set-rate") { S.set.rate = +e.target.value; save(); say("Guten Tag! Wie geht's?"); }
+  if (e.target.id === "set-auto") { S.set.auto = e.target.checked; save(); }
+});
+
+renderStats();
+let startTab = "today";
+try { startTab = localStorage.getItem(KEY + "-tab") || "today"; } catch (e) {}
+showTab(["today", "lessons", "pron", "sheet"].includes(startTab) ? startTab : "today");
+</script>
+<script>
+if ("serviceWorker" in navigator) { window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {})); }
+</script>
+</body>
+</html>
