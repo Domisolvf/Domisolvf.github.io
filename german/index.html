@@ -160,12 +160,25 @@ select { font: 15px var(--f-ui); color: var(--text); background: var(--sheet); b
 .plan { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; text-align: center; margin: 12px 0 16px; }
 .plan div { border: 1px solid var(--line); border-radius: 10px; padding: 10px 4px; }
 .plan span { display: block; font-size: 13px; color: var(--muted); }
+.lnav { display: flex; justify-content: space-between; gap: 6px; }
+.lnav .btn { padding: 7px 10px; }
+.focus { display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: var(--muted); margin-top: 16px; }
+.focus select { width: 100%; }
+.cur { display: block; font-size: 11.5px; color: var(--gold); font-weight: 600; }
 details { border-top: 1px solid var(--line); padding-top: 10px; margin-top: 18px; }
 summary { cursor: pointer; font-weight: 600; color: var(--muted); }
+</style>
+<style>
+.appnav { display: flex; gap: 6px; align-items: center; overflow-x: auto; scrollbar-width: none; margin: 0 0 4px; }
+.appnav::-webkit-scrollbar { display: none; }
+.appnav a { font: 500 13.5px system-ui, -apple-system, "Segoe UI", sans-serif; color: inherit; text-decoration: none; white-space: nowrap; padding: 5px 11px; border-radius: 99px; border: 1px solid rgba(127,127,127,.35); opacity: .75; }
+.appnav a[aria-current="page"] { opacity: 1; font-weight: 600; background: rgba(127,127,127,.16); border-color: transparent; }
+.appnav a.home { padding: 5px 9px; }
 </style>
 </head>
 <body>
 <div class="wrap">
+  <nav class="appnav" aria-label="Тренажёры"><a class="home" href="../" aria-label="Все тренажёры">☰</a><a href="../russian/">Русский</a><a href="../physics/">Физика</a><a href="../german/" aria-current="page">Немецкий</a></nav>
   <header>
     <div>
       <h1>Немецкий A1</h1>
@@ -818,7 +831,9 @@ function dueIds() {
   return ORDER.filter(id => S.c[id] && S.c[id].due < end).sort((a, b) => S.c[a].due - S.c[b].due);
 }
 function nextNewIds(k, lessonIdx) {
-  const pool = lessonIdx == null ? ORDER : ORDER.filter(id => CARDS[id].li === lessonIdx);
+  const f = S.set.focus;
+  const pool = lessonIdx != null ? ORDER.filter(id => CARDS[id].li === lessonIdx)
+    : f != null && LESSONS[f] ? ORDER.filter(id => CARDS[id].li === f).concat(ORDER.filter(id => CARDS[id].li !== f)) : ORDER;
   return pool.filter(id => !introduced(id)).slice(0, k);
 }
 function grade(id, g) {
@@ -995,14 +1010,15 @@ function renderToday() {
   let main;
   if (due + newLeft > 0) {
     main = `<div class="plan"><div><b class="today-num">${due}</b><span>повторить</span></div><div><b class="today-num">${newLeft}</b><span>новых фраз</span></div><div><b class="today-num">~${Math.max(1, Math.round((due * 9 + newLeft * 30) / 60))}</b><span>минут</span></div></div>
-      <div class="row center"><button class="btn" data-act="start">${seen ? "Начать" : "Начать первый урок"}</button></div>
-      ${curLesson ? `<p class="small muted" style="text-align:center;margin-top:10px">Новые фразы из урока ${CARDS[nextNew].li + 1}: «${esc(curLesson.title)}»</p>` : ""}`;
+      <div class="row center"><button class="btn" data-act="start">Начать</button></div>
+      ${curLesson ? `<p class="small muted" style="text-align:center;margin-top:10px">Сейчас новые фразы из урока ${CARDS[nextNew].li + 1}: «${esc(curLesson.title)}»</p>` : ""}`;
   } else {
     main = `<p style="text-align:center"><b>На сегодня всё сделано.</b> Серия: ${streakNow()} дн.</p>
       ${nextNew ? `<div class="row center"><button class="btn ghost" data-act="extra">Взять ещё 5 новых фраз</button></div>` : `<p style="text-align:center" class="muted">Все уроки пройдены — теперь только повторения.</p>`}`;
   }
   $("#p-today").innerHTML = `<div class="voice-note">${voiceNote()}</div>
     <h2>Занятие на сегодня</h2>${main}
+    <label class="focus">Новые фразы брать из <select id="set-focus"><option value="">всех уроков по порядку</option>${LESSONS.map((L, i) => { const st = lessonStats(L); return `<option value="${i}"${S.set.focus === i ? " selected" : ""}>${i + 1}. ${esc(L.title)} (${st.seen}/${st.total})</option>`; }).join("")}</select></label>
     <p class="small muted" style="margin-top:18px">Выучено надёжно: <b>${learned}</b> из ${ORDER.length} фраз · начато: ${seen}</p>
     <details><summary>Как это работает</summary>
       <p class="small" style="margin-top:8px">• Ты учишь не отдельные слова, а <b>целые фразы</b> — так сразу видна грамматика и слова не путаются.<br>
@@ -1025,7 +1041,7 @@ function renderLessons() {
     P.innerHTML = `<h2>Уроки</h2><p class="small muted">Иди по порядку: каждый урок опирается на предыдущий. Новые фразы из уроков сами попадают в «Сегодня», но можно открыть любой урок и почитать объяснение заранее.</p>
     <div class="lessons">${LESSONS.map((L, i) => {
       const st = lessonStats(L);
-      return `<button class="lesson${st.seen === st.total ? " done" : ""}" data-lesson="${i}"><div class="n">${i + 1}</div><div><b>${esc(L.title)}</b><span>${esc(L.sub)}</span></div><div class="cnt">${st.seen}/${st.total}</div></button>`;
+      return `<button class="lesson${st.seen === st.total ? " done" : ""}" data-lesson="${i}"><div class="n">${i + 1}</div><div><b>${esc(L.title)}</b><span>${esc(L.sub)}</span></div><div class="cnt">${S.set.focus === i ? '<span class="cur">сейчас</span>' : ""}${st.seen}/${st.total}</div></button>`;
     }).join("")}</div>`;
     return;
   }
@@ -1033,7 +1049,9 @@ function renderLessons() {
   S.read[L.id] = true; save();
   const st = lessonStats(L);
   const left = st.total - st.seen;
-  P.innerHTML = `<button class="btn ghost small" data-act="back">← Все уроки</button>
+  const nav = `<div class="lnav"><button class="btn ghost small" data-goto="${openLesson - 1}"${openLesson === 0 ? " disabled" : ""}>← Урок ${openLesson}</button><button class="btn ghost small" data-act="back">Все уроки</button><button class="btn ghost small" data-goto="${openLesson + 1}"${openLesson === LESSONS.length - 1 ? " disabled" : ""}>Урок ${openLesson + 2} →</button></div>`;
+  const isFocus = S.set.focus === openLesson;
+  P.innerHTML = `${nav}
     <h2 style="margin-top:14px">Урок ${openLesson + 1}. ${esc(L.title)}</h2>
     <div class="theory">${L.theory}</div>
     <h3>Фразы урока</h3><p class="small muted">Нажми на фразу — услышишь её. Точка справа: серая — ещё не учил, жёлтая — учишь, зелёная — выучено.</p>
@@ -1045,7 +1063,9 @@ function renderLessons() {
       ${left ? `<button class="btn" data-act="learn-lesson">Учить фразы урока (${left})</button>` : ""}
       ${st.seen ? `<button class="btn ghost" data-act="practice-lesson">Потренироваться</button>` : ""}
     </div>
-    ${st.seen ? `<p class="small muted" style="margin-top:8px">«Потренироваться» не сбивает расписание повторений — просто прогон для себя.</p>` : ""}`;
+    ${st.seen ? `<p class="small muted" style="margin-top:8px">«Потренироваться» не сбивает расписание повторений — просто прогон для себя.</p>` : ""}
+    ${left ? (isFocus ? `<p class="small" style="margin-top:12px">✓ Новые фразы во вкладке «Сегодня» берутся из этого урока. <button class="chip" data-act="unfocus">Вернуть по порядку</button></p>` : `<div class="row" style="margin-top:12px"><button class="btn ghost small" data-act="focus">Брать новые фразы на «Сегодня» отсюда</button></div>`) : ""}
+    <div style="margin-top:18px">${nav}</div>`;
 }
 
 let PD = { pair: null, pick: null, score: 0, total: 0 };
@@ -1120,6 +1140,7 @@ document.addEventListener("click", e => {
     return;
   }
   if (t.dataset.rule) { gotoRule(t.dataset.rule); return; }
+  if (t.dataset.goto != null) { openLesson = Math.max(0, Math.min(LESSONS.length - 1, +t.dataset.goto)); renderLessons(); window.scrollTo(0, 0); return; }
   if (t.dataset.lesson) { openLesson = +t.dataset.lesson; renderLessons(); window.scrollTo(0, 0); return; }
   if (t.dataset.opt) {
     const it = cur();
@@ -1163,6 +1184,8 @@ document.addEventListener("click", e => {
     else if (act === "home") renderToday();
     else if (act === "to-lessons") { showTab("lessons"); }
     else if (act === "back") { openLesson = null; renderLessons(); }
+    else if (act === "focus") { S.set.focus = openLesson; save(); renderLessons(); }
+    else if (act === "unfocus") { S.set.focus = null; save(); renderLessons(); }
     else if (act === "learn-lesson") startSession({ lesson: openLesson });
     else if (act === "practice-lesson") startSession({ lesson: openLesson, practice: true });
     else if (act === "pair-play") say(PD.pair[PD.pick * 2]);
@@ -1181,6 +1204,7 @@ function drillTilesSafe() { if (W && cur() && cur().mode === "build") drawTiles(
 document.addEventListener("change", e => {
   if (e.target.id === "set-new") { S.set.newPerDay = +e.target.value; save(); renderToday(); }
   if (e.target.id === "set-rate") { S.set.rate = +e.target.value; save(); say("Guten Tag! Wie geht's?"); }
+  if (e.target.id === "set-focus") { S.set.focus = e.target.value === "" ? null : +e.target.value; save(); renderToday(); }
   if (e.target.id === "set-auto") { S.set.auto = e.target.checked; save(); }
 });
 
