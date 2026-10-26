@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Корни и приставки</title>
+<title>Русский ЕГЭ</title>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="ЕГЭ 9·10">
+<meta name="apple-mobile-web-app-title" content="ЕГЭ рус">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="theme-color" content="#f3f6fb" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#10141c" media="(prefers-color-scheme: dark)">
@@ -209,6 +209,20 @@ label.lbl { font-size: 13px; color: var(--muted); display: inline-flex; gap: 8px
 .rcard .row-actions { margin-top: 2px; }
 .errc { font-size: 12px; color: var(--red); font-weight: 500; }
 
+
+.sent { font: 21px/2 var(--f-word); text-align: center; padding: 24px 0 8px; }
+.sent .sw { border-radius: 5px; padding: 2px 1px; }
+.sent .sw[data-sw] { cursor: pointer; }
+.sent .sw[data-sw]:hover, .sent .sw.sel { background: var(--ink-soft); }
+.cm { font-family: var(--f-hand); font-weight: 700; font-size: 1.35em; line-height: 0; color: var(--ink); }
+.cm.ok { color: var(--ok); }
+.cm.miss { color: var(--red); text-decoration: underline; }
+.cm.extra { color: var(--red); text-decoration: line-through; }
+.r .ws .sw { font: 17px/1.6 var(--f-word); }
+.cnt16 { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; font: 13px var(--f-ui); color: var(--muted); margin-top: 4px; }
+.cnt16 .chip { margin-top: 0; }
+.opt.ropt { font: 600 15px var(--f-ui); height: auto; min-height: 54px; padding: 8px 14px; max-width: 100%; }
+.opt.ropt .k { margin-top: 2px; }
 button:focus-visible, select:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 
@@ -222,8 +236,8 @@ button, select { touch-action: manipulation; -webkit-tap-highlight-color: transp
   <nav class="appnav" aria-label="Тренажёры"><a class="home" href="../" aria-label="Все тренажёры">☰</a><a href="../russian/" aria-current="page">Русский</a><a href="../physics/">Физика</a><a href="../german/">Немецкий</a><a href="../english/">Английский</a></nav>
   <header>
     <div>
-      <h1>Корни и приставки</h1>
-      <div class="sub">задания 9 и 10 ЕГЭ · работа над ошибками</div>
+      <h1>Русский ЕГЭ</h1>
+      <div class="sub">задания 9, 10 и 16 · работа над ошибками</div>
     </div>
     <div class="stats" id="stats"></div>
   </header>
@@ -232,12 +246,14 @@ button, select { touch-action: manipulation; -webkit-tap-highlight-color: transp
     <button class="tab" role="tab" data-tab="words" aria-selected="true">Слова</button>
     <button class="tab" role="tab" data-tab="rows" aria-selected="false">Ряды как на ЕГЭ</button>
     <button class="tab" role="tab" data-tab="test" aria-selected="false">Моя ср</button>
+    <button class="tab" role="tab" data-tab="commas" aria-selected="false">Запятые · 16</button>
     <button class="tab" role="tab" data-tab="rules" aria-selected="false">Правила</button>
   </nav>
 
   <section class="sheet" id="p-words"></section>
   <section class="sheet" id="p-rows" hidden></section>
   <section class="sheet" id="p-test" hidden></section>
+  <section class="sheet" id="p-commas" hidden></section>
   <section class="sheet" id="p-rules" hidden></section>
 </div>
 
@@ -316,7 +332,34 @@ const RULES = {
                    "В начале слова без приставки ы не пишется."] },
   tz:     { t: 10, short: "ъ / ь", title: "Разделительные Ъ и Ь", opts: ["ъ", "ь"],
             text: ["Ъ пишется перед е, ё, ю, я: после приставок на согласный (подъезд), в иноязычных приставках и корнях (адъютант, субъект, объект), в сложных словах с двух-, трёх-, четырёх-.",
-                   "Ь пишется внутри корня, перед суффиксами и окончаниями — не после приставки (вьюга, соловьи), а также в иноязычных словах (бульон, батальон)."] }
+                   "Ь пишется внутри корня, перед суффиксами и окончаниями — не после приставки (вьюга, соловьи), а также в иноязычных словах (бульон, батальон)."] },
+  odn:    { t: 16, short: "без союзов", title: "Однородные члены без союзов",
+            text: ["Между однородными членами, которые не соединены союзами, ставится запятая: Дети бегали, смеялись, кричали.",
+                   "Однородные отвечают на один вопрос и относятся к одному и тому же слову."] },
+  odin:   { t: 16, short: "одиночный и/или", title: "Одиночный союз И, ИЛИ, ДА (= и)",
+            text: ["Если однородные соединены одиночным союзом и, или, либо, да (= и), запятая не нужна: Брат любит читать и рисовать.",
+                   "Два одиночных «и» в разных рядах однородных — тоже без запятых: Мы шли по лесу и собирали грибы и ягоды."] },
+  povt:   { t: 16, short: "и…и, ни…ни", title: "Повторяющиеся союзы",
+            text: ["При союзах и…и, ни…ни, или…или, либо…либо, то…то, то ли…то ли запятая ставится перед вторым и следующими союзами: и яблони, и груши, и вишни.",
+                   "Перед первым союзом запятой нет."] },
+  prot:   { t: 16, short: "а, но, однако", title: "Противительные союзы А, НО, ДА (= но), ОДНАКО, ЗАТО",
+            text: ["Перед противительным союзом запятая ставится всегда: День был холодный, но солнечный.",
+                   "Да может значить «и» (без запятой) или «но» (с запятой): Мал золотник, да дорог."] },
+  dvoin:  { t: 16, short: "не только…но и", title: "Двойные союзы",
+            text: ["не только…, но и; как…, так и; хотя и…, но; если не…, то; не столько…, сколько.",
+                   "Запятая ставится один раз — перед второй частью союза: Он знал не только математику, но и физику."] },
+  pary:   { t: 16, short: "пары", title: "Однородные, соединённые попарно",
+            text: ["Если однородные соединены в пары союзом и, запятая ставится между парами, а внутри пары её нет: Мальчики и девочки, взрослые и дети вышли на площадь."] },
+  ssp:    { t: 16, short: "две основы", title: "Сложносочинённое предложение",
+            text: ["Если у каждой части есть своё подлежащее и сказуемое, перед и, а, но между частями ставится запятая: Наступил вечер, и в окнах зажглись огни.",
+                   "Как проверить: найди все грамматические основы. Две основы и союз между ними — нужна запятая."] },
+  obsh:   { t: 16, short: "общий член", title: "Сложносочинённое без запятой",
+            text: ["Запятая перед и не ставится, если у обеих частей есть общий второстепенный член, общее придаточное или общее вводное слово: Весной снег тает и бегут ручьи (весной — общее).",
+                   "Также без запятой, если обе части — вопросительные, восклицательные или побудительные: Сколько тебе лет и где ты учишься?"] },
+  fraz:   { t: 16, short: "фразеологизм", title: "Фразеологизмы с повторяющимися союзами",
+            text: ["Внутри устойчивых выражений запятая не ставится: ни свет ни заря, ни жив ни мёртв, ни то ни сё, ни рыба ни мясо, и так и сяк, и смех и грех, ни днём ни ночью, ни дать ни взять, ни с того ни с сего, ни конца ни края, ни больше ни меньше."] },
+  skaz:   { t: 16, short: "пойду погуляю", title: "Два глагола — одно действие",
+            text: ["Сочетания глаголов, которые обозначают одно действие или действие и его цель, — не однородные, запятая не нужна: пойду погуляю, сядь отдохни, взял да и рассказал."] }
 };
 
 const DEFAULT_OPTS = { "а": ["а","о"], "о": ["а","о"], "е": ["е","и"], "и": ["е","и"], "я": ["е","и","я"],
@@ -429,7 +472,14 @@ const EXTRA = {
       "ск_чок|а|skak","нач_нать|и|im","сн_мать|и|im","ум_лять (свои достоинства)|а|prov","пос_деть (у окна)|и|prov",
       "пос_деть (о волосах)|е|prov","обв_нять|и|prov","разв_вается (ребёнок)|и|prov","пол_скать (бельё)|о|prov",
       "вет_ринар|е|neprov","интелл_генция|и|neprov","ап_ллировать|е|neprov","д_фицит|е|neprov","ж_лудь|ё|sh",
-      "ш_рох|о|sh","ч_рствый|ё|sh","ш_пот|ё|sh","ц_рк|и|c","ц_плёнок|ы|c","на ц_почках|ы|c"],
+      "ш_рох|о|sh","ч_рствый|ё|sh","ш_пот|ё|sh","ц_рк|и|c","ц_плёнок|ы|c","на ц_почках|ы|c",
+      "выт_рать|и|ei","зам_рать|и|ei","расст_лается (туман)|и|ei","отр_стить|а|rast","нар_щение|а|rast","выр_с|о|rast",
+      "пол_жить|о|lag","сл_гаемое|а|lag","к_сание|а|kas","з_рница|а|zar","оз_рить|а|zar","пог_релец|о|gar","уг_реть|о|gar",
+      "тв_рение|о|tvar","пл_вник|а|plav","ос_лить (врага)|и|prov","посв_тить (жизнь науке)|я|prov","посв_тить (фонариком)|е|prov",
+      "разр_дить (ружьё)|я|prov","разр_дить (рассаду)|е|prov","отв_зать|я|prov","т_рпеливый|е|prov","к_мпьютер|о|neprov",
+      "к_рдинальный|а|neprov","эксп_римент|е|neprov","ф_нтастический|а|neprov","ш_лк|ё|sh","ч_лка|ё|sh","ж_нглёр|о|sh",
+      "ц_фра|и|c","ц_ган|ы|c","обм_кать (кисть в краску)|а|mak","нам_кнуть|о|mak","ск_чу|а|skak","выск_чить|о|skak",
+      "зан_мать|и|im","ур_внение|а|ravn","выр_внять (дорогу)|о|ravn","накл_ниться|о|klan"],
   10: ["пр_бывать (в столицу)|и|pre","пр_бывать (в неведении)|е|pre","пр_зирать (предателей)|е|pre_d",
        "пр_дел (участка)|е|pre_d","пр_вратный|е|pre_d","пр_зидент|е|pre_d","пр_тензия|е|pre_d","пр_оритет|и|pre_d",
        "пр_митивный|и|pre_d","пр_вилегия|и|pre_d","пр_сесть|и|pre","пр_мудрый|е|pre","пр_брежный|и|pre",
@@ -439,7 +489,14 @@ const EXTRA = {
        "сер_ёзный|ь|tz","трёх_язычный|ъ|tz","из_ян|ъ|tz","солов_иный|ь|tz","д_бежать|о|pv","з_гадка|а|pv",
        "пр_бег|о|pv","р_спись (по дереву)|о|rr","р_зыск|о|rr","р_списание|а|rr","р_ссказ|а|rr","по_писать|д|dt",
        "о_дать|т|dt","по_жечь|д|dt","о_бросить|т|dt","_бить (с толку)|с|s_pref","_гиб|с|s_pref",
-       "н_спадающий|и|niz","н_звергнуть|и|niz","пр_дпоследний|е|pred"]
+       "н_спадающий|и|niz","н_звергнуть|и|niz","пр_дпоследний|е|pred",
+       "пр_бой|и|pre","пр_сечь (попытку)|е|pre","пр_вокзальный|и|pre","пр_вышать (скорость)|е|pre","пр_старелый|е|pre",
+       "пр_держиваться (мнения)|и|pre_d","пр_небрегать|е|pre_d","пр_вередливый|и|pre_d","пр_зидиум|е|pre_d","пр_мьера|е|pre_d",
+       "пр_вычка|и|pre_d","пр_ключение|и|pre_d","пр_пятствие|е|pre_d","пр_дназначение|е|pred","бе_вредный|з|zs","ра_сказать|с|zs",
+       "и_жарить|з|zs","во_сиять|с|zs","чере_полосица|с|zs","ра_дробленный|з|zs","_делка|с|s_pref","_бор (вещей)|с|s_pref",
+       "по_толкнуть|д|dt","о_кусить|т|dt","на_пиленный|д|dt","р_зряд|а|rr","р_ссыпь|о|rr","дез_нформация|и|yi",
+       "пост_мпрессионизм|и|yi","без_дейный|ы|yi","от_граться|ы|yi","пед_нститут|и|yi","в_езд|ъ|tz","кар_ера|ь|tz",
+       "интер_ер|ь|tz","пан_европейский|ъ|tz","четырёх_ярусный|ъ|tz","д_брать|о|pv","з_морозки|а|pv"]
 };
 
 /* ---------- Банк слов ---------- */
@@ -459,7 +516,7 @@ function optsOf(w) { return w.opts || RULES[w.rule].opts || DEFAULT_OPTS[w.ans];
 
 /* ---------- Хранилище ---------- */
 const KEY = "ege-9-10-trainer-v1";
-let S = { words: {}, blocks: {}, total: { n: 0, ok: 0 } };
+let S = { words: {}, blocks: {}, total: { n: 0, ok: 0 }, sent: {} };
 try { const raw = localStorage.getItem(KEY); if (raw) S = Object.assign(S, JSON.parse(raw)); } catch (e) {}
 function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
 function ws(id) { return S.words[id] || (S.words[id] = { ok: 0, bad: 0, streak: 0 }); }
@@ -486,15 +543,17 @@ function ruleHTML(id) {
 function renderStats() {
   const solved = TEST.filter(b => S.blocks[b.id]).length;
   const pct = S.total.n ? Math.round(S.total.ok / S.total.n * 100) : 0;
-  $("#stats").innerHTML = `<span>ответов: <b>${S.total.n}</b></span><span>верно: <b>${pct}%</b></span><span>блоков ср решено: <b>${solved}/${TEST.length}</b></span>`;
+  const sd = Object.values(S.sent || {}).filter(x => x.streak >= 2).length;
+  $("#stats").innerHTML = `<span>ответов: <b>${S.total.n}</b></span><span>верно: <b>${pct}%</b></span><span>блоков ср: <b>${solved}/${TEST.length}</b></span><span>запятые усвоены: <b>${sd}/${SENT.length}</b></span>`;
 }
 
 /* ---------- Вкладки ---------- */
 const tabs = document.querySelectorAll(".tab");
 function showTab(name) {
   tabs.forEach(t => t.setAttribute("aria-selected", t.dataset.tab === name ? "true" : "false"));
-  ["words", "rows", "test", "rules"].forEach(n => { $("#p-" + n).hidden = n !== name; });
+  ["words", "rows", "test", "commas", "rules"].forEach(n => { $("#p-" + n).hidden = n !== name; });
   if (name === "rules") renderRules();
+  if (name === "commas" && !C.cur) renderCommas();
   if (name === "words" && !W.queue.length && !W.current) renderWords();
   try { localStorage.setItem(KEY + "-tab", name); } catch (e) {}
 }
@@ -502,7 +561,7 @@ tabs.forEach(t => t.addEventListener("click", () => showTab(t.dataset.tab)));
 
 /* ---------- Режим «Слова» ---------- */
 const ROUND = 20;
-const W = { task: "all", source: "all", rule: "", queue: [], current: null, answered: false, seen: new Set(),
+const W = { mode: "letter", ropts: [], task: "all", source: "all", rule: "", queue: [], current: null, answered: false, seen: new Set(),
             first: { n: 0, ok: 0 }, missedRules: {}, total: 0, timer: null, customIds: null, customLabel: "" };
 
 function poolWords() {
@@ -525,11 +584,16 @@ function startRound() {
 function nextWord() {
   clearTimeout(W.timer);
   W.current = W.queue.shift() || null; W.answered = false;
+  if (W.current) {
+    const w = BANK[W.current];
+    const others = shuffle(Object.keys(RULES).filter(id => RULES[id].t === w.task && id !== w.rule));
+    W.ropts = shuffle([w.rule, ...others.slice(0, 3)]);
+  }
   renderWords();
 }
 function answer(letter) {
   if (!W.current || W.answered) return;
-  const w = BANK[W.current]; const ok = letter === w.ans; const st = ws(w.id);
+  const w = BANK[W.current]; const ok = W.mode === "rule" ? letter === w.rule : letter === w.ans; const st = ws(w.id);
   W.answered = { letter, ok };
   const firstTime = !W.seen.has(w.id); W.seen.add(w.id);
   if (firstTime) { W.first.n++; if (ok) W.first.ok++; }
@@ -545,14 +609,15 @@ function answer(letter) {
 }
 
 function wordControls() {
+  const modeSeg = `<div class="seg" role="group" aria-label="Тип"><button data-wm="letter" aria-pressed="${W.mode === "letter"}">Буква</button><button data-wm="rule" aria-pressed="${W.mode === "rule"}">Какое правило?</button></div>`;
   const ruleOpts = Object.entries(RULES)
-    .filter(([, r]) => W.task === "all" || String(r.t) === W.task)
+    .filter(([, r]) => r.t !== 16 && (W.task === "all" || String(r.t) === W.task))
     .map(([id, r]) => `<option value="${id}"${W.rule === id ? " selected" : ""}>${esc(r.title)}</option>`).join("");
   if (W.customIds) {
-    return `<div class="controls"><span class="pill">${esc(W.customLabel)}</span>
+    return `<div class="controls">${modeSeg}<span class="pill">${esc(W.customLabel)}</span>
       <button class="btn ghost" id="w-reset">Вернуться ко всем словам</button></div>`;
   }
-  return `<div class="controls">
+  return `<div class="controls">${modeSeg}
     <div class="seg" role="group" aria-label="Задание">
       ${[["all","9 и 10"],["9","Задание 9"],["10","Задание 10"]].map(([v,l]) => `<button data-task="${v}" aria-pressed="${W.task===v}">${l}</button>`).join("")}
     </div>
@@ -589,14 +654,17 @@ function renderWords() {
     body = n ? `<div class="summary"><div>В подборке ${n} слов${n > ROUND && !W.customIds ? `, в круге будет ${ROUND}` : ""}.</div><button class="btn" id="w-again">Начать</button></div>`
              : `<div class="summary"><div>Под эти фильтры слов нет${W.source === "mistakes" ? " — ошибок пока нет или ты их уже исправил" : ""}.</div></div>`;
   } else {
-    const w = BANK[W.current]; const a = W.answered; const opts = optsOf(w);
+    const w = BANK[W.current]; const a = W.answered; const opts = optsOf(w); const rm = W.mode === "rule";
     const repeat = W.seen.has(w.id) && !a ? `<span class="pill">повтор</span>` : "";
     body = `
       <div class="progress"><i style="width:${W.first.n / Math.max(1, W.total) * 100}%"></i></div>
       <div class="ptext">осталось ${W.queue.length + 1} · задание ${w.task} ${repeat}</div>
-      <div class="word">${a && a.ok ? wordHTML(w, w.ans) : wordHTML(w)}</div>
-      <div class="opts">${opts.map((o, i) => `<button class="opt" data-l="${o}"${a ? " disabled" : ""}>${o}<span class="k">${i + 1}</span></button>`).join("")}</div>
-      ${!a ? `<div class="hint">Нажми букву или цифру на клавиатуре</div>` : ""}
+      <div class="word">${(a && a.ok) || rm ? wordHTML(w, w.ans) : wordHTML(w)}</div>
+      ${rm ? `<div class="hint">Почему здесь «${esc(w.ans)}»? Выбери правило.</div>` : ""}
+      <div class="opts">${rm
+        ? W.ropts.map((id, i) => `<button class="opt ropt" data-l="${id}"${a ? " disabled" : ""}>${esc(RULES[id].short)}<span class="k">${i + 1}</span></button>`).join("")
+        : opts.map((o, i) => `<button class="opt" data-l="${o}"${a ? " disabled" : ""}>${o}<span class="k">${i + 1}</span></button>`).join("")}</div>
+      ${!a && !rm ? `<div class="hint">Нажми букву или цифру на клавиатуре</div>` : ""}
       ${a ? (a.ok
         ? `<div class="fb ok"><div class="head">Верно</div><div class="row-actions"><span class="pill">${esc(RULES[w.rule].short)}</span><button class="btn ghost" id="w-next">Дальше</button></div></div>`
         : `<div class="fb bad"><div class="head">Не так. Вспомни правило</div>${ruleHTML(w.rule)}
@@ -606,6 +674,7 @@ function renderWords() {
   const mark = W.current && W.answered ? `<div class="mark" style="top:96px">${W.answered.ok ? "+" : "−"}</div>` : "";
   root.innerHTML = wordControls() + body + mark + weakHTML();
 
+  root.querySelectorAll("[data-wm]").forEach(b => b.onclick = () => { W.mode = b.dataset.wm; const keep = W.customIds; resetIdle(); if (keep) { W.customIds = keep; startRound(); } });
   root.querySelectorAll("[data-task]").forEach(b => b.onclick = () => { W.task = b.dataset.task; if (W.rule && String(RULES[W.rule].t) !== W.task && W.task !== "all") W.rule = ""; resetIdle(); });
   const src = $("#w-source", root); if (src) src.onchange = () => { W.source = src.value; resetIdle(); };
   const rl = $("#w-rule", root); if (rl) rl.onchange = () => { W.rule = rl.value; resetIdle(); };
@@ -628,9 +697,9 @@ document.addEventListener("keydown", e => {
   if (e.target.tagName === "SELECT") return;
   if (!W.current) return;
   if (W.answered) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); nextWord(); } return; }
-  const opts = optsOf(BANK[W.current]); const k = e.key.toLowerCase();
+  const opts = W.mode === "rule" ? W.ropts : optsOf(BANK[W.current]); const k = e.key.toLowerCase();
   if (/^[1-9]$/.test(k) && opts[+k - 1]) { answer(opts[+k - 1]); return; }
-  if (opts.includes(k)) answer(k);
+  if (W.mode !== "rule" && opts.includes(k)) answer(k);
 });
 
 /* ---------- Ряды (общий виджет) ---------- */
@@ -755,11 +824,237 @@ function renderRules() {
       ${r.text.map(p => `<p>${esc(p)}</p>`).join("")}
       <div class="row-actions"><button class="btn ghost" data-drill="${id}">Тренировать (${count(id)} слов)</button></div></div>`; };
   const ids = t => Object.keys(RULES).filter(id => RULES[id].t === t);
+  const e16 = ruleErrors16();
+  const card16 = id => { const r = RULES[id]; return `<div class="rcard"><h3>${esc(r.title)}${e16[id] ? `<span class="errc">ошибок: ${e16[id]}</span>` : ""}</h3>
+      ${r.text.map(p => `<p>${esc(p)}</p>`).join("")}
+      <div class="row-actions"><button class="btn ghost" data-drill16="${id}">Тренировать (${SENT.filter(x => x.rule === id).length} предл.)</button></div></div>`; };
   $("#p-rules").innerHTML = `<div class="rules-list">
     <h2>Задание 9 · корни</h2>${ids(9).map(card).join("")}
-    <h2>Задание 10 · приставки</h2>${ids(10).map(card).join("")}</div>`;
+    <h2>Задание 10 · приставки</h2>${ids(10).map(card).join("")}
+    <h2>Задание 16 · запятые</h2>${ids(16).map(card16).join("")}</div>`;
   $("#p-rules").querySelectorAll("[data-drill]").forEach(b => b.onclick = () => drillRule(b.dataset.drill));
+  $("#p-rules").querySelectorAll("[data-drill16]").forEach(b => b.onclick = () => drill16(b.dataset.drill16));
 }
+
+const SENT = [
+["Мы купили хлеб, молоко и сыр.", "odn", "Хлеб, молоко — без союза, нужна запятая; перед одиночным «и» — нет."],
+["На столе лежали книги, тетради, карандаши.", "odn", "Три однородных подлежащих без союзов — две запятые."],
+["Лес был тихий, тёмный и сырой.", "odn", "Тихий, тёмный — без союза; перед одиночным «и» запятой нет."],
+["Дети бегали, смеялись, кричали.", "odn", "Три однородных сказуемых без союзов."],
+["Поле было широкое, ровное и пустое.", "odn", "Широкое, ровное — без союза; «и пустое» — одиночный союз."],
+["На берегу стояли лодки, сети и вёсла.", "odn", "Лодки, сети — без союза; перед одиночным «и» запятой нет."],
+["Брат любит читать и рисовать.", "odin", "Однородные с одиночным «и» — без запятой."],
+["Можно поехать на поезде или полететь на самолёте.", "odin", "Одиночный «или» — без запятой."],
+["Старик долго смотрел на море и о чём-то думал.", "odin", "Одно подлежащее, два сказуемых с одиночным «и»."],
+["Мы шли по лесу и собирали грибы и ягоды.", "odin", "Два одиночных «и» в разных рядах однородных — запятых нет."],
+["Ветер шумел в листве да гнал по небу облака.", "odin", "«Да» здесь значит «и» — одиночный союз, без запятой."],
+["Ученики писали сочинение и не замечали шума за окном.", "odin", "Одно подлежащее и два сказуемых с одиночным «и»."],
+["Мальчик открыл книгу и начал читать вслух.", "odin", "Однородные сказуемые с одиночным «и»."],
+["Утро было морозное и ясное.", "odin", "Два однородных с одиночным «и»."],
+["В саду росли и яблони, и груши, и вишни.", "povt", "Повторяющийся «и»: запятая перед вторым и третьим."],
+["Ни дождь, ни ветер не могли остановить путников.", "povt", "Ни…ни: запятая перед вторым «ни»."],
+["Он не знал ни отдыха, ни покоя.", "povt", "Ни…ни: запятая перед вторым «ни»."],
+["Вечером мы или читали, или играли в шахматы.", "povt", "Или…или: запятая перед вторым «или»."],
+["Я пригласил и Машу, и Петю, и Олега.", "povt", "И…и…и: две запятые."],
+["Ветер то усиливался, то затихал.", "povt", "То…то: запятая перед вторым «то»."],
+["Сестра то смеялась, то плакала, то вдруг замолкала.", "povt", "То…то…то: две запятые."],
+["Ни я, ни мой брат не знали дороги.", "povt", "Ни…ни: одна запятая."],
+["Я люблю и осень, и весну.", "povt", "И…и: запятая перед вторым «и»."],
+["Он то ли шутил, то ли говорил всерьёз.", "povt", "То ли…то ли: запятая перед вторым."],
+["День был холодный, но солнечный.", "prot", "Перед «но» запятая всегда."],
+["Он говорил не громко, а тихо.", "prot", "Перед «а» запятая всегда."],
+["Мал золотник, да дорог.", "prot", "«Да» = «но» — противительный союз, нужна запятая."],
+["Задача сложная, однако интересная.", "prot", "«Однако» = «но»."],
+["Работа тяжёлая, зато хорошо оплачивается.", "prot", "Перед «зато» запятая."],
+["Мы долго искали дорогу, но так и не нашли её.", "prot", "Перед «но» запятая; «так и не» — не повтор союза."],
+["Дом был старый, но крепкий и тёплый.", "prot", "Перед «но» запятая, перед одиночным «и» — нет."],
+["Он был умён, но ленив и рассеян.", "prot", "Перед «но» запятая, «ленив и рассеян» — без."],
+["Я хотел позвонить, но не решился и отложил разговор.", "prot", "Перед «но» запятая, перед одиночным «и» — нет."],
+["Мы осмотрели музей и парк, а потом пошли обедать.", "prot", "Перед «а» запятая; «музей и парк» — без."],
+["Он знал не только математику, но и физику.", "dvoin", "Не только…, но и: запятая перед «но»."],
+["Как взрослые, так и дети любят этот праздник.", "dvoin", "Как…, так и: запятая перед «так»."],
+["Комната хотя и маленькая, но уютная.", "dvoin", "Хотя и…, но: запятая перед «но»."],
+["Это если не лучший, то один из лучших фильмов года.", "dvoin", "Если не…, то: запятая перед «то»."],
+["Не только ученики, но и учителя пришли на концерт.", "dvoin", "Не только…, но и."],
+["Мы не только посетили выставку, но и встретились с художником.", "dvoin", "Не только…, но и: одна запятая."],
+["Мальчики и девочки, взрослые и дети вышли на площадь.", "pary", "Пары соединены «и» внутри; между парами — запятая."],
+["Мы говорили о книгах и фильмах, о музыке и театре.", "pary", "Две пары однородных — запятая между парами."],
+["Наступил вечер, и в окнах зажглись огни.", "ssp", "Две основы: «наступил вечер» и «огни зажглись»."],
+["Солнце село, а небо ещё долго оставалось светлым.", "ssp", "Две основы, союз «а»."],
+["Я позвонил другу, но он не взял трубку.", "ssp", "Две основы: «я позвонил», «он не взял»."],
+["Подул ветер, и деревья зашумели.", "ssp", "Две основы, союз «и»."],
+["Снег шёл всю ночь, и к утру всё вокруг побелело.", "ssp", "Две основы: «снег шёл», «всё побелело»."],
+["Мама ушла на работу, а папа остался дома.", "ssp", "Две основы, союз «а»."],
+["Прошёл дождь, и воздух стал свежим, и на траве заблестели капли.", "ssp", "Три основы — две запятые."],
+["Гроза прошла, но небо оставалось хмурым, и где-то вдали гремел гром.", "ssp", "Три основы — две запятые."],
+["То солнце светит, то дождь идёт.", "ssp", "Две основы, повторяющийся союз «то…то»."],
+["Через минуту дождь кончился и выглянуло солнце.", "obsh", "Две основы, но «через минуту» относится к обеим — запятой нет."],
+["Весной снег тает и бегут ручьи.", "obsh", "Общий второстепенный член «весной»."],
+["Вечером похолодало и пошёл снег.", "obsh", "Общее «вечером» — без запятой."],
+["Вокруг стало темно и запахло сыростью.", "obsh", "Общее «вокруг» — без запятой."],
+["Когда мы вышли из дома, уже стемнело и зажглись фонари.", "obsh", "Запятая после придаточного; дальше общее придаточное — перед «и» запятой нет."],
+["К сожалению, поезд опоздал и встреча не состоялась.", "obsh", "Запятая после вводного; оно общее для обеих частей — перед «и» нет."],
+["Сколько тебе лет и где ты учишься?", "obsh", "Обе части — вопросительные, запятой нет."],
+["Пусть светит солнце и поют птицы!", "obsh", "Обе части побудительные — без запятой."],
+["Как тихо в лесу и как прозрачен воздух!", "obsh", "Обе части восклицательные — без запятой."],
+["Мы встали ни свет ни заря.", "fraz", "«Ни свет ни заря» — фразеологизм, без запятой."],
+["Он стоял ни жив ни мёртв.", "fraz", "Фразеологизм «ни жив ни мёртв»."],
+["Получилось ни то ни сё.", "fraz", "Фразеологизм «ни то ни сё»."],
+["Он не знал покоя ни днём ни ночью.", "fraz", "Фразеологизм «ни днём ни ночью»."],
+["Мы пробовали и так и сяк, но ничего не получалось.", "fraz", "«И так и сяк» — фразеологизм; запятая только перед «но»."],
+["И смех и грех смотреть на это.", "fraz", "Фразеологизм «и смех и грех»."],
+["Пойду погуляю в парке.", "skaz", "«Пойду погуляю» — одно действие, не однородные."],
+["Сядь отдохни немного.", "skaz", "«Сядь отдохни» — одно сказуемое."],
+["Он взял да и рассказал всё.", "skaz", "«Взял да и рассказал» — одно действие."],
+["Ни я, ни сестра не умели плавать, и мы остались на берегу.", "ssp", "Ни…ни внутри первой части + запятая между основами."]
+].map((s, i) => {
+  const toks = s[0].split(" ");
+  return { id: "s" + i, text: s[0], rule: s[1], note: s[2], words: toks.map(t => t.replace(/,$/, "")), commas: toks.map((t, j) => t.endsWith(",") ? j : -1).filter(j => j >= 0) };
+});
+const SBANK = Object.fromEntries(SENT.map(s => [s.id, s]));
+
+function sst(id) { S.sent = S.sent || {}; return S.sent[id] || (S.sent[id] = { ok: 0, bad: 0, streak: 0 }); }
+function ruleErrors16() {
+  const m = {};
+  for (const [id, st] of Object.entries(S.sent || {})) { const s = SBANK[id]; if (s && st.bad) m[s.rule] = (m[s.rule] || 0) + st.bad; }
+  return m;
+}
+function sentHTML(s, mode, sel) {
+  return s.words.map((w, j) => {
+    const need = s.commas.includes(j), mine = sel && sel.has(j), last = j === s.words.length - 1;
+    if (mode === "pick") return `<span class="sw${mine ? " sel" : ""}"${last ? "" : ` data-sw="${j}"`}>${esc(w)}${mine ? '<b class="cm">,</b>' : ""}</span>`;
+    if (mode === "check") {
+      let c = "";
+      if (need && mine) c = '<b class="cm ok">,</b>';
+      else if (need) c = '<b class="cm miss">,</b>';
+      else if (mine) c = '<b class="cm extra">,</b>';
+      return `<span class="sw">${esc(w)}${c}</span>`;
+    }
+    if (mode === "show") return `<span class="sw">${esc(w)}${need ? '<b class="cm ok">,</b>' : ""}</span>`;
+    return `<span class="sw">${esc(w)}</span>`;
+  }).join(" ");
+}
+
+const C = { mode: "place", rule: "", source: "all", queue: [], cur: null, sel: new Set(), res: null, first: { n: 0, ok: 0 }, total: 0, seen: new Set(), ege: null };
+const CROUND = 12;
+function poolSent() {
+  return SENT.filter(s => {
+    if (C.rule && s.rule !== C.rule) return false;
+    if (C.source === "mistakes") { const st = (S.sent || {})[s.id]; if (!st || !st.bad || st.streak >= 2) return false; }
+    return true;
+  });
+}
+function startCommas() {
+  if (C.mode === "ege") { C.ege = genEge(); renderCommas(); return; }
+  const pool = shuffle(poolSent());
+  C.queue = pool.slice(0, CROUND).map(s => s.id);
+  C.total = C.queue.length; C.first = { n: 0, ok: 0 }; C.seen = new Set();
+  nextSent();
+}
+function nextSent() { C.cur = C.queue.shift() || null; C.sel = new Set(); C.res = null; renderCommas(); }
+function recordSent(s, ok) {
+  const st = sst(s.id);
+  const firstTime = !C.seen.has(s.id); C.seen.add(s.id);
+  if (firstTime) { C.first.n++; if (ok) C.first.ok++; }
+  S.total.n++;
+  if (ok) { S.total.ok++; st.ok++; st.streak++; }
+  else { st.bad++; st.streak = 0; C.queue.splice(Math.min(C.queue.length, 3), 0, s.id); }
+  save(); renderStats();
+}
+function genEge() {
+  const pool = poolSent().length >= 8 ? poolSent() : SENT;
+  const one = shuffle(pool.filter(s => s.commas.length === 1)).slice(0, 2);
+  const other = shuffle(pool.filter(s => s.commas.length !== 1)).slice(0, 3);
+  if (one.length < 2 || other.length < 3) {
+    return { list: shuffle(shuffle(SENT.filter(s => s.commas.length === 1)).slice(0, 2).concat(shuffle(SENT.filter(s => s.commas.length !== 1)).slice(0, 3))).map(s => s.id), sel: new Set(), done: false };
+  }
+  return { list: shuffle(one.concat(other)).map(s => s.id), sel: new Set(), done: false };
+}
+function commasControls() {
+  const ruleOpts = Object.entries(RULES).filter(([, r]) => r.t === 16)
+    .map(([id, r]) => `<option value="${id}"${C.rule === id ? " selected" : ""}>${esc(r.title)}</option>`).join("");
+  return `<div class="controls">
+    <div class="seg" role="group" aria-label="Тип">
+      ${[["place", "Расставь"], ["count", "Сколько?"], ["ege", "Как на ЕГЭ"]].map(([v, l]) => `<button data-cm="${v}" aria-pressed="${C.mode === v}">${l}</button>`).join("")}
+    </div>
+    <label class="lbl">Правило <select id="c-rule"><option value="">любое</option>${ruleOpts}</select></label>
+    <label class="lbl">Предложения <select id="c-source"><option value="all"${C.source === "all" ? " selected" : ""}>все (${SENT.length})</option><option value="mistakes"${C.source === "mistakes" ? " selected" : ""}>мои ошибки</option></select></label>
+  </div>`;
+}
+function weak16HTML() {
+  const errs = Object.entries(ruleErrors16()).sort((a, b) => b[1] - a[1]).slice(0, 5);
+  if (!errs.length) return "";
+  return `<div class="weak"><span class="t">Чаще всего ошибаешься:</span>${errs.map(([id, n]) => `<button class="chipbtn" data-drill16="${id}">${esc(RULES[id].short)} · ${n}</button>`).join("")}</div>`;
+}
+function renderCommas() {
+  const root = $("#p-commas");
+  let body = "";
+  if (C.mode === "ege") {
+    if (!C.ege) C.ege = genEge();
+    const E = C.ege;
+    const right = E.list.map((id, i) => SBANK[id].commas.length === 1 ? i + 1 : 0).filter(Boolean);
+    const ansStr = [...E.sel].sort().join("") || "—";
+    const okAll = E.done && right.length === E.sel.size && right.every(i => E.sel.has(i));
+    body = `<p class="task">Расставьте знаки препинания. Укажите два предложения, в которых нужно поставить <b>одну</b> запятую.</p>
+      <div class="rows">${E.list.map((id, i) => { const s = SBANK[id]; return `<button class="r" data-eg="${i + 1}" aria-pressed="${E.sel.has(i + 1)}"><span class="n">${i + 1}</span><span class="ws" style="display:block">${sentHTML(s, E.done ? "show" : "plain")}${E.done ? `<span class="cnt16">${s.commas.length} ${s.commas.length === 1 ? "запятая" : s.commas.length ? "запятые" : "запятых"} · <span class="chip" data-rule16="${s.rule}">${esc(RULES[s.rule].short)}</span></span>` : ""}</span></button>`; }).join("")}</div>
+      <div class="answer-line"><span class="small">Ответ:</span><span class="hand">${ansStr}</span>${E.done ? `<button class="btn" id="e-new">Новый вариант</button>` : `<button class="btn" id="e-check">Проверить</button>`}</div>
+      ${E.done ? `<div class="msg ${okAll ? "ok" : "bad"}">${okAll ? "Верно." : `Неверно. Правильный ответ: ${right.join("")}. Нажми на правило под предложением, чтобы его прочитать.`}</div>` : ""}
+      ${E.open ? `<div style="margin-top:12px">${ruleHTML(E.open)}</div>` : ""}
+      ${E.done ? `<div class="mark" style="top:90px">${okAll ? "+" : "−"}</div>` : ""}`;
+  } else if (!C.cur && !C.queue.length && C.total) {
+    const pct = C.first.n ? Math.round(C.first.ok / C.first.n * 100) : 0;
+    body = `<div class="summary"><div class="big">${C.first.ok} / ${C.first.n}</div><div>верно с первого раза (${pct}%)</div><button class="btn" id="c-again">Ещё круг</button></div>`;
+  } else if (!C.cur) {
+    const n = poolSent().length;
+    body = n ? `<div class="summary"><div>${C.mode === "place" ? "Нажимай на слово, после которого нужна запятая." : "Определи, сколько запятых нужно в предложении."}<br><span class="small">В подборке ${n} предложений${n > CROUND ? `, в круге будет ${CROUND}` : ""}.</span></div><button class="btn" id="c-again">Начать</button></div>`
+      : `<div class="summary"><div>Под эти фильтры предложений нет${C.source === "mistakes" ? " — ошибок пока нет или ты их уже исправил" : ""}.</div></div>`;
+  } else {
+    const s = SBANK[C.cur], r = C.res;
+    const head = `<div class="progress"><i style="width:${C.first.n / Math.max(1, C.total) * 100}%"></i></div><div class="ptext">осталось ${C.queue.length + 1} · задание 16${C.seen.has(s.id) && !r ? ' <span class="pill">повтор</span>' : ""}</div>`;
+    let main;
+    if (C.mode === "place") {
+      main = `<div class="sent">${sentHTML(s, r ? "check" : "pick", C.sel)}</div>
+        ${r ? "" : `<div class="hint">Нажми на слово, после которого нужна запятая. Ещё раз — убрать. Если запятые не нужны, сразу жми «Проверить».</div><div class="row-actions" style="justify-content:center;margin-top:12px"><button class="btn" id="c-check">Проверить</button></div>`}`;
+    } else {
+      main = `<div class="sent">${sentHTML(s, r ? "show" : "plain")}</div>
+        <div class="opts">${[0, 1, 2, 3].map(k => `<button class="opt" data-cc="${k}"${r ? " disabled" : ""}>${k}<span class="k">${k === 1 ? "запятая" : k ? "запятые" : "запятых"}</span></button>`).join("")}</div>`;
+    }
+    const fb = r ? (r.ok
+      ? `<div class="fb ok"><div class="head">Верно</div><p style="margin:0">${esc(s.note)}</p><div class="row-actions"><span class="pill">${esc(RULES[s.rule].short)}</span><button class="btn ghost" id="c-next">Дальше</button></div></div>`
+      : `<div class="fb bad"><div class="head">Не так</div><p style="margin:0">${esc(s.note)}</p>${ruleHTML(s.rule)}<div class="row-actions"><button class="btn" id="c-next">Дальше</button><span class="small">Это предложение вернётся через несколько заданий.</span></div></div>`) : "";
+    body = head + main + fb + (r ? `<div class="mark" style="top:96px">${r.ok ? "+" : "−"}</div>` : "");
+  }
+  root.innerHTML = commasControls() + body + weak16HTML();
+  root.querySelectorAll("[data-cm]").forEach(b => b.onclick = () => { C.mode = b.dataset.cm; C.cur = null; C.queue = []; C.total = 0; C.ege = null; renderCommas(); });
+  $("#c-rule", root).onchange = e => { C.rule = e.target.value; C.cur = null; C.queue = []; C.total = 0; C.ege = null; renderCommas(); };
+  $("#c-source", root).onchange = e => { C.source = e.target.value; C.cur = null; C.queue = []; C.total = 0; C.ege = null; renderCommas(); };
+  root.querySelectorAll("[data-sw]").forEach(el => el.onclick = () => { const j = +el.dataset.sw; C.sel.has(j) ? C.sel.delete(j) : C.sel.add(j); renderCommas(); });
+  const ck = $("#c-check", root); if (ck) ck.onclick = () => {
+    const s = SBANK[C.cur];
+    const ok = s.commas.length === C.sel.size && s.commas.every(j => C.sel.has(j));
+    C.res = { ok }; recordSent(s, ok); renderCommas();
+  };
+  root.querySelectorAll("[data-cc]").forEach(b => b.onclick = () => {
+    const s = SBANK[C.cur]; const ok = +b.dataset.cc === s.commas.length;
+    C.res = { ok }; recordSent(s, ok); renderCommas();
+  });
+  const nx = $("#c-next", root); if (nx) { nx.onclick = nextSent; nx.focus({ preventScroll: true }); }
+  const ag = $("#c-again", root); if (ag) ag.onclick = startCommas;
+  root.querySelectorAll("[data-eg]").forEach(b => b.onclick = e => {
+    const chip = e.target.closest("[data-rule16]");
+    if (chip) { C.ege.open = C.ege.open === chip.dataset.rule16 ? null : chip.dataset.rule16; renderCommas(); return; }
+    if (C.ege.done) return;
+    const i = +b.dataset.eg; C.ege.sel.has(i) ? C.ege.sel.delete(i) : C.ege.sel.add(i); renderCommas();
+  });
+  const ec = $("#e-check", root); if (ec) ec.onclick = () => {
+    const E = C.ege; E.done = true;
+    E.list.forEach((id, i) => { const s = SBANK[id]; const ok = (s.commas.length === 1) === E.sel.has(i + 1); const st = sst(id); S.total.n++; if (ok) { S.total.ok++; st.ok++; st.streak++; } else { st.bad++; st.streak = 0; } });
+    save(); renderStats(); renderCommas();
+  };
+  const en = $("#e-new", root); if (en) en.onclick = () => { C.ege = genEge(); renderCommas(); };
+  root.querySelectorAll("[data-drill16]").forEach(b => b.onclick = () => drill16(b.dataset.drill16));
+}
+function drill16(id) { C.rule = id; C.source = "all"; if (C.mode === "ege") C.mode = "place"; showTab("commas"); startCommas(); }
 
 /* ---------- Старт ---------- */
 renderStats();
@@ -768,7 +1063,7 @@ renderRowsTab();
 renderTest();
 let startTab = "words";
 try { startTab = localStorage.getItem(KEY + "-tab") || "words"; } catch (e) {}
-showTab(["words", "rows", "test", "rules"].includes(startTab) ? startTab : "words");
+showTab(["words", "rows", "test", "commas", "rules"].includes(startTab) ? startTab : "words");
 </script>
 
 <script>
