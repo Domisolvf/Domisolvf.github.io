@@ -195,6 +195,8 @@ label.lbl { font-size: 13px; color: var(--muted); display: inline-flex; gap: 8px
 
 .blocks { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
 .bk { font: 600 13px var(--f-ui); border: 1px solid var(--line); background: var(--sheet); color: var(--muted); border-radius: 7px; padding: 5px 9px; cursor: pointer; font-variant-numeric: tabular-nums; }
+.seg.sheets { max-width: 100%; overflow-x: auto; }
+.seg.sheets button { white-space: nowrap; }
 .bk.done { background: var(--ok-soft); color: var(--ok); border-color: transparent; }
 .bk[aria-current="true"] { outline: 2px solid var(--ink); outline-offset: 1px; }
 .orig { font-size: 14px; color: var(--muted); margin-bottom: 10px; }
@@ -245,7 +247,7 @@ button, select { touch-action: manipulation; -webkit-tap-highlight-color: transp
   <nav class="tabs" role="tablist">
     <button class="tab" role="tab" data-tab="words" aria-selected="true">Слова</button>
     <button class="tab" role="tab" data-tab="rows" aria-selected="false">Ряды как на ЕГЭ</button>
-    <button class="tab" role="tab" data-tab="test" aria-selected="false">Моя ср</button>
+    <button class="tab" role="tab" data-tab="test" aria-selected="false">Мои работы</button>
     <button class="tab" role="tab" data-tab="commas" aria-selected="false">Запятые · 16</button>
     <button class="tab" role="tab" data-tab="rules" aria-selected="false">Правила</button>
   </nav>
@@ -301,7 +303,8 @@ const RULES = {
                    "В окончаниях и суффиксах -ын пишется ы (огурцы, сестрицын)."] },
   sh:     { t: 9,  short: "ё/о после шипящих", title: "Ё / О после шипящих в корне", opts: ["ё", "о"],
             text: ["Под ударением пишется ё, если можно подобрать однокоренное слово с е (жёлтый — желтеть).",
-                   "Если такого слова нет — пишется о (шорох, обжора). В заимствованных словах тоже о (шок, шорты, жокей)."] },
+                   "Если такого слова нет — пишется о (шорох, обжора). В заимствованных словах тоже о (шок, шорты, жокей).",
+                   "В формах глагола пишется ё: сжёг, поджёг (а существительное — поджог). Запомни: трущоба, мажорный, жонглёр — с о."] },
 
   pre:    { t: 10, short: "пре-/при-", title: "Приставки ПРЕ- и ПРИ-",
             text: ["ПРЕ- = «очень» (премилый) или близко к ПЕРЕ- (преградить = перегородить, преступить = переступить).",
@@ -359,7 +362,10 @@ const RULES = {
   fraz:   { t: 16, short: "фразеологизм", title: "Фразеологизмы с повторяющимися союзами",
             text: ["Внутри устойчивых выражений запятая не ставится: ни свет ни заря, ни жив ни мёртв, ни то ни сё, ни рыба ни мясо, и так и сяк, и смех и грех, ни днём ни ночью, ни дать ни взять, ни с того ни с сего, ни конца ни края, ни больше ни меньше."] },
   skaz:   { t: 16, short: "пойду погуляю", title: "Два глагола — одно действие",
-            text: ["Сочетания глаголов, которые обозначают одно действие или действие и его цель, — не однородные, запятая не нужна: пойду погуляю, сядь отдохни, взял да и рассказал."] }
+            text: ["Сочетания глаголов, которые обозначают одно действие или действие и его цель, — не однородные, запятая не нужна: пойду погуляю, сядь отдохни, взял да и рассказал."] },
+  neodn:  { t: 16, short: "неоднородные", title: "Неоднородные определения",
+            text: ["Если определения описывают предмет с разных сторон (возраст и назначение, погода и ветер, цвет и материал), они неоднородные — запятая не ставится: напольные старинные часы, ясный ветреный день.",
+                   "Однородные определения описывают предмет с одной стороны, между ними можно вставить «и»: западные, южные, юго-восточные районы."] }
 };
 
 const DEFAULT_OPTS = { "а": ["а","о"], "о": ["а","о"], "е": ["е","и"], "и": ["е","и"], "я": ["е","и","я"],
@@ -458,8 +464,158 @@ const TEST = [
     ["спорт_нвентарь|и|yi","сверх_зысканно|и|yi","меж_нститутский|и|yi"],
     ["ра_мешать|з|zs","бе_граничный|з|zs","и_рисованный|з|zs"],
     ["пр_землиться|и|pre","пр_обретение|и|pre_d","пр_открывшийся|и|pre"],
-    ["пр_двзятый|е|pred","н_зводить|и|niz","н_сходящий|и|niz"]]}
+    ["пр_двзятый|е|pred","н_зводить|и|niz","н_сходящий|и|niz"]]},
+
+  { id: "l9-1", sheet: "l9", task: 9, orig: "125", mark: "+", rows: [
+    ["изг_рь|а|gar","пл_вун (грунт)|а|plav","к_сательная|а|kas"],
+    ["р_гламент|е|neprov","стр_мянный|е|prov","цв_ток|е|prov"],
+    ["пог_релец|о|gar","вым_кнуть (под дождём)|о|mak","выр_с|о|rast"],
+    ["отр_слевой|а|rast","ур_вень|о|ravn","зап_роть|о|prov"],
+    ["вып_рить (воду)|а|prov","обн_жать|а|prov","ав_нгард|а|neprov"]]},
+  { id: "l9-2", sheet: "l9", task: 9, orig: "135", mark: "+", rows: [
+    ["ар_стократ|и|neprov","м_нистерство|и|neprov","д_визион|и|neprov"],
+    ["оз_ряться|а|zar","просм_треть|о|prov","м_рячок|о|prov"],
+    ["зап_реть (дверь)|е|ei","д_ревья|е|prov","выст_лить|е|ei"],
+    ["выск_чка|о|skak","г_ризонт|о|neprov","стр_тегия|а|neprov"],
+    ["расст_лается (туман)|и|ei","пр_оритет|и|neprov","ум_ротворение|и|prov"]]},
+  { id: "l9-3", sheet: "l9", task: 9, orig: "25", mark: "+", rows: [
+    ["к_мфорт|о|neprov","р_стение|а|rast","прил_гательное|а|lag"],
+    ["сп_раль|и|neprov","заст_лать|и|ei","зап_рать (дверь)|и|ei"],
+    ["б_рашек|а|prov","ф_рмат|о|neprov","з_рница|а|zar"],
+    ["предв_рительный|а|neprov","в_дянистый|о|prov","пром_кнуть (салфеткой)|о|mak"],
+    ["тв_рительный|о|tvar","прид_рожный|о|prov","пл_вец|о|plav"]]},
+  { id: "l9-4", sheet: "l9", task: 9, orig: "24", mark: "−", rows: [
+    ["доск_нально|о|neprov","прик_снуться|о|kas","распол_житься|о|lag"],
+    ["прид_раться|и|ei","л_нейка|и|neprov","сж_гать|и|ei"],
+    ["получ_совой|а|prov","б_лото|о|neprov","нест_бильно|а|neprov"],
+    ["прик_сновение|о|kas","м_кать (в краску)|а|mak","в_здушный|о|prov"],
+    ["гр_мыхало|о|prov","тр_вяной|а|prov","зас_рять (природу)|о|prov"]]},
+  { id: "l9-5", sheet: "l9", task: 9, orig: "45", mark: "+", rows: [
+    ["перекл_каться|и|prov","занав_с|е|neprov","запл_сти|е|prov"],
+    ["дост_ваться|а|prov","задр_мала|е|prov","многог_лосье|о|prov"],
+    ["ш_девр|е|neprov","бл_стательный|и|ei","сч_тать|и|ei"],
+    ["подсв_тить|е|prov","зап_реть (дверь)|е|ei","ст_кло|е|prov"],
+    ["водор_сли|о|rast","подг_реть|о|gar","прил_жить|о|lag"]]},
+  { id: "l9-6", sheet: "l9", task: 9, orig: "135", mark: "+", rows: [
+    ["д_визия|и|neprov","передв_жение|и|prov","отп_рать|и|ei"],
+    ["к_сание|а|kas","с_лдат|о|neprov","г_стевой (дом)|о|prov"],
+    ["г_лова|о|prov","р_сток|о|rast","покл_ниться|о|klan"],
+    ["об_щавший|е|neprov","нат_реть|е|ei","подм_гнуть|и|prov"],
+    ["р_стение|а|rast","прил_гательное|а|lag","ск_кать|а|skak"]]},
+  { id: "l9-7", sheet: "l9", task: 9, orig: "123", mark: "−", rows: [
+    ["н_гилист|и|neprov","приор_тет|и|neprov","ф_нансист|и|neprov"],
+    ["упр_жнение|а|neprov","подв_ротня|о|prov","укл_ниться|о|klan"],
+    ["м_ридиан|е|neprov","ап_льсин|е|neprov","ош_ломлённый|е|neprov"],
+    ["прикр_ватный|о|prov","подл_жить|о|lag","ур_внение|а|ravn"],
+    ["прот_реть|е|ei","л_сток|и|prov","к_вать (головой)|и|neprov"]]},
+
+  { id: "m9-1", sheet: "m", task: 9, orig: "24", rows: [
+    ["ум_лять (значение)|а|prov","утр_мбовать|а|neprov","благосл_вить|о|prov"],
+    ["разр_дить (всходы)|е|prov","просв_щение|е|prov","прист_жной (воротник)|е|prov|е,я"],
+    ["ж_нглёр|о|sh","деш_вый|ё|sh","маж_рный|о|sh"],
+    ["п_ррон|е|neprov","сп_ктакль|е|neprov","подст_лить|е|ei"],
+    ["пол_мический|е|neprov","вн_мательность|и|neprov","выч_тать (из ста)|и|ei"]]},
+  { id: "m9-2", sheet: "m", task: 9, orig: "24", rows: [
+    ["отск_чить|о|skak","(на) з_ре|а|zar","пан_рама|о|neprov"],
+    ["разг_релся (спор)|о|gar","сокр_венные (мечты)|о|neprov","затв_рить (окно)|о|tvar"],
+    ["сж_г (дотла)|ё|sh","трущ_ба|о|sh","пощ_чина|ё|sh"],
+    ["выт_реть (руки)|е|ei","благоч_стивый|е|prov","в_лосипед|е|neprov"],
+    ["прив_дение (примера)|е|prov","выч_тание|и|ei","вин_грет|е|neprov"]]},
+  { id: "m10-1", sheet: "m", task: 10, orig: "135", rows: [
+    ["пр_увеличение|е|pre","пр_имущество|е|pre_d","пр_даваться (воспоминаниям)|е|pre_d"],
+    ["вз_перти|а|pv","пр_родитель|а|pv","непревз_йдённый|о|pv"],
+    ["не_гибаемый|с|s_pref","во_препятствовать|с|zs","ра_кладывать|с|zs"],
+    ["вз_мать (плату)|и|yi","об_ндевелый|ы|yi","без_дейность|ы|yi"],
+    ["гидропод_ёмник|ъ|tz","без_ядерный|ъ|tz","ад_ютант|ъ|tz"]]},
+  { id: "m10-2", sheet: "m", task: 10, orig: "145", rows: [
+    ["обе_покоиться|с|zs","не_гораемый|с|s_pref","и_тончиться|с|zs"],
+    ["необ_ятный|ъ|tz","раз_ехаться|ъ|tz","зав_южить|ь|tz"],
+    ["пр_исполненный|е|pre_d","непр_клонность|е|pre_d","непр_ступные (скалы)|и|pre"],
+    ["небез_звестный|ы|yi","под_тожить|ы|yi","роз_грыш|ы|yi"],
+    ["поз_прошлый|а|pv","р_спустить|а|rr","пр_родина|а|pv"]]},
+  { id: "m10-3", sheet: "m", task: 10, orig: "25", rows: [
+    ["об_ятия|ъ|tz","раз_единил|ъ|tz","нав_юченный|ь|tz"],
+    ["пр_чудливый|и|pre_d","пр_ободрился|и|pre","беспр_станный|е|pre"],
+    ["пред_дущий|ы|yi","меж_гровой|и|yi","без_мянный|ы|yi"],
+    ["пред_стория|ы|yi","с_знова|ы|yi","вз_скать|ы|yi"],
+    ["не_держанность|с|s_pref","ра_фасовать|с|zs","бе_подобный|с|zs"]]},
+
+  { id: "s10-1", sheet: "s10", task: 10, orig: "145", mark: "−", rows: [
+    ["пре_полагать|д|pred","на_рёберный|д|dt","по_чалить|д|dt"],
+    ["пр_ображённый|е|pre","пр_неприятный|е|pre","пр_града|е|pre"],
+    ["пост_ндустриальный|и|yi","из_сканность|ы|yi","под_тоженный|ы|yi"],
+    ["и_траченный|с|zs","ра_чищенный|с|zs","бе_хозный|с|zs"],
+    ["с_ёмщик|ъ|tz","суб_ект|ъ|tz","конс_ерж|ь|tz"]]},
+  { id: "s10-2", sheet: "s10", task: 10, orig: "25", mark: "+", rows: [
+    ["з_подозрить|а|pv","нед_выполнить|о|pv","п_молчать|о|pv"],
+    ["пр_морский|и|pre","пр_выкнуть|и|pre_d","без пр_крас|и|pre_d"],
+    ["и_быточный|з|zs","во_хождение|с|zs","ни_вергнуть|з|niz"],
+    ["по_бросить|д|dt","о_пилить|т|dt","о_крыть|т|dt"],
+    ["пр_мудрый|е|pre","пр_красный|е|pre","пр_возмочь|е|pre"]]},
+  { id: "s10-3", sheet: "s10", task: 10, orig: "23", mark: "+", rows: [
+    ["беспр_страстный|и|pre_d","пр_вышение (скорости)|е|pre","пр_града|е|pre"],
+    ["бе_грамотный|з|zs","чре_мерный|з|zs","во_звание|з|zs"],
+    ["р_сположившийся|а|rr","пон_слышке|а|pv","р_звал|а|rr"],
+    ["с_ехидничать|ъ|tz","уст_е|ь|tz","в_юга|ь|tz"],
+    ["неп_ладки|о|pv","н_вьючить|а|pv","п_лагать|о|pv"]]},
+  { id: "s10-4", sheet: "s10", task: 10, orig: "134", mark: "−", rows: [
+    ["бе_крайний|с|zs","ни_вергать|з|niz","чере_чур|с|zs"],
+    ["пр_одолевать|е|pre","пр_даточный|и|pre","(негде) пр_моститься|и|pre"],
+    ["об_скать|ы|yi","под_грать|ы|yi","без_нициативный|ы|yi"],
+    ["вз_браться|о|pv","пр_махнуться|о|pv","п_ложиться|о|pv"],
+    ["в_юнок|ь|tz","в_едливый|ъ|tz","двух_ярусный|ъ|tz"]]},
+  { id: "s10-5", sheet: "s10", task: 10, orig: "23", mark: "+", rows: [
+    ["пр_обрёл|и|pre_d","пр_образователь|е|pre","беспр_станно (лил дождь)|е|pre"],
+    ["п_дсказывать|о|dt","п_никнуть|о|pv","д_ехать|о|pv"],
+    ["п_едестал|ь|tz","ал_тернатива|ь|tz","б_ются|ь|tz"],
+    ["и_древле|з|zs","не_держанный|с|s_pref","не_добровать|с|s_pref"],
+    ["оп_знание|о|pv","нер_створимый|а|rr","п_йдём|о|pv"]]},
+  { id: "s10-6", sheet: "s10", task: 10, orig: "14", mark: "+", rows: [
+    ["пр_общиться|и|pre_d","пр_школьный|и|pre","пр_встать|и|pre"],
+    ["вз_браться|о|pv","п_забавить|о|pv","р_ссказ|а|rr"],
+    ["ни_вергать|з|niz","и_черпать|с|zs","в_дрогнуть|з|zs"],
+    ["об_явить|ъ|tz","с_ёмка|ъ|tz","суб_ект|ъ|tz"],
+    ["от_всюду|о|pv","нар_спашку|а|rr","п_дсветка|о|dt"]]},
+  { id: "s10-7", sheet: "s10", task: 10, orig: "123", mark: "−", rows: [
+    ["пр_обретение|и|pre_d","пр_градить|е|pre","пр_интересный|е|pre"],
+    ["не_держанность|с|s_pref","бе_человечный|с|zs","в_сходы|с|zs"],
+    ["з_ночевать|а|pv","нен_глядный|а|pv","пр_бабушка|а|pv"],
+    ["об_ективный|ъ|tz","доб_ётся|ь|tz","из_ян|ъ|tz"],
+    ["о_вести|т|dt","пре_сказание|д|pred","о_вёртка|т|dt"]]},
+
+  { id: "l16-1", sheet: "l16", task: 16, orig: "24", sents: [
+    ["Мелкие поселения в Древней Руси называли иногда «городцами» да «городищами».", "odin", "«Да» здесь значит «и» — одиночный союз, запятая не нужна."],
+    ["Кувшинки плавали и справа, и слева от лодки.", "povt", "И…и: запятая перед вторым «и»."],
+    ["Обломов был расстроен письмом старосты и предстоящим переездом на квартиру и утомлён трескотнёй Тарантьева.", "odin", "Два одиночных «и» в разных рядах однородных: «письмом и переездом», «расстроен и утомлён» — запятых нет."],
+    ["Россия соседствует со многими странами и имеет как сухопутные, так и морские границы.", "dvoin", "Как…, так и: запятая перед «так»; «соседствует и имеет» — одиночный «и»."],
+    ["Символисты и их последователи называли Ф.И. Тютчева своим предтечей и считали себя продолжателями тютчевской поэтической традиции.", "odin", "Все «и» одиночные — запятых нет."]]},
+  { id: "l16-2", sheet: "l16", task: 16, orig: "35", sents: [
+    ["Поезд с трудом прорывался через сырые потоки и безнадёжно опаздывал.", "odin", "Однородные сказуемые с одиночным «и»."],
+    ["А над лугами шёл холодный дождь и ветер налетал косыми ударами.", "obsh", "Две основы, но «над лугами» относится к обеим — запятой нет."],
+    ["Переправляемся на пароме через Оку, и за широкой полосой приокских лугов нас встречают Мещёрские леса.", "ssp", "Две основы: «переправляемся» и «леса встречают» — перед «и» запятая."],
+    ["Станции завалены смолистыми брёвнами и пахнут свежей порубкой и дикими лесными цветами.", "odin", "Два одиночных «и» в разных рядах однородных — запятых нет."],
+    ["Я вырывал в сене глубокую нору, залезал в неё и всю ночь спал в стогу.", "odn", "«Вырывал, залезал» — без союза, нужна запятая; перед одиночным «и» — нет."]]},
+  { id: "l16-3", sheet: "l16", task: 16, orig: "235", sents: [
+    ["В доме стояли напольные старинные часы с боем и висели две картины неизвестного итальянского мастера.", "obsh", "«В доме» относится к обеим основам — перед «и» запятой нет. «Напольные старинные» — неоднородные определения."],
+    ["В один из последних вечеров в Коктебеле видел я и старую женщину с сухими цветами, и её новых друзей.", "povt", "И…и: запятая перед вторым «и»."],
+    ["Но ни усталость, ни скука ни на минуту не смогли согнать с лица Ильи Ильича мягкость.", "povt", "Ни…ни: запятая перед вторым «ни». Третье «ни» в «ни на минуту» — частица, не союз."],
+    ["Ударам стихии подверглись западные, южные, юго-восточные районы города и его центральная часть.", "odn", "«Западные, южные, юго-восточные» — однородные определения без союза, две запятые."],
+    ["Солнце садилось и окрашивало небосклон нежными красками то огненного, то желтовато-бледного заката.", "povt", "То…то: запятая перед вторым «то»."]]},
+  { id: "l16-4", sheet: "l16", task: 16, orig: "24", sents: [
+    ["В каждом человеке есть сила и слабость, мужество и страх, твёрдость и сомнение.", "pary", "Три пары однородных — запятые между парами, всего две."],
+    ["Прозрачные русалки замахали Маргарите, и над пустынным зеленоватым берегом прозвучали их приветствия.", "ssp", "Две основы: «русалки замахали» и «прозвучали приветствия»."],
+    ["В позднем творчестве Сальвадора Дали заметны новые художественные тенденции и интерес к классической ясности и внутренней гармонии.", "odin", "Два одиночных «и» в разных рядах — запятых нет."],
+    ["В настоящее время газодобывающая компания располагает как развитой инфраструктурой, так и бесценным опытом для организации промышленного освоения месторождений газа.", "dvoin", "Как…, так и: одна запятая перед «так»."],
+    ["В ясный ветреный день мы бродили по проталинам тундры и наблюдали массу прелюбопытных явлений.", "neodn", "«Ясный ветреный» — неоднородные определения, запятой нет; «бродили и наблюдали» — одиночный «и»."]]}
 ];
+const SHEETS = [
+  { id: "sr1", title: "Ср · 9 и 10" },
+  { id: "l9", title: "Лист · 9" },
+  { id: "m", title: "Лист · 9 и 10" },
+  { id: "s10", title: "Ср · 10" },
+  { id: "l16", title: "Лист · 16" }
+];
+TEST.forEach(b => { b.sheet = b.sheet || "sr1"; });
 
 /* ---------- Дополнительные слова на те же правила ---------- */
 const EXTRA = {
@@ -504,11 +660,15 @@ const BANK = {};
 function addWord(s, task, fromTest) {
   const [text, ans, rule, o] = s.split("|");
   if (!RULES[rule]) console.warn("no rule", s);
-  if (!BANK[text]) BANK[text] = { id: text, text, ans, rule, task, fromTest, opts: o ? o.split(",") : null };
-  else if (fromTest) BANK[text].fromTest = true;
-  return BANK[text];
+  const id = BANK[text] && BANK[text].task !== task ? text + "#" + task : text;
+  if (!BANK[id]) BANK[id] = { id, text, ans, rule, task, fromTest, opts: o ? o.split(",") : null };
+  else {
+    if (BANK[id].ans !== ans) console.warn("conflict", s, BANK[id].ans);
+    if (fromTest) BANK[id].fromTest = true;
+  }
+  return BANK[id];
 }
-TEST.forEach(b => { b.rows = b.rows.map(r => r.map(s => addWord(s, b.task, true).id)); });
+TEST.forEach(b => { if (b.rows) b.rows = b.rows.map(r => r.map(s => addWord(s, b.task, true).id)); });
 EXTRA[9].forEach(s => addWord(s, 9, false));
 EXTRA[10].forEach(s => addWord(s, 10, false));
 const ALL = Object.values(BANK);
@@ -544,7 +704,7 @@ function renderStats() {
   const solved = TEST.filter(b => S.blocks[b.id]).length;
   const pct = S.total.n ? Math.round(S.total.ok / S.total.n * 100) : 0;
   const sd = Object.values(S.sent || {}).filter(x => x.streak >= 2).length;
-  $("#stats").innerHTML = `<span>ответов: <b>${S.total.n}</b></span><span>верно: <b>${pct}%</b></span><span>блоков ср: <b>${solved}/${TEST.length}</b></span><span>запятые усвоены: <b>${sd}/${SENT.length}</b></span>`;
+  $("#stats").innerHTML = `<span>ответов: <b>${S.total.n}</b></span><span>верно: <b>${pct}%</b></span><span>блоков из работ: <b>${solved}/${TEST.length}</b></span><span>запятые усвоены: <b>${sd}/${SENT.length}</b></span>`;
 }
 
 /* ---------- Вкладки ---------- */
@@ -624,7 +784,7 @@ function wordControls() {
     <label class="lbl">Слова
       <select id="w-source">
         <option value="all"${W.source==="all"?" selected":""}>все (${ALL.length})</option>
-        <option value="test"${W.source==="test"?" selected":""}>только из ср</option>
+        <option value="test"${W.source==="test"?" selected":""}>из моих работ</option>
         <option value="mistakes"${W.source==="mistakes"?" selected":""}>мои ошибки</option>
       </select></label>
     <label class="lbl">Правило
@@ -709,7 +869,7 @@ function rowsWidget(root, block, opts) {
   function draw() {
     const answerStr = [...st.sel].sort().join("") || "—";
     root.innerHTML = `
-      ${opts.header || ""}
+      ${typeof opts.header === "function" ? opts.header(st) : (opts.header || "")}
       <p class="task">Укажите варианты ответов, в которых во всех словах одного ряда пропущена одна и та же буква.</p>
       <div class="rows">${block.rows.map((r, i) => `
         <button class="r" data-i="${i + 1}" aria-pressed="${st.sel.has(i + 1)}"${st.solved ? " disabled" : ""}>
@@ -794,26 +954,93 @@ function renderRowsTab() {
   rowsWidget($("#r-body", root), block, { markTop: 90, drillLabel: "Слова из этого варианта" });
 }
 
-/* ---------- Режим «Моя ср» ---------- */
+/* ---------- Режим «Мои работы» ---------- */
+let currentSheet = "sr1";
 let currentBlock = TEST[0].id;
+function blockKey(b) {
+  if (b.task === 16) return b.sids.map((id, i) => SBANK[id].commas.length === 1 ? i + 1 : 0).filter(Boolean).join("");
+  return correctRows(b).join("");
+}
+function origHTML(b, solved) {
+  const key = blockKey(b), origOk = b.orig === key;
+  const mark = b.mark ? ` <span class="redm">${b.mark.replace("?", "")}</span>` : "";
+  let note = "";
+  if (b.mark && b.mark.startsWith("+") !== origOk) {
+    note = solved ? ` <span class="small">(по правилам ответ ${key} — с оценкой не сходится, уточни у учителя)</span>`
+                  : ` <span class="small">(по правилам с оценкой не всё сходится — разберись после решения)</span>`;
+  } else if (!b.mark && solved) {
+    note = origOk ? ` <span class="small">— на листе было верно</span>` : ` <span class="small">— на листе была ошибка, верно ${key}</span>`;
+  }
+  return `<div class="orig">Задание ${b.task}, блок ${b.id.split("-")[1]} · в работе ты ответил <span class="hand">${b.orig}</span>${mark}${note}</div>`;
+}
 function renderTest() {
   const root = $("#p-test");
-  const b = TEST.find(x => x.id === currentBlock);
-  const idx = TEST.indexOf(b);
-  const label = x => { const [t, n] = x.id.split("-"); return `${t}·${n}`; };
-  root.innerHTML = `<div class="blocks" role="group" aria-label="Блоки">${TEST.map(x =>
+  const list = TEST.filter(x => x.sheet === currentSheet);
+  let b = list.find(x => x.id === currentBlock);
+  if (!b) { b = list[0]; currentBlock = b.id; }
+  const idx = list.indexOf(b);
+  const label = x => `${x.task}·${x.id.split("-")[1]}`;
+  const sheetDone = id => TEST.filter(x => x.sheet === id).every(x => S.blocks[x.id]);
+  root.innerHTML = `<div class="controls"><div class="seg sheets" role="group" aria-label="Работа">${SHEETS.map(sh =>
+      `<button data-sh="${sh.id}" aria-pressed="${sh.id === currentSheet}">${esc(sh.title)}${sheetDone(sh.id) ? " ✓" : ""}</button>`).join("")}</div></div>
+    <div class="blocks" role="group" aria-label="Блоки">${list.map(x =>
       `<button class="bk${S.blocks[x.id] ? " done" : ""}" data-b="${x.id}" aria-current="${x.id === b.id}">${label(x)}</button>`).join("")}</div>
     <div id="t-body"></div>`;
+  root.querySelectorAll("[data-sh]").forEach(x => x.onclick = () => { currentSheet = x.dataset.sh; currentBlock = ""; renderTest(); });
   root.querySelectorAll("[data-b]").forEach(x => x.onclick = () => { currentBlock = x.dataset.b; renderTest(); });
-  const dispute = b.mark === "−?"
-    ? ` <span class="small">(по правилам твой ответ здесь выглядит верным — уточни у учителя)</span>` : "";
-  const header = `<div class="orig">Задание ${b.task}, блок ${b.id.split("-")[1]} · на ср ты ответил <span class="hand">${b.orig}</span> <span class="redm">${b.mark.replace("?", "")}</span>${dispute}</div>`;
-  rowsWidget($("#t-body", root), b, {
-    header, markTop: 74, drillLabel: `Слова из блока ${label(b)}`,
+  const common = {
+    header: st => origHTML(b, st.solved), markTop: 120,
     onSolve: () => { S.blocks[b.id] = true; save(); renderStats(); root.querySelector(`[data-b="${b.id}"]`).classList.add("done"); },
-    footer: st => st.solved && idx < TEST.length - 1 ? `<button class="btn ghost" id="t-next">Следующий блок</button>` : "",
-    bind: (r) => { const n = $("#t-next", r); if (n) n.onclick = () => { currentBlock = TEST[idx + 1].id; renderTest(); }; }
-  });
+    footer: st => st.solved && idx < list.length - 1 ? `<button class="btn ghost" id="t-next">Следующий блок</button>` : "",
+    bind: r => { const n = $("#t-next", r); if (n) n.onclick = () => { currentBlock = list[idx + 1].id; renderTest(); }; }
+  };
+  if (b.task === 16) sentWidget($("#t-body", root), b, common);
+  else rowsWidget($("#t-body", root), b, Object.assign({ drillLabel: `Слова из блока ${label(b)}` }, common));
+}
+function sentWidget(root, block, opts) {
+  const st = { sel: new Set(), tries: 0, solved: false, shown: false, msg: "", openRule: null };
+  const right = blockKey(block).split("").map(Number);
+  function draw() {
+    const ansStr = [...st.sel].sort().join("") || "—";
+    root.innerHTML = `${opts.header(st)}
+      <p class="task">Расставьте знаки препинания. Укажите предложения, в которых нужно поставить <b>одну</b> запятую.</p>
+      <div class="rows">${block.sids.map((id, i) => { const s = SBANK[id]; return `<button class="r" data-sg="${i + 1}" aria-pressed="${st.sel.has(i + 1)}"><span class="n">${i + 1}</span><span class="ws" style="display:block">${sentHTML(s, st.shown ? "show" : "plain")}${st.tries ? `<span class="cnt16">${st.shown ? `${s.commas.length} ${s.commas.length === 1 ? "запятая" : s.commas.length ? "запятые" : "запятых"} · ` : ""}<span class="chip" data-rule16="${s.rule}">${esc(RULES[s.rule].short)}</span></span>` : ""}${st.shown ? `<span class="small" style="display:block;margin-top:4px">${esc(s.note)}</span>` : ""}</span></button>`; }).join("")}</div>
+      <div class="answer-line"><span class="small">Ответ:</span><span class="hand">${ansStr}</span>
+        ${st.shown ? "" : `<button class="btn" id="sg-check">Проверить</button>`}
+        ${!st.shown && st.tries ? `<button class="btn ghost" id="sg-show">Показать разбор</button>` : ""}
+        ${opts.footer(st)}</div>
+      ${st.msg ? `<div class="msg ${st.solved ? "ok" : "bad"}">${st.msg}</div>` : ""}
+      ${st.openRule ? `<div style="margin-top:12px">${ruleHTML(st.openRule)}</div>` : ""}
+      ${st.tries ? `<div class="mark" style="top:${opts.markTop}px">${st.solved ? "+" : "−"}</div>` : ""}`;
+    root.querySelectorAll("[data-sg]").forEach(b => b.onclick = e => {
+      const chip = e.target.closest("[data-rule16]");
+      if (chip) { st.openRule = st.openRule === chip.dataset.rule16 ? null : chip.dataset.rule16; draw(); return; }
+      if (st.shown) return;
+      const i = +b.dataset.sg; st.sel.has(i) ? st.sel.delete(i) : st.sel.add(i); draw();
+    });
+    const ck = $("#sg-check", root); if (ck) ck.onclick = check;
+    const sh = $("#sg-show", root); if (sh) sh.onclick = () => { st.shown = true; st.msg = `Правильный ответ: ${right.join("")}.`; draw(); };
+    opts.bind(root, st);
+  }
+  function check() {
+    const wrong = [1, 2, 3, 4, 5].filter(i => right.includes(i) !== st.sel.has(i));
+    if (!st.tries) {
+      block.sids.forEach((id, i) => { const ok = right.includes(i + 1) === st.sel.has(i + 1); const ss = sst(id); S.total.n++; if (ok) { S.total.ok++; ss.ok++; ss.streak++; } else { ss.bad++; ss.streak = 0; } });
+      save(); renderStats();
+    }
+    st.tries++;
+    if (!wrong.length) {
+      st.solved = true; st.shown = true; st.openRule = null;
+      st.msg = st.tries === 1 ? "Верно с первой попытки." : `Верно. Попыток: ${st.tries}.`;
+      opts.onSolve(st);
+    } else {
+      st.msg = st.tries === 1
+        ? "Есть ошибка. Под каждым предложением подписано правило — нажми на него, перечитай и попробуй ещё раз."
+        : `Всё ещё неверно: ошибка в ${wrong.length} ${wrong.length === 1 ? "предложении" : "предложениях"}. Найди в каждом все основы и союзы.`;
+    }
+    draw();
+  }
+  draw();
 }
 
 /* ---------- Правила ---------- */
@@ -836,7 +1063,7 @@ function renderRules() {
   $("#p-rules").querySelectorAll("[data-drill16]").forEach(b => b.onclick = () => drill16(b.dataset.drill16));
 }
 
-const SENT = [
+const SENT_BASE = [
 ["Мы купили хлеб, молоко и сыр.", "odn", "Хлеб, молоко — без союза, нужна запятая; перед одиночным «и» — нет."],
 ["На столе лежали книги, тетради, карандаши.", "odn", "Три однородных подлежащих без союзов — две запятые."],
 ["Лес был тихий, тёмный и сырой.", "odn", "Тихий, тёмный — без союза; перед одиночным «и» запятой нет."],
@@ -907,11 +1134,13 @@ const SENT = [
 ["Сядь отдохни немного.", "skaz", "«Сядь отдохни» — одно сказуемое."],
 ["Он взял да и рассказал всё.", "skaz", "«Взял да и рассказал» — одно действие."],
 ["Ни я, ни сестра не умели плавать, и мы остались на берегу.", "ssp", "Ни…ни внутри первой части + запятая между основами."]
-].map((s, i) => {
+];
+const SENT = SENT_BASE.concat(TEST.filter(b => b.task === 16).flatMap(b => b.sents)).map((s, i) => {
   const toks = s[0].split(" ");
   return { id: "s" + i, text: s[0], rule: s[1], note: s[2], words: toks.map(t => t.replace(/,$/, "")), commas: toks.map((t, j) => t.endsWith(",") ? j : -1).filter(j => j >= 0) };
 });
 const SBANK = Object.fromEntries(SENT.map(s => [s.id, s]));
+TEST.filter(b => b.task === 16).forEach(b => { b.sids = b.sents.map(x => SENT.find(s => s.text === x[0]).id); });
 
 function sst(id) { S.sent = S.sent || {}; return S.sent[id] || (S.sent[id] = { ok: 0, bad: 0, streak: 0 }); }
 function ruleErrors16() {
