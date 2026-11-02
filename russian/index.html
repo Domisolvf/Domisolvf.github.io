@@ -212,6 +212,16 @@ label.lbl { font-size: 13px; color: var(--muted); display: inline-flex; gap: 8px
 .errc { font-size: 12px; color: var(--red); font-weight: 500; }
 
 
+.sw4 { font-family: var(--f-word); font-size: clamp(30px, 7vw, 46px); line-height: 1.3; text-align: center; padding: 30px 0 6px; overflow-wrap: anywhere; }
+.sw4 .vw { font: inherit; color: inherit; background: transparent; border: 0; border-bottom: 2px dashed var(--ink); padding: 0 .04em; margin: 0 .02em; cursor: pointer; border-radius: 3px 3px 0 0; }
+.sw4 .vw:hover { background: var(--ink-soft); }
+.sw4 .vw:disabled { cursor: default; border-bottom-color: transparent; }
+.sw4 .vw.ok { color: var(--ok); background: var(--ok-soft); border-bottom: 2px solid var(--ok); font-weight: 700; }
+.sw4 .vw.bad { color: var(--red); text-decoration: line-through; }
+.r .st4 { font: 22px var(--f-word); }
+.r .st4 b { color: var(--ink); }
+.r .st4 .fix { font: 15px var(--f-ui); color: var(--ok); margin-left: 8px; }
+.r .st4 .fix b { color: var(--ok); }
 .sent { font: 21px/2 var(--f-word); text-align: center; padding: 24px 0 8px; }
 .sent .sw { border-radius: 5px; padding: 2px 1px; }
 .sent .sw[data-sw] { cursor: pointer; }
@@ -239,7 +249,7 @@ button, select { touch-action: manipulation; -webkit-tap-highlight-color: transp
   <header>
     <div>
       <h1>Русский ЕГЭ</h1>
-      <div class="sub">задания 9, 10 и 16 · работа над ошибками</div>
+      <div class="sub">задания 4, 9, 10 и 16 · работа над ошибками</div>
     </div>
     <div class="stats" id="stats"></div>
   </header>
@@ -249,6 +259,7 @@ button, select { touch-action: manipulation; -webkit-tap-highlight-color: transp
     <button class="tab" role="tab" data-tab="rows" aria-selected="false">Ряды как на ЕГЭ</button>
     <button class="tab" role="tab" data-tab="test" aria-selected="false">Мои работы</button>
     <button class="tab" role="tab" data-tab="commas" aria-selected="false">Запятые · 16</button>
+    <button class="tab" role="tab" data-tab="stress" aria-selected="false">Ударения · 4</button>
     <button class="tab" role="tab" data-tab="rules" aria-selected="false">Правила</button>
   </nav>
 
@@ -256,6 +267,7 @@ button, select { touch-action: manipulation; -webkit-tap-highlight-color: transp
   <section class="sheet" id="p-rows" hidden></section>
   <section class="sheet" id="p-test" hidden></section>
   <section class="sheet" id="p-commas" hidden></section>
+  <section class="sheet" id="p-stress" hidden></section>
   <section class="sheet" id="p-rules" hidden></section>
 </div>
 
@@ -366,8 +378,48 @@ const RULES = {
   neodn:  { t: 16, short: "неоднородные", title: "Неоднородные определения",
             text: ["Если определения описывают предмет с разных сторон (возраст и назначение, погода и ветер, цвет и материал), они неоднородные — запятая не ставится: напольные старинные часы, ясный ветреный день.",
                    "Однородные определения описывают предмет с одной стороны, между ними можно вставить «и»: западные, южные, юго-восточные районы."] }
+  ,
+  vpast:  { t: 4, short: "глагол прош. вр. ж. р.", title: "Глаголы прошедшего времени женского рода",
+            text: ["Ударение обычно падает на окончание -А: бралА, взялА, началА, понялА, создалА, убралА.",
+                   "В мужском роде и во множественном числе ударение уходит на основу: нАчал — началА — нАчали, прИнял — принялА — прИняли, зАнял — занялА — зАняли.",
+                   "Исключения: приставка вы- тянет ударение на себя (вЫлила, вЫзвала); у глаголов класть, красться, слать, послать, отослать ударение остаётся на основе: клАла, крАлась, слАла, послАла, отослАла."] },
+  shortf: { t: 4, short: "краткое причастие ж. р.", title: "Краткие причастия женского рода",
+            text: ["Ударение падает на окончание -А: занятА, запертА, заселенА, нажитА, налитА, ободренА, снятА, созданА, принятА.",
+                   "В полной форме ударение другое: зАнятый, зАпертый, прИнятый, нАчатый."] },
+  itconj: { t: 4, short: "-ИТЬ: включИт", title: "Глаголы на -ИТЬ при спряжении",
+            text: ["Ударение падает на окончание: включИшь, включИт, звонИт, звонЯт, вручИт, сверлИт, позвонИт, облегчИт, укрепИт, щемИт.",
+                   "Проверка: поставь глагол в форму «он …» — ударение на -ИТ.",
+                   "Исключения: опОшлить — они опОшлят; освЕдомиться — ты освЕдомишься."] },
+  adjverb:{ t: 4, short: "глагол от прилагательного", title: "Глаголы, образованные от прилагательных",
+            text: ["Ударение обычно падает на -ИТЬ: быстрый — убыстрИть, острый — обострИть, лёгкий — облегчИть, бодрый — ободрИть, глубокий — углубИть.",
+                   "Исключение: озлОбить (от «злой»)."] },
+  vsh:    { t: 4, short: "причастие с -ВШ-", title: "Причастия с суффиксом -ВШ-",
+            text: ["Ударение падает на гласную перед -вш-: нажИвший, начАвший, понЯвший, прожИвший, налИвший."] },
+  gnut:   { t: 4, short: "-гнутый", title: "Причастия от «изогнуть», «загнуть», «согнуть»",
+            text: ["Ударение падает на приставку: изОгнутый, зАгнутый, сОгнутый."] },
+  enn:    { t: 4, short: "суффикс -ЁНН-", title: "Причастия с суффиксом -ЁНН-",
+            text: ["Суффикс -ённ- всегда ударный: облегчЁнный, углублЁнный, повторЁнный, заселЁнный.",
+                   "В краткой форме мужского рода ударение остаётся на суффиксе (включЁн), а в женском и среднем роде уходит на окончание: включенА, включенО."] },
+  deepr:  { t: 4, short: "деепричастие", title: "Деепричастия",
+            text: ["Ударение обычно как в неопределённой форме глагола: занЯть — занЯв, начАть — начАв, понЯть — понЯв, принЯть — принЯв, создАть — создАв.",
+                   "Запомни также: закУпорив, начАвшись, отдАв, исчЕрпав."] },
+  french: { t: 4, short: "иноязычное слово", title: "Иноязычные слова",
+            text: ["Слова, пришедшие из других языков (чаще из французского), обычно сохраняют ударение на последнем слоге: партЕр, экспЕрт, жалюзИ, диспансЕр, шофЁр, портфЕль.",
+                   "Сюда же: каталОг, квартАл, некролОг, дефИс, докумЕнт, цемЕнт, киломЕтр."] },
+  nroot:  { t: 4, short: "ударение на корне", title: "Существительные с ударением на корне во всех формах",
+            text: ["Ударение не сдвигается ни в одной форме: тОрт — тОрты — с тОртом — тОртами, шАрф — шАрфы — нет шАрфа, крАн — крАны, лЕктор — лЕкторы — лЕкторов, Икс — Иксы, мЕстность — мЕстностей, бАнт — бАнты."] },
+  derived:{ t: 4, short: "как в исходном слове", title: "Ударение как в исходном слове",
+            text: ["Прилагательное сохраняет ударение существительного, от которого образовано: слИва — слИвовый, кУхня — кУхонный.",
+                   "От «красИвый» ударение не сдвигается: красИвее, красИвейший.",
+                   "Слова с -провод ударны так же, как провОдит: нефтепровОд, газопровОд, водопровОд, мусоропровОд."] },
+  advdo:  { t: 4, short: "наречие с ДО-", title: "Наречия с приставкой ДО-",
+            text: ["Ударение падает на приставку: дОверху, дОнизу, дОсуха.", "Исключения: донЕльзя, добелА, докраснА."] },
+  advza:  { t: 4, short: "наречие с ЗА-", title: "Наречия с приставкой ЗА-",
+            text: ["Ударение падает на приставку: зАгодя (= заранее), зАтемно, зАсветло.", "Исключение: завИдно — как в глаголе завИдовать."] },
+  slovar: { t: 4, short: "запомнить", title: "Слова, которые надо запомнить",
+            text: ["Эти слова не подчиняются простому правилу, их ударение запоминают по орфоэпическому минимуму ФИПИ.",
+                   "Помогают рифмовки: «Не будем улыбаться, хватит баловАться». «Потолок отличный, весь он мозаИчный». «Рынок совсем новый: видимо, оптОвый». «Моя соседка Фёкла вырастила свЁклу». «Вижу старый пень, крепкий, как кремЕнь». «Василиса так красива, да ещё и прозорлИва»."] }
 };
-
 const DEFAULT_OPTS = { "а": ["а","о"], "о": ["а","о"], "е": ["е","и"], "и": ["е","и"], "я": ["е","и","я"],
   "ё": ["ё","о"], "ю": ["у","ю"], "ы": ["и","ы"], "з": ["з","с"], "с": ["з","с"], "д": ["д","т"], "т": ["д","т"],
   "ъ": ["ъ","ь"], "ь": ["ъ","ь"] };
@@ -704,16 +756,17 @@ function renderStats() {
   const solved = TEST.filter(b => S.blocks[b.id]).length;
   const pct = S.total.n ? Math.round(S.total.ok / S.total.n * 100) : 0;
   const sd = Object.values(S.sent || {}).filter(x => x.streak >= 2).length;
-  $("#stats").innerHTML = `<span>ответов: <b>${S.total.n}</b></span><span>верно: <b>${pct}%</b></span><span>блоков из работ: <b>${solved}/${TEST.length}</b></span><span>запятые усвоены: <b>${sd}/${SENT.length}</b></span>`;
+  $("#stats").innerHTML = `<span>ответов: <b>${S.total.n}</b></span><span>верно: <b>${pct}%</b></span><span>блоков из работ: <b>${solved}/${TEST.length}</b></span><span>запятые усвоены: <b>${sd}/${SENT.length}</b></span><span>ударения усвоены: <b>${Object.values(S.stress || {}).filter(x => x.streak >= 2).length}/${STRESS.length}</b></span>`;
 }
 
 /* ---------- Вкладки ---------- */
 const tabs = document.querySelectorAll(".tab");
 function showTab(name) {
   tabs.forEach(t => t.setAttribute("aria-selected", t.dataset.tab === name ? "true" : "false"));
-  ["words", "rows", "test", "commas", "rules"].forEach(n => { $("#p-" + n).hidden = n !== name; });
+  ["words", "rows", "test", "commas", "stress", "rules"].forEach(n => { $("#p-" + n).hidden = n !== name; });
   if (name === "rules") renderRules();
   if (name === "commas" && !C.cur) renderCommas();
+  if (name === "stress" && !U.cur) renderStress();
   if (name === "words" && !W.queue.length && !W.current) renderWords();
   try { localStorage.setItem(KEY + "-tab", name); } catch (e) {}
 }
@@ -771,7 +824,7 @@ function answer(letter) {
 function wordControls() {
   const modeSeg = `<div class="seg" role="group" aria-label="Тип"><button data-wm="letter" aria-pressed="${W.mode === "letter"}">Буква</button><button data-wm="rule" aria-pressed="${W.mode === "rule"}">Какое правило?</button></div>`;
   const ruleOpts = Object.entries(RULES)
-    .filter(([, r]) => r.t !== 16 && (W.task === "all" || String(r.t) === W.task))
+    .filter(([, r]) => (r.t === 9 || r.t === 10) && (W.task === "all" || String(r.t) === W.task))
     .map(([id, r]) => `<option value="${id}"${W.rule === id ? " selected" : ""}>${esc(r.title)}</option>`).join("");
   if (W.customIds) {
     return `<div class="controls">${modeSeg}<span class="pill">${esc(W.customLabel)}</span>
@@ -1055,10 +1108,16 @@ function renderRules() {
   const card16 = id => { const r = RULES[id]; return `<div class="rcard"><h3>${esc(r.title)}${e16[id] ? `<span class="errc">ошибок: ${e16[id]}</span>` : ""}</h3>
       ${r.text.map(p => `<p>${esc(p)}</p>`).join("")}
       <div class="row-actions"><button class="btn ghost" data-drill16="${id}">Тренировать (${SENT.filter(x => x.rule === id).length} предл.)</button></div></div>`; };
+  const e4 = ruleErrors4();
+  const card4 = id => { const r = RULES[id]; return `<div class="rcard"><h3>${esc(r.title)}${e4[id] ? `<span class="errc">ошибок: ${e4[id]}</span>` : ""}</h3>
+      ${r.text.map(p => `<p>${esc(p)}</p>`).join("")}
+      <div class="row-actions"><button class="btn ghost" data-drill4="${id}">Тренировать (${STRESS.filter(x => x.rule === id).length} слов)</button></div></div>`; };
   $("#p-rules").innerHTML = `<div class="rules-list">
     <h2>Задание 9 · корни</h2>${ids(9).map(card).join("")}
     <h2>Задание 10 · приставки</h2>${ids(10).map(card).join("")}
-    <h2>Задание 16 · запятые</h2>${ids(16).map(card16).join("")}</div>`;
+    <h2>Задание 16 · запятые</h2>${ids(16).map(card16).join("")}
+    <h2>Задание 4 · ударения</h2>${ids(4).map(card4).join("")}</div>`;
+  $("#p-rules").querySelectorAll("[data-drill4]").forEach(b => b.onclick = () => drill4(b.dataset.drill4));
   $("#p-rules").querySelectorAll("[data-drill]").forEach(b => b.onclick = () => drillRule(b.dataset.drill));
   $("#p-rules").querySelectorAll("[data-drill16]").forEach(b => b.onclick = () => drill16(b.dataset.drill16));
 }
@@ -1285,6 +1344,162 @@ function renderCommas() {
 }
 function drill16(id) { C.rule = id; C.source = "all"; if (C.mode === "ege") C.mode = "place"; showTab("commas"); startCommas(); }
 
+/* ---------- Задание 4 · ударения ---------- */
+const STRESS_RAW = {
+  vpast: "бралА бралАсь взялА взялАсь влилАсь ворвалАсь воспринялА воссоздалА гналА гналАсь добралА добралАсь дождалАсь ждалА жилОсь занялА заперлА звалА лгалА лилА лилАсь навралА надорвалАсь назвалАсь налилА нарвалА началА облилАсь обнялАсь обогналА ободралА отбылА отдалА отозвалА отозвалАсь перелилА позвалА полилА понялА прибылА принялА рвалА снялА совралА создалА сорвалА убралА клАла крАлась послАла слАла отослАла вЫлила вЫзвала зАнял зАняли нАчал нАчали прИбыл прИбыли прИнял прИняли",
+  shortf: "занятА запертА заселенА нажитА налитА ободренА снятА созданА принятА",
+  itconj: "вручИт вручИшь вручАт дозвонИтся дозвонИшься дозвонЯтся защемИт звонИт звонИшь звонЯт наделИт наделЯт накренИтся насорИт обзвонИт обзвонЯт облегчИт ободрИт ободрИтся одолжИт окружИт перезвонИт повторИт позвонИт позвонЯт сверлИт сверлИшь сверлЯт сорИт укрепИт укрепЯт щемИт включИт включИшь включИм исключИт опОшлить опОшлят освЕдомиться освЕдомится освЕдомишься",
+  adjverb: "облегчИть ободрИть ободрИться обострИть углубИть убыстрИть озлОбить",
+  vsh: "нажИвший налИвший нанЯвшийся начАвший понЯвший прожИвший",
+  gnut: "зАгнутый сОгнутый изОгнутый",
+  enn: "довезЁнный заселЁнный низведЁнный облегчЁнный ободрЁнный обострЁнный отключЁнный повторЁнный поделЁнный приручЁнный углублЁнный включЁн включенА",
+  deepr: "закУпорив начАв начАвшись отдАв поднЯв понЯв прибЫв создАв занЯв принЯв исчЕрпав",
+  french: "партЕр экспЕрт диспансЕр жалюзИ каталОг квартАл некролОг дефИс докумЕнт цемЕнт портфЕль шофЁр киломЕтр",
+  nroot: "Иксы|с_Иксом крАны лЕкторы лЕкторов мЕстность мЕстностей тОрты|с_тОртом тОртами шАрфы|нет_шАрфа бАнты кОнусы аэропОрты бухгАлтеров",
+  derived: "слИвовый кУхонный красИвее красИвейший нефтепровОд газопровОд водопровОд мусоропровОд",
+  advdo: "дОверху дОнизу дОсуха донЕльзя добелА докраснА",
+  advza: "зАгодя зАтемно зАсветло завИдно",
+  slovar: "закУпорить откУпорить кАшлянуть клЕить оклЕить дозИровать запломбировАть пломбировАть чЕрпать щЁлкать плодоносИть кровоточИть положИть положИл занЯть начАть понЯть принЯть прибЫть воспринЯть одолжИть баловАться зАнятый зАпертый нАчатый прИнятый кормЯщий кровоточАщий вОвремя надОлго ненадОлго мозаИчный оптОвый прозорлИвый прозорлИва знАчимый вернА ловкА свЁкла свЁклу кремЕнь кремнЯ отзЫв_(посла) созЫв призЫв бОроду вероисповЕдание гражданИн дешевИзна договорЁнность знАчимость корЫсть лыжнЯ намЕрение нарОст нЕдруг недУг ненАвисть новостЕй нОгтя Отрочество порУчни придАное сирОты сосредотОчение срЕдства стАтуя столЯр тамОжня тУфля цЕнтнер цепОчка"
+};
+const VOWELS = "аеёиоуыэюя";
+const STRESS = [];
+for (const [rule, list] of Object.entries(STRESS_RAW)) {
+  list.split(/\s+|\|/).forEach(raw => {
+    const text = raw.replace(/_/g, " ");
+    const up = [...text].map((c, i) => VOWELS.includes(c.toLowerCase()) && c !== c.toLowerCase() ? i : -1).filter(i => i >= 0);
+    if (up.length !== 1) { console.warn("stress", raw); return; }
+    const k = up[0], low = text.toLowerCase();
+    const start = low.lastIndexOf(" ", k) + 1, endSp = low.indexOf(" ", k), end = endSp < 0 ? low.length : endSp;
+    const vowels = [];
+    for (let i = start; i < end; i++) if (VOWELS.includes(low[i])) vowels.push(i);
+    if (vowels.length < 2) return;
+    STRESS.push({ id: "u:" + text, text, rule, k, low: low.replace(/ё/g, "е"), vowels });
+  });
+}
+const UBANK = Object.fromEntries(STRESS.map(w => [w.id, w]));
+function ust(id) { S.stress = S.stress || {}; return S.stress[id] || (S.stress[id] = { ok: 0, bad: 0, streak: 0 }); }
+function ruleErrors4() {
+  const m = {};
+  for (const [id, st] of Object.entries(S.stress || {})) { const w = UBANK[id]; if (w && st.bad) m[w.rule] = (m[w.rule] || 0) + st.bad; }
+  return m;
+}
+function stressStr(w, idx) {
+  return esc([...w.low].map((c, i) => i === idx ? c.toUpperCase() : c).join("")).replace(/\([^)]*\)/g, m => `<span class="note">${m}</span>`);
+}
+function correctStr(w) { return esc(w.text).replace(/[А-ЯЁ]/g, m => `<b>${m}</b>`).replace(/\([^)]*\)/g, m => `<span class="note">${m}</span>`); }
+
+const U = { mode: "tap", rule: "", source: "all", queue: [], cur: null, res: null, first: { n: 0, ok: 0 }, total: 0, seen: new Set(), ege: null, timer: null };
+const UROUND = 20;
+function poolStress() {
+  return STRESS.filter(w => {
+    if (U.rule && w.rule !== U.rule) return false;
+    if (U.source === "mistakes") { const st = (S.stress || {})[w.id]; if (!st || !st.bad || st.streak >= 2) return false; }
+    return true;
+  });
+}
+function recordStress(w, ok, retry) {
+  const st = ust(w.id);
+  S.total.n++;
+  if (ok) { S.total.ok++; st.ok++; st.streak++; }
+  else { st.bad++; st.streak = 0; if (retry) U.queue.splice(Math.min(U.queue.length, 3 + Math.floor(Math.random() * 3)), 0, w.id); }
+  save(); renderStats();
+}
+function startStress() {
+  clearTimeout(U.timer);
+  if (U.mode === "ege") { U.ege = genStressEge(); renderStress(); return; }
+  U.queue = shuffle(poolStress()).slice(0, UROUND).map(w => w.id);
+  U.total = U.queue.length; U.first = { n: 0, ok: 0 }; U.seen = new Set();
+  nextStress();
+}
+function nextStress() { clearTimeout(U.timer); U.cur = U.queue.shift() || null; U.res = null; renderStress(); }
+function answerStress(i) {
+  if (!U.cur || U.res) return;
+  const w = UBANK[U.cur]; const ok = i === w.k;
+  U.res = { pick: i, ok };
+  if (!U.seen.has(w.id)) { U.seen.add(w.id); U.first.n++; if (ok) U.first.ok++; }
+  recordStress(w, ok, true);
+  renderStress();
+  if (ok) U.timer = setTimeout(nextStress, 1300);
+}
+function genStressEge() {
+  const pool = poolStress().length >= 10 ? poolStress() : STRESS;
+  const words = shuffle(pool).slice(0, 5);
+  const nRight = 2 + Math.floor(Math.random() * 3);
+  const rightSet = new Set(shuffle([0, 1, 2, 3, 4]).slice(0, nRight));
+  return { items: words.map((w, i) => ({ id: w.id, show: rightSet.has(i) ? w.k : pick(w.vowels.filter(v => v !== w.k)) })), sel: new Set(), done: false, open: null };
+}
+function renderStress() {
+  const root = $("#p-stress");
+  const ruleOpts = Object.entries(RULES).filter(([, r]) => r.t === 4)
+    .map(([id, r]) => `<option value="${id}"${U.rule === id ? " selected" : ""}>${esc(r.title)}</option>`).join("");
+  const controls = `<div class="controls">
+    <div class="seg" role="group" aria-label="Тип">${[["tap", "Где ударение?"], ["ege", "Как на ЕГЭ"]].map(([v, l]) => `<button data-um="${v}" aria-pressed="${U.mode === v}">${l}</button>`).join("")}</div>
+    <label class="lbl">Правило <select id="u-rule"><option value="">любое</option>${ruleOpts}</select></label>
+    <label class="lbl">Слова <select id="u-source"><option value="all"${U.source === "all" ? " selected" : ""}>все (${STRESS.length})</option><option value="mistakes"${U.source === "mistakes" ? " selected" : ""}>мои ошибки</option></select></label>
+  </div>`;
+  let body = "";
+  if (U.mode === "ege") {
+    if (!U.ege) U.ege = genStressEge();
+    const E = U.ege;
+    const right = E.items.map((it, i) => it.show === UBANK[it.id].k ? i + 1 : 0).filter(Boolean);
+    const okAll = E.done && right.length === E.sel.size && right.every(i => E.sel.has(i));
+    body = `<p class="task">Укажите варианты ответов, в которых верно выделена буква, обозначающая ударный гласный звук.</p>
+      <div class="rows">${E.items.map((it, i) => { const w = UBANK[it.id]; const good = it.show === w.k;
+        return `<button class="r" data-ue="${i + 1}" aria-pressed="${E.sel.has(i + 1)}"><span class="n">${i + 1}</span><span class="ws" style="display:block"><span class="st4">${stressStr(w, it.show)}${E.done && !good ? `<span class="fix">верно: ${correctStr(w)}</span>` : ""}</span>${E.done ? `<span class="cnt16">${good ? "выделено верно" : "выделено неверно"} · <span class="chip" data-rule4="${w.rule}">${esc(RULES[w.rule].short)}</span></span>` : ""}</span></button>`; }).join("")}</div>
+      <div class="answer-line"><span class="small">Ответ:</span><span class="hand">${[...E.sel].sort().join("") || "—"}</span>${E.done ? `<button class="btn" id="ue-new">Новый вариант</button>` : `<button class="btn" id="ue-check">Проверить</button>`}</div>
+      ${E.done ? `<div class="msg ${okAll ? "ok" : "bad"}">${okAll ? "Верно." : `Неверно. Правильный ответ: ${right.join("") || "—"}. Нажми на правило под словом, чтобы его прочитать.`}</div>` : ""}
+      ${E.open ? `<div style="margin-top:12px">${ruleHTML(E.open)}</div>` : ""}
+      ${E.done ? `<div class="mark" style="top:90px">${okAll ? "+" : "−"}</div>` : ""}`;
+  } else if (!U.cur && !U.queue.length && U.total) {
+    const pct = U.first.n ? Math.round(U.first.ok / U.first.n * 100) : 0;
+    body = `<div class="summary"><div class="big">${U.first.ok} / ${U.first.n}</div><div>верно с первого раза (${pct}%)</div><button class="btn" id="u-again">Ещё круг</button></div>`;
+  } else if (!U.cur) {
+    const n = poolStress().length;
+    body = n ? `<div class="summary"><div>Нажми на гласную, на которую падает ударение.<br><span class="small">В подборке ${n} слов${n > UROUND ? `, в круге будет ${UROUND}` : ""}.</span></div><button class="btn" id="u-again">Начать</button></div>`
+      : `<div class="summary"><div>Под эти фильтры слов нет${U.source === "mistakes" ? " — ошибок пока нет или ты их уже исправил" : ""}.</div></div>`;
+  } else {
+    const w = UBANK[U.cur], r = U.res;
+    const letters = [...w.low].map((c, i) => {
+      if (!w.vowels.includes(i)) return esc(c);
+      const cls = r ? (i === w.k ? " ok" : i === r.pick ? " bad" : "") : "";
+      return `<button class="vw${cls}" data-uv="${i}"${r ? " disabled" : ""}>${r && i === w.k ? c.toUpperCase() : esc(c)}</button>`;
+    }).join("").replace(/\([^)]*\)/g, m => `<span class="note">${m}</span>`);
+    const head = `<div class="progress"><i style="width:${U.first.n / Math.max(1, U.total) * 100}%"></i></div><div class="ptext">осталось ${U.queue.length + 1} · задание 4${U.seen.has(w.id) && !r ? ' <span class="pill">повтор</span>' : ""}</div>`;
+    const fb = r ? (r.ok
+      ? `<div class="fb ok"><div class="head">Верно: ${correctStr(w)}</div><div class="row-actions"><span class="pill">${esc(RULES[w.rule].short)}</span><button class="btn ghost" id="u-next">Дальше</button></div></div>`
+      : `<div class="fb bad"><div class="head">Не так. Правильно: ${correctStr(w)}</div>${ruleHTML(w.rule)}<div class="row-actions"><button class="btn" id="u-next">Дальше</button><span class="small">Это слово вернётся через несколько заданий.</span></div></div>`) : "";
+    body = head + `<div class="sw4">${letters}</div>` + (r ? "" : `<div class="hint">Нажми на ударную гласную</div>`) + fb + (r ? `<div class="mark" style="top:96px">${r.ok ? "+" : "−"}</div>` : "");
+  }
+  const errs = Object.entries(ruleErrors4()).sort((a, b) => b[1] - a[1]).slice(0, 5);
+  const weak = errs.length ? `<div class="weak"><span class="t">Чаще всего ошибаешься:</span>${errs.map(([id, n]) => `<button class="chipbtn" data-drill4="${id}">${esc(RULES[id].short)} · ${n}</button>`).join("")}</div>` : "";
+  root.innerHTML = controls + body + weak;
+  const reset = () => { clearTimeout(U.timer); U.cur = null; U.queue = []; U.total = 0; U.ege = null; renderStress(); };
+  root.querySelectorAll("[data-um]").forEach(b => b.onclick = () => { U.mode = b.dataset.um; reset(); });
+  $("#u-rule", root).onchange = e => { U.rule = e.target.value; reset(); };
+  $("#u-source", root).onchange = e => { U.source = e.target.value; reset(); };
+  root.querySelectorAll("[data-uv]").forEach(b => b.onclick = () => answerStress(+b.dataset.uv));
+  const nx = $("#u-next", root); if (nx) { nx.onclick = nextStress; nx.focus({ preventScroll: true }); }
+  const ag = $("#u-again", root); if (ag) ag.onclick = startStress;
+  root.querySelectorAll("[data-ue]").forEach(b => b.onclick = e => {
+    const chip = e.target.closest("[data-rule4]");
+    if (chip) { U.ege.open = U.ege.open === chip.dataset.rule4 ? null : chip.dataset.rule4; renderStress(); return; }
+    if (U.ege.done) return;
+    const i = +b.dataset.ue; U.ege.sel.has(i) ? U.ege.sel.delete(i) : U.ege.sel.add(i); renderStress();
+  });
+  const ec = $("#ue-check", root); if (ec) ec.onclick = () => {
+    const E = U.ege; E.done = true;
+    E.items.forEach((it, i) => { const w = UBANK[it.id]; recordStress(w, (it.show === w.k) === E.sel.has(i + 1), false); });
+    renderStress();
+  };
+  const en = $("#ue-new", root); if (en) en.onclick = () => { U.ege = genStressEge(); renderStress(); };
+  root.querySelectorAll("[data-drill4]").forEach(b => b.onclick = () => drill4(b.dataset.drill4));
+}
+function drill4(id) { U.rule = id; U.source = "all"; U.mode = "tap"; showTab("stress"); startStress(); }
+document.addEventListener("keydown", e => {
+  if ($("#p-stress").hidden || e.ctrlKey || e.metaKey || e.altKey || e.target.tagName === "SELECT") return;
+  if (U.mode === "tap" && U.res && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); nextStress(); }
+});
+
 /* ---------- Старт ---------- */
 renderStats();
 startRound();
@@ -1292,7 +1507,7 @@ renderRowsTab();
 renderTest();
 let startTab = "words";
 try { startTab = localStorage.getItem(KEY + "-tab") || "words"; } catch (e) {}
-showTab(["words", "rows", "test", "commas", "rules"].includes(startTab) ? startTab : "words");
+showTab(["words", "rows", "test", "commas", "stress", "rules"].includes(startTab) ? startTab : "words");
 </script>
 
 <script>
