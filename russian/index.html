@@ -1570,29 +1570,84 @@ const PFX_INFO = {
             "Перед е, ё, ю, я после иноязычных приставок пишется ъ: субъект, адъютант, панъевропейский."]
 };
 
-const L = { mode: "roots", quiz: false, queue: [], cur: null, res: null, opts: [], first: { n: 0, ok: 0 }, total: 0, timer: null };
-function learnItems() { return L.mode === "roots" ? ROOTS.map(x => "r:" + x.id) : PREFIXES.map(x => "p:" + x.p); }
-function learnGet(key) { return key.startsWith("r:") ? ROOTS.find(x => "r:" + x.id === key) : PREFIXES.find(x => "p:" + x.p === key); }
+const ROOT_HOW = {
+  ber: [["после корня есть суффикс -а-", "и"], ["после корня нет суффикса -а-", "е"]],
+  der: "ber", mer: "ber", per: "ber", ter: "ber", blest: "ber", zheg: "ber", stel: "ber", chet: "ber",
+  kas: [["после корня есть суффикс -а-", "а"], ["после корня нет суффикса -а-", "о"]],
+  im: [["после корня есть суффикс -а-", "-им- / -ин-"], ["после корня нет суффикса -а-", "-а- / -я-"]],
+  lag: [["перед г", "а"], ["перед ж", "о"]],
+  rast: [["перед ст и щ", "а"], ["перед с (без т)", "о"]],
+  skak: [["перед к", "а"], ["перед ч", "о"]],
+  gar: [["без ударения", "о"]], zar: [["без ударения", "а"]], klan: [["без ударения", "о"]], tvar: [["без ударения", "о"]],
+  plav: [["без ударения", "а"]],
+  mak: [["значение «окунать в жидкость»", "а"], ["значение «пропускать жидкость, намокать»", "о"]],
+  ravn: [["значение «равный, одинаковый»", "а"], ["значение «ровный, гладкий»", "о"]]
+};
+const HOW_OPTS = { "и": ["е", "и"], "е": ["е", "и"], "а": ["а", "о"], "о": ["а", "о"], "-им- / -ин-": ["-им- / -ин-", "-а- / -я-"], "-а- / -я-": ["-им- / -ин-", "-а- / -я-"] };
+function rootQuestions() {
+  const qs = [];
+  ROOTS.forEach(r => {
+    qs.push({ id: "rc:" + r.id, title: r.r, q: "От чего зависит, какую букву писать?", a: ROOT_CONDS[r.c], opts: Object.values(ROOT_CONDS), why: `${r.r}: ${r.how}.` });
+    const how = typeof ROOT_HOW[r.id] === "string" ? ROOT_HOW[ROOT_HOW[r.id]] : ROOT_HOW[r.id];
+    how.forEach(([cond, ans], i) => qs.push({ id: `rh:${r.id}:${i}`, title: r.r, q: `${cond[0].toUpperCase() + cond.slice(1)}. Что пишем?`, a: ans, opts: HOW_OPTS[ans], why: `${r.r}: ${r.how}.${r.exc ? ` Исключения: ${r.exc}.` : ""}` }));
+    (r.exc || "").split(", ").filter(Boolean).forEach(w => {
+      const others = shuffle(ROOTS.filter(x => x.exc && x.id !== r.id)).slice(0, 3).map(x => x.r);
+      qs.push({ id: "re:" + w, title: "«" + w + "»", q: "Исключение к какому корню?", a: r.r, opts: [r.r, ...others], why: `${r.r}: ${r.how}. Исключения: ${r.exc}.` });
+    });
+  });
+  return qs;
+}
+const PFX_RULES = [
+  ["з / с", "Приставка на з/с перед глухой согласной (к, п, с, т, ф, х, ц, ч, ш, щ)", "с", ["з", "с"], "Перед глухой — с: бесшумный, рассказ, испуг."],
+  ["з / с", "Приставка на з/с перед звонкой согласной или гласной", "з", ["з", "с"], "Перед звонкой и гласной — з: безвкусный, раздать, изобразить."],
+  ["раз- / роз-", "Под ударением пишем…", "ро-", ["ра-", "ро-"], "Под ударением ро-: рОзыск, рОспись."],
+  ["раз- / роз-", "Без ударения пишем…", "ра-", ["ра-", "ро-"], "Без ударения ра-: разыскАть, расписАние."],
+  ["с-", "Приставка с- перед звонкой согласной (с…делать)", "не меняется: с", ["не меняется: с", "меняется на з"], "Приставки «з-» в русском языке нет: сделать, сбить, сгиб."],
+  ["под-, над-, от-, об-", "Перед глухой согласной эти приставки…", "не меняются", ["не меняются", "оглушаются: пот-, нат-, оп-"], "Пишутся всегда одинаково: подписать, надкусить, отпилить."],
+  ["по-, про-, до-, за-, на-", "Без ударения эти приставки пишутся…", "всегда одинаково", ["всегда одинаково", "как слышатся"], "Неизменяемые приставки на гласный: проверь по другому слову — дОбег, зАгадка."],
+  ["ы / и", "Корень на и после русской приставки на согласный (от…скать)", "ы", ["и", "ы"], "Отыскать, сыграть, предыдущий, безынициативный."],
+  ["ы / и", "Корень на и после меж- и сверх-", "и", ["и", "ы"], "Межинститутский, сверхинтересный."],
+  ["ы / и", "Корень на и после иноязычной приставки (пост-, суб-, контр-, дез-)", "и", ["и", "ы"], "Постиндустриальный, контригра, дезинформация."],
+  ["ы / и", "Корень на и после приставки на гласный (за…грать)", "и", ["и", "ы"], "После гласной ы не пишется: заиграть, поиграть."],
+  ["ы / и", "Слово взимать — какая буква после вз-?", "и", ["и", "ы"], "Взимать — исключение, пишется и."],
+  ["ъ / ь", "Перед е, ё, ю, я после приставки на согласный (под…езд)", "ъ", ["ъ", "ь"], "Подъезд, объявить, съёмка, субъект."],
+  ["ъ / ь", "Перед е, ё, ю, я внутри корня, не после приставки (в…юга)", "ь", ["ъ", "ь"], "Вьюга, соловьи, бьются."],
+  ["ъ / ь", "В сложных словах с двух-, трёх-, четырёх- перед я, е", "ъ", ["ъ", "ь"], "Двухъярусный, трёхъязычный."],
+  ["пре-", "Что значит приставка пре-?", "«очень» или = «пере-»", ["«очень» или = «пере-»", "приближение, присоединение", "«перед», «раньше»"], "Премилый (очень милый), преградить (перегородить)."],
+  ["при-", "Что значит приставка при-?", "приближение, присоединение, близость, неполное действие", ["приближение, присоединение, близость, неполное действие", "«очень» или = «пере-»", "«перед», «раньше»"], "Прибежать, пришить, приморский, приоткрыть."],
+  ["пред-", "Что значит приставка пред-?", "«перед», «раньше»", ["«перед», «раньше»", "«очень» или = «пере-»", "приближение, присоединение"], "Предвидеть, предсказать, предпоследний."],
+  ["пре- / при-", "Значение не определить (президент, привилегия, преимущество)", "запомнить по словарю", ["запомнить по словарю", "всегда пре-", "всегда при-"], "Такие слова словарные — их запоминают."],
+  ["пребывать / прибывать", "«Находиться где-то» (… в неведении)", "пре-", ["пре-", "при-"], "Пребывать = находиться, прибывать = приезжать."],
+  ["низ- / нис-", "Какая гласная в приставке?", "и", ["е", "и"], "Низвергнуть, ниспадать."]
+].map(([title, q, a, opts, why], i) => ({ id: "pr:" + i, title, q, a, opts, why }));
+function prefixQuestions() {
+  const cat = shuffle(PREFIXES).slice(0, 14).map(x => ({ id: "pc:" + x.p, title: x.p, q: "Что это за приставка?", a: PFX_CATS[x.c], opts: Object.values(PFX_CATS), why: PFX_INFO[x.c][0] }));
+  return PFX_RULES.concat(cat);
+}
+const LROUND = 20;
+const L = { mode: "roots", quiz: false, queue: [], cur: null, res: null, opts: [], first: { n: 0, ok: 0 }, total: 0, timer: null, bank: {} };
 function startLearn() {
   clearTimeout(L.timer); L.quiz = true;
-  L.queue = shuffle(learnItems()); L.total = L.queue.length; L.first = { n: 0, ok: 0 }; L.seen = new Set();
+  const qs = L.mode === "roots" ? rootQuestions() : prefixQuestions();
+  L.bank = Object.fromEntries(qs.map(q => [q.id, q]));
+  L.queue = shuffle(qs).slice(0, LROUND).map(q => q.id); L.total = L.queue.length; L.first = { n: 0, ok: 0 }; L.seen = new Set();
   nextLearn();
 }
 function nextLearn() {
   clearTimeout(L.timer); L.cur = L.queue.shift() || null; L.res = null;
-  L.opts = shuffle(Object.keys(L.mode === "roots" ? ROOT_CONDS : PFX_CATS));
+  if (L.cur) L.opts = shuffle(L.bank[L.cur].opts);
   renderLearn();
 }
 function answerLearn(c) {
   if (!L.cur || L.res) return;
-  const it = learnGet(L.cur); const ok = c === it.c;
+  const q = L.bank[L.cur]; const ok = c === q.a;
   L.res = { c, ok };
   if (!L.seen.has(L.cur)) { L.seen.add(L.cur); L.first.n++; if (ok) L.first.ok++; }
   S.learn = S.learn || {}; const st = S.learn[L.cur] || (S.learn[L.cur] = { ok: 0, bad: 0 });
   S.total.n++;
   if (ok) { S.total.ok++; st.ok++; } else { st.bad++; L.queue.splice(Math.min(L.queue.length, 3), 0, L.cur); }
   save(); renderStats(); renderLearn();
-  if (ok) L.timer = setTimeout(nextLearn, 1200);
+  if (ok) L.timer = setTimeout(nextLearn, 1400);
 }
 function rootsTable() {
   return Object.entries(ROOT_CONDS).map(([c, title]) => `<div class="lgroup"><h3>Зависит от того: ${esc(title)}</h3>
@@ -1615,16 +1670,11 @@ function renderLearn() {
     const pct = L.first.n ? Math.round(L.first.ok / L.first.n * 100) : 0;
     body = `<div class="summary"><div class="big">${L.first.ok} / ${L.first.n}</div><div>верно с первого раза (${pct}%)</div><button class="btn" id="l-again">Ещё раз</button></div>`;
   } else {
-    const it = learnGet(L.cur), r = L.res, roots = L.mode === "roots";
-    const names = roots ? ROOT_CONDS : PFX_CATS;
-    const q = roots ? "От чего зависит написание?" : "Что это за приставка?";
-    const fbText = roots
-      ? `<p style="margin:0"><b>${esc(it.r)}</b>: ${esc(it.how)}.</p><p class="small" style="margin:6px 0 0">${esc(it.ex)}${it.exc ? ` · исключения: ${esc(it.exc)}` : ""}</p>`
-      : `<p style="margin:0"><b>${esc(it.p)}</b> — ${esc(PFX_CATS[it.c])}.</p><p class="small" style="margin:6px 0 0">${esc(PFX_INFO[it.c][0])}</p>`;
+    const q = L.bank[L.cur], r = L.res;
     body = `<div class="progress"><i style="width:${L.first.n / Math.max(1, L.total) * 100}%"></i></div><div class="ptext">осталось ${L.queue.length + 1}</div>
-      <div class="word">${esc(roots ? it.r : it.p)}</div><div class="hint" style="display:block">${q}</div>
-      <div class="opts lq">${L.opts.map((c, i) => `<button class="opt ropt" data-lc="${c}"${r ? " disabled" : ""}>${esc(names[c])}<span class="k">${i + 1}</span></button>`).join("")}</div>
-      ${r ? `<div class="fb ${r.ok ? "ok" : "bad"}"><div class="head">${r.ok ? "Верно" : "Не так"}</div>${fbText}<div class="row-actions"><button class="btn${r.ok ? " ghost" : ""}" id="l-next">Дальше</button></div></div>` : ""}
+      <div class="word">${esc(q.title)}</div><div class="hint" style="display:block;font-size:16px">${esc(q.q)}</div>
+      <div class="opts lq">${L.opts.map((c, i) => `<button class="opt ropt" data-lc="${i}"${r ? " disabled" : ""}>${esc(c)}<span class="k">${i + 1}</span></button>`).join("")}</div>
+      ${r ? `<div class="fb ${r.ok ? "ok" : "bad"}"><div class="head">${r.ok ? "Верно" : `Не так. Правильно: ${esc(q.a)}`}</div><p style="margin:0">${esc(q.why)}</p><div class="row-actions"><button class="btn${r.ok ? " ghost" : ""}" id="l-next">Дальше</button>${r.ok ? "" : `<span class="small">Этот вопрос вернётся через несколько.</span>`}</div></div>` : ""}
       ${r ? `<div class="mark" style="top:96px">${r.ok ? "+" : "−"}</div>` : ""}`;
   }
   root.innerHTML = controls + body;
@@ -1632,7 +1682,7 @@ function renderLearn() {
   const qz = $("#l-quiz", root); if (qz) qz.onclick = startLearn;
   const tb = $("#l-table", root); if (tb) tb.onclick = () => { clearTimeout(L.timer); L.quiz = false; L.cur = null; renderLearn(); };
   const ag = $("#l-again", root); if (ag) ag.onclick = startLearn;
-  root.querySelectorAll("[data-lc]").forEach(b => b.onclick = () => answerLearn(b.dataset.lc));
+  root.querySelectorAll("[data-lc]").forEach(b => b.onclick = () => answerLearn(L.opts[+b.dataset.lc]));
   const nx = $("#l-next", root); if (nx) { nx.onclick = nextLearn; nx.focus({ preventScroll: true }); }
 }
 document.addEventListener("keydown", e => {
