@@ -212,6 +212,18 @@ label.lbl { font-size: 13px; color: var(--muted); display: inline-flex; gap: 8px
 .errc { font-size: 12px; color: var(--red); font-weight: 500; }
 
 
+.ltab { width: 100%; border-collapse: collapse; font-size: 15px; margin: 6px 0 18px; }
+.ltab th { text-align: left; font: 600 12px var(--f-ui); color: var(--muted); text-transform: uppercase; letter-spacing: .04em; padding: 6px 8px; border-bottom: 1px solid var(--line); }
+.ltab td { padding: 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.ltab td.rt { font: 600 17px var(--f-word); color: var(--ink); width: 34%; }
+.ltab .ex { display: block; font-size: 13px; color: var(--muted); margin-top: 2px; }
+.ltab .exc { display: block; font-size: 13px; color: var(--red); margin-top: 2px; }
+.lgroup { margin: 4px 0 18px; }
+.lgroup h3 { font: 600 15px var(--f-ui); margin: 14px 0 4px; }
+.lgroup p { margin: 0 0 6px; font-size: 14px; color: var(--muted); }
+.pfx { display: flex; flex-wrap: wrap; gap: 6px; }
+.pfx span { font: 600 16px var(--f-word); border: 1px solid var(--line); border-radius: 7px; padding: 3px 9px; background: var(--sheet); }
+.lq .opt.ropt { font: 500 15px var(--f-ui); height: auto; min-height: 56px; padding: 8px 12px; max-width: 260px; }
 .sw4 { font-family: var(--f-word); font-size: clamp(30px, 7vw, 46px); line-height: 1.3; text-align: center; padding: 30px 0 6px; overflow-wrap: anywhere; }
 .sw4 .vw { font: inherit; color: inherit; background: transparent; border: 0; border-bottom: 2px dashed var(--ink); padding: 0 .04em; margin: 0 .02em; cursor: pointer; border-radius: 3px 3px 0 0; }
 .sw4 .vw:hover { background: var(--ink-soft); }
@@ -260,6 +272,7 @@ button, select { touch-action: manipulation; -webkit-tap-highlight-color: transp
     <button class="tab" role="tab" data-tab="test" aria-selected="false">Мои работы</button>
     <button class="tab" role="tab" data-tab="commas" aria-selected="false">Запятые · 16</button>
     <button class="tab" role="tab" data-tab="stress" aria-selected="false">Ударения · 4</button>
+    <button class="tab" role="tab" data-tab="learn" aria-selected="false">Учить</button>
     <button class="tab" role="tab" data-tab="rules" aria-selected="false">Правила</button>
   </nav>
 
@@ -268,6 +281,7 @@ button, select { touch-action: manipulation; -webkit-tap-highlight-color: transp
   <section class="sheet" id="p-test" hidden></section>
   <section class="sheet" id="p-commas" hidden></section>
   <section class="sheet" id="p-stress" hidden></section>
+  <section class="sheet" id="p-learn" hidden></section>
   <section class="sheet" id="p-rules" hidden></section>
 </div>
 
@@ -763,10 +777,11 @@ function renderStats() {
 const tabs = document.querySelectorAll(".tab");
 function showTab(name) {
   tabs.forEach(t => t.setAttribute("aria-selected", t.dataset.tab === name ? "true" : "false"));
-  ["words", "rows", "test", "commas", "stress", "rules"].forEach(n => { $("#p-" + n).hidden = n !== name; });
+  ["words", "rows", "test", "commas", "stress", "learn", "rules"].forEach(n => { $("#p-" + n).hidden = n !== name; });
   if (name === "rules") renderRules();
   if (name === "commas" && !C.cur) renderCommas();
   if (name === "stress" && !U.cur) renderStress();
+  if (name === "learn" && !L.cur) renderLearn();
   if (name === "words" && !W.queue.length && !W.current) renderWords();
   try { localStorage.setItem(KEY + "-tab", name); } catch (e) {}
 }
@@ -1500,6 +1515,132 @@ document.addEventListener("keydown", e => {
   if (U.mode === "tap" && U.res && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); nextStress(); }
 });
 
+/* ---------- Учить: корни и приставки ---------- */
+const ROOT_CONDS = {
+  suff: "есть ли суффикс -а- после корня",
+  next: "какая буква стоит после корня",
+  stress: "ударение",
+  mean: "значение корня"
+};
+const ROOTS = [
+  { id: "ber", r: "-бер- / -бир-", c: "suff", how: "и, если после корня суффикс -а-; иначе е", ex: "собирать — соберу" },
+  { id: "der", r: "-дер- / -дир-", c: "suff", how: "и, если после корня суффикс -а-; иначе е", ex: "задирать — задеру" },
+  { id: "mer", r: "-мер- / -мир-", c: "suff", how: "и, если после корня суффикс -а-; иначе е", ex: "замирать — замереть" },
+  { id: "per", r: "-пер- / -пир-", c: "suff", how: "и, если после корня суффикс -а-; иначе е", ex: "запирать — запереть" },
+  { id: "ter", r: "-тер- / -тир-", c: "suff", how: "и, если после корня суффикс -а-; иначе е", ex: "вытирать — вытереть" },
+  { id: "blest", r: "-блест- / -блист-", c: "suff", how: "и, если после корня суффикс -а-; иначе е", ex: "блистать — блестеть" },
+  { id: "zheg", r: "-жег- / -жиг-", c: "suff", how: "и, если после корня суффикс -а-; иначе е", ex: "выжигать — выжечь" },
+  { id: "stel", r: "-стел- / -стил-", c: "suff", how: "и, если после корня суффикс -а-; иначе е", ex: "расстилать — расстелить" },
+  { id: "chet", r: "-чет- / -чит-", c: "suff", how: "и, если после корня суффикс -а-; иначе е", ex: "вычитать — вычет", exc: "сочетать, сочетание, чета" },
+  { id: "kas", r: "-кас- / -кос-", c: "suff", how: "а, если после корня суффикс -а-; иначе о", ex: "касаться — коснуться" },
+  { id: "im", r: "-им- / -а-, -ин- / -я-", c: "suff", how: "-им-, -ин-, если после корня суффикс -а-", ex: "сжимать — сжать, начинать — начать" },
+  { id: "lag", r: "-лаг- / -лож-", c: "next", how: "перед г — а, перед ж — о", ex: "предлагать — предложить", exc: "полог" },
+  { id: "rast", r: "-раст- / -ращ- / -рос-", c: "next", how: "перед ст и щ — а, перед с — о", ex: "растение, выращивать — вырос", exc: "росток, ростовщик, подросток, Ростов, Ростислав, отрасль" },
+  { id: "skak", r: "-скак- / -скоч-", c: "next", how: "перед к — а, перед ч — о", ex: "скакать — выскочить", exc: "скачок, скачу" },
+  { id: "gar", r: "-гар- / -гор-", c: "stress", how: "без ударения о", ex: "загорать — загар", exc: "выгарки, изгарь, пригарь" },
+  { id: "zar", r: "-зар- / -зор-", c: "stress", how: "без ударения а", ex: "заря — зори", exc: "зоревать" },
+  { id: "klan", r: "-клан- / -клон-", c: "stress", how: "без ударения о", ex: "наклониться — поклон, кланяться", exc: "" },
+  { id: "tvar", r: "-твар- / -твор-", c: "stress", how: "без ударения о", ex: "творить — тварь", exc: "утварь" },
+  { id: "plav", r: "-плав- / -плов- / -плыв-", c: "stress", how: "без ударения пишется а", ex: "плавать, плавник", exc: "пловец, пловчиха, плывун" },
+  { id: "mak", r: "-мак- / -мок-", c: "mean", how: "мак — «окунать в жидкость», мок — «пропускать жидкость, намокать»", ex: "обмакнуть кисть — промокнуть под дождём" },
+  { id: "ravn", r: "-равн- / -ровн-", c: "mean", how: "равн — «равный, одинаковый», ровн — «ровный, гладкий»", ex: "сравнить — выровнять", exc: "ровесник, ровня, уровень, равнина" }
+];
+const PFX_CATS = {
+  zs: "изменяемая: з / с",
+  fixed: "неизменяемая",
+  prepri: "пре- / при- — по смыслу",
+  foreign: "иноязычная"
+};
+const PREFIXES = [
+  ...["без- / бес-", "воз- / вос-", "вз- / вс-", "из- / ис-", "низ- / нис-", "раз- / рас-", "роз- / рос-", "через- / черес-", "чрез- / чрес-"].map(p => ({ p, c: "zs" })),
+  ...["в-", "во-", "вы-", "до-", "за-", "на-", "над-", "надо-", "о-", "об-", "обо-", "от-", "ото-", "по-", "под-", "подо-", "пред-", "преди-", "пере-", "про-", "пра-", "с-", "со-", "у-", "наи-", "поза-", "меж-", "сверх-"].map(p => ({ p, c: "fixed" })),
+  ...["пре-", "при-"].map(p => ({ p, c: "prepri" })),
+  ...["дез-", "дис-", "контр-", "пан-", "пост-", "суб-", "супер-", "транс-", "ультра-", "анти-", "архи-", "интер-", "экс-", "гипер-", "контра-"].map(p => ({ p, c: "foreign" }))
+];
+const PFX_INFO = {
+  zs: ["Перед звонкой согласной (б, в, г, д, ж, з, л, м, н, р) и гласной — з, перед глухой (к, п, с, т, ф, х, ц, ч, ш, щ) — с: безвкусный — бесшумный, раздать — рассказ.",
+       "раз-/рас- и роз-/рос-: под ударением ро- (рОзыск, рОспись), без ударения ра- (разыскАть, расписАние)."],
+  fixed: ["Пишутся всегда одинаково: сделать (не «зделать»), подтолкнуть (не «потолкнуть»), отдать (не «оддать»).",
+          "Приставки на гласный (по-, про-, до-, за-, на-, о-, пра-) не зависят от ударения: проверь приставку в другом слове — дОбежать как дОбег.",
+          "После меж- и сверх- пишется и: межинститутский, сверхинтересный. После остальных русских приставок на согласный — ы: сыграть, отыскать, предыдущий."],
+  prepri: ["пре- = «очень» (премилый) или = пере- (преградить = перегородить).",
+           "при- = приближение, присоединение, близость, неполное действие, доведение до конца: прибежать, пришить, приморский, приоткрыть, пристыдить.",
+           "Если значение не определить — словарное слово: президент, привилегия, преимущество, приоритет."],
+  foreign: ["Не меняются и после них пишется и: дезинформация, постиндустриальный, контригра, суперигра, панисламизм.",
+            "Перед е, ё, ю, я после иноязычных приставок пишется ъ: субъект, адъютант, панъевропейский."]
+};
+
+const L = { mode: "roots", quiz: false, queue: [], cur: null, res: null, opts: [], first: { n: 0, ok: 0 }, total: 0, timer: null };
+function learnItems() { return L.mode === "roots" ? ROOTS.map(x => "r:" + x.id) : PREFIXES.map(x => "p:" + x.p); }
+function learnGet(key) { return key.startsWith("r:") ? ROOTS.find(x => "r:" + x.id === key) : PREFIXES.find(x => "p:" + x.p === key); }
+function startLearn() {
+  clearTimeout(L.timer); L.quiz = true;
+  L.queue = shuffle(learnItems()); L.total = L.queue.length; L.first = { n: 0, ok: 0 }; L.seen = new Set();
+  nextLearn();
+}
+function nextLearn() {
+  clearTimeout(L.timer); L.cur = L.queue.shift() || null; L.res = null;
+  L.opts = shuffle(Object.keys(L.mode === "roots" ? ROOT_CONDS : PFX_CATS));
+  renderLearn();
+}
+function answerLearn(c) {
+  if (!L.cur || L.res) return;
+  const it = learnGet(L.cur); const ok = c === it.c;
+  L.res = { c, ok };
+  if (!L.seen.has(L.cur)) { L.seen.add(L.cur); L.first.n++; if (ok) L.first.ok++; }
+  S.learn = S.learn || {}; const st = S.learn[L.cur] || (S.learn[L.cur] = { ok: 0, bad: 0 });
+  S.total.n++;
+  if (ok) { S.total.ok++; st.ok++; } else { st.bad++; L.queue.splice(Math.min(L.queue.length, 3), 0, L.cur); }
+  save(); renderStats(); renderLearn();
+  if (ok) L.timer = setTimeout(nextLearn, 1200);
+}
+function rootsTable() {
+  return Object.entries(ROOT_CONDS).map(([c, title]) => `<div class="lgroup"><h3>Зависит от того: ${esc(title)}</h3>
+    <table class="ltab"><thead><tr><th>Корень</th><th>Как писать</th></tr></thead><tbody>${ROOTS.filter(x => x.c === c).map(x =>
+      `<tr><td class="rt">${esc(x.r)}</td><td>${esc(x.how)}<span class="ex">${esc(x.ex)}</span>${x.exc ? `<span class="exc">Исключения: ${esc(x.exc)}</span>` : ""}</td></tr>`).join("")}</tbody></table></div>`).join("");
+}
+function prefixTable() {
+  return Object.entries(PFX_CATS).map(([c, title]) => `<div class="lgroup"><h3>${esc(title[0].toUpperCase() + title.slice(1))}</h3>
+    <div class="pfx">${PREFIXES.filter(x => x.c === c).map(x => `<span>${esc(x.p)}</span>`).join("")}</div>
+    ${PFX_INFO[c].map(t => `<p style="margin-top:8px">${esc(t)}</p>`).join("")}</div>`).join("");
+}
+function renderLearn() {
+  const root = $("#p-learn");
+  const controls = `<div class="controls">
+    <div class="seg" role="group" aria-label="Что учить">${[["roots", "Корни с чередованием"], ["pfx", "Приставки"]].map(([v, l]) => `<button data-lm="${v}" aria-pressed="${L.mode === v}">${l}</button>`).join("")}</div>
+    ${L.quiz ? `<button class="btn ghost" id="l-table">К таблице</button>` : `<button class="btn" id="l-quiz">Проверь себя</button>`}</div>`;
+  let body;
+  if (!L.quiz) body = L.mode === "roots" ? rootsTable() : prefixTable();
+  else if (!L.cur) {
+    const pct = L.first.n ? Math.round(L.first.ok / L.first.n * 100) : 0;
+    body = `<div class="summary"><div class="big">${L.first.ok} / ${L.first.n}</div><div>верно с первого раза (${pct}%)</div><button class="btn" id="l-again">Ещё раз</button></div>`;
+  } else {
+    const it = learnGet(L.cur), r = L.res, roots = L.mode === "roots";
+    const names = roots ? ROOT_CONDS : PFX_CATS;
+    const q = roots ? "От чего зависит написание?" : "Что это за приставка?";
+    const fbText = roots
+      ? `<p style="margin:0"><b>${esc(it.r)}</b>: ${esc(it.how)}.</p><p class="small" style="margin:6px 0 0">${esc(it.ex)}${it.exc ? ` · исключения: ${esc(it.exc)}` : ""}</p>`
+      : `<p style="margin:0"><b>${esc(it.p)}</b> — ${esc(PFX_CATS[it.c])}.</p><p class="small" style="margin:6px 0 0">${esc(PFX_INFO[it.c][0])}</p>`;
+    body = `<div class="progress"><i style="width:${L.first.n / Math.max(1, L.total) * 100}%"></i></div><div class="ptext">осталось ${L.queue.length + 1}</div>
+      <div class="word">${esc(roots ? it.r : it.p)}</div><div class="hint" style="display:block">${q}</div>
+      <div class="opts lq">${L.opts.map((c, i) => `<button class="opt ropt" data-lc="${c}"${r ? " disabled" : ""}>${esc(names[c])}<span class="k">${i + 1}</span></button>`).join("")}</div>
+      ${r ? `<div class="fb ${r.ok ? "ok" : "bad"}"><div class="head">${r.ok ? "Верно" : "Не так"}</div>${fbText}<div class="row-actions"><button class="btn${r.ok ? " ghost" : ""}" id="l-next">Дальше</button></div></div>` : ""}
+      ${r ? `<div class="mark" style="top:96px">${r.ok ? "+" : "−"}</div>` : ""}`;
+  }
+  root.innerHTML = controls + body;
+  root.querySelectorAll("[data-lm]").forEach(b => b.onclick = () => { L.mode = b.dataset.lm; clearTimeout(L.timer); L.quiz = false; L.cur = null; renderLearn(); });
+  const qz = $("#l-quiz", root); if (qz) qz.onclick = startLearn;
+  const tb = $("#l-table", root); if (tb) tb.onclick = () => { clearTimeout(L.timer); L.quiz = false; L.cur = null; renderLearn(); };
+  const ag = $("#l-again", root); if (ag) ag.onclick = startLearn;
+  root.querySelectorAll("[data-lc]").forEach(b => b.onclick = () => answerLearn(b.dataset.lc));
+  const nx = $("#l-next", root); if (nx) { nx.onclick = nextLearn; nx.focus({ preventScroll: true }); }
+}
+document.addEventListener("keydown", e => {
+  if ($("#p-learn").hidden || !L.quiz || !L.cur || e.ctrlKey || e.metaKey || e.altKey) return;
+  if (L.res) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); nextLearn(); } return; }
+  if (/^[1-4]$/.test(e.key) && L.opts[+e.key - 1]) answerLearn(L.opts[+e.key - 1]);
+});
+
 /* ---------- Старт ---------- */
 renderStats();
 startRound();
@@ -1507,7 +1648,7 @@ renderRowsTab();
 renderTest();
 let startTab = "words";
 try { startTab = localStorage.getItem(KEY + "-tab") || "words"; } catch (e) {}
-showTab(["words", "rows", "test", "commas", "stress", "rules"].includes(startTab) ? startTab : "words");
+showTab(["words", "rows", "test", "commas", "stress", "learn", "rules"].includes(startTab) ? startTab : "words");
 </script>
 
 <script>
